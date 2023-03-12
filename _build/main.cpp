@@ -1,22 +1,30 @@
 #include "raylib.h"
 #include "box2d/box2d.h"
+#include "movement.h"
+#include "player.h"
 
 int main()
 {
-    b2World phsWorld = b2World(b2Vec2(0, -9.8));
+    //b2World phsWorld = b2World(b2Vec2(0, -9.8));
 
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
     
-    InitWindow(800, 450, "raylib [core] example - basic window");
-
+    InitWindow(screenWidth, screenHeight, "Dev window");
+    ToggleFullscreen();
+    SetTargetFPS(60);
+    
+    int playerPoxX = screenWidth / 2;
+    int playerPoxy = screenHeight / 2;
+    Player player;
+    
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+        DrawTexture(player.texture, playerPoxX - 93, playerPoxy - 93, RAYWHITE);
+        checkForMovement(playerPoxX, playerPoxy);
         EndDrawing();
     }
-
     CloseWindow();
-
-    return 0;
 }
