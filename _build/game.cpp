@@ -16,27 +16,37 @@ void Game()
 
     Player* player = Player::getinstance();
 
+    Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 2};
+    Texture2D a = LoadTexture("./../assets/player/player.png");
+
     while (!WindowShouldClose())
     {
+        // Move the player
+        player->Move(player->getPosition());
+
+        // Update camera position
+        playerCam.target = player->getPosition();
+
+        // Draw
         BeginDrawing();
 
-        ClearBackground(BLACK);
+        ClearBackground(BLANK);
+
+        BeginMode2D(playerCam);
+
+        DrawTexture(a, 200, 200, RAYWHITE);
 
         // Draw the player
         DrawTexturePro(
         player->getTexture(), 
-        Rectangle{0,0,float(player->getTexture().width), float(player->getTexture().height)},
+        Rectangle{0, 0, float(player->getTexture().width), float(player->getTexture().height)},
+        
         Rectangle{player->getPosition().x, player->getPosition().y, float(player->getTexture().width), float(player->getTexture().height)},
-        Vector2{float(player->getTexture().width / 2), float(player->getTexture().height / 2)},
-        0,
-        RAYWHITE
-        );
+        
+        Vector2{float(player->getTexture().width / 2), float(player->getTexture().height / 2)}, 0, RAYWHITE);
 
-        // Move the player
-        player->Move(player->getPosition());
-
+        EndMode2D();
         EndDrawing();
     }
     CloseWindow();
-    
 }
