@@ -11,13 +11,15 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    /*ToggleFullscreen();*/
+    ToggleFullscreen();
     SetTargetFPS(60);
 
     Player* player = Player::getinstance();
 
-    Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 2};
+    Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
     Texture2D a = LoadTexture("./../assets/player/player.png");
+
+    // float recY = 100;
 
     while (!WindowShouldClose())
     {
@@ -35,6 +37,11 @@ void Game()
         BeginMode2D(playerCam);
 
         DrawTexture(a, 200, 200, RAYWHITE);
+
+        // Scrolls
+        // recY -= GetMouseWheelMove() * 4;
+
+        // DrawRectangle(100, recY, 100, 100, RED);
 
         // Draw the player
         DrawTexturePro(
