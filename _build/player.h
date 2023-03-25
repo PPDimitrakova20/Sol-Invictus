@@ -6,6 +6,7 @@ class Player
 {
 private:
 	Texture2D _texture = LoadTexture("./../assets/player/player.png");
+	Texture2D _underglow = LoadTexture("./../assets/player/playerUnderglow.png");
 	Vector2 _position = {960, 540};
 
 	// Constructor
@@ -26,7 +27,8 @@ public:
 	void setPosition(Vector2 position);
 
 	// Getters
-	Texture2D getTexture();
+	Texture2D getPlayerTexture();
+	Texture2D getUnderglowTexture();
 	Vector2 getPosition();
 
 	// Methods

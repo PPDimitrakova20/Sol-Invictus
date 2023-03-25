@@ -11,12 +11,14 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(60);
 
+    // Intialize player variables
     Player* player = Player::getinstance();
-
     Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
+
+    // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
     Rectangle boundaries[4] = {
         {-50, 0, 50, 2160},
@@ -24,8 +26,6 @@ void Game()
         {0, -50, 3840, 50},
         {0, 2160, 3840, 50}
     };
-
-    // float recY = 100;
 
     while (!WindowShouldClose())
     {
@@ -41,27 +41,28 @@ void Game()
         // Draw
         BeginDrawing();
 
-        ClearBackground(BLANK);
+            ClearBackground(BLANK);
 
-        BeginMode2D(playerCam);
+            BeginMode2D(playerCam);
 
-        DrawTexture(background, 0, 0, RAYWHITE);
+                // Draw background base
+                DrawRectangle(0, 0, 3840, 2160, WHITE);
 
-        // Scrolls
-        // recY -= GetMouseWheelMove() * 4;
+                // Draw texture underglow
+                DrawTexture(player->getUnderglowTexture(), player->getPosition().x - 400, player->getPosition().y - 400, RAYWHITE);
 
-        // DrawRectangle(100, recY, 100, 100, RED);
+                // Draw background
+                DrawTexture(background, 0, 0, RAYWHITE);
 
-        // Draw the player
-        DrawTexturePro(
-        player->getTexture(), 
-        Rectangle{0, 0, float(player->getTexture().width), float(player->getTexture().height)},
-        
-        Rectangle{player->getPosition().x, player->getPosition().y, float(player->getTexture().width), float(player->getTexture().height)},
-        
-        Vector2{float(player->getTexture().width / 2), float(player->getTexture().height / 2)}, 0, RAYWHITE);
+                // Draw the player
+                DrawTexturePro(
+                player->getPlayerTexture(), 
+                Rectangle{0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height)},
+                Rectangle{player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height)},
+                Vector2{float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2)}, 0, RAYWHITE);
 
-        EndMode2D();
+            EndMode2D();
+
         EndDrawing();
     }
     CloseWindow();
