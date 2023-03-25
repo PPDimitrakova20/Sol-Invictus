@@ -42,6 +42,11 @@ void Game()
     AminoAcid* aminoAcids = new AminoAcid[21];
     aminoAcids = aminoAcids->initAminoAcids();
 
+    // Intialize amino-acid repository variables
+    Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
+    Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
+    Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
+
     while (!WindowShouldClose())
     {
         // Move the player
@@ -77,6 +82,12 @@ void Game()
         Vector2{float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2)}, 0, RAYWHITE);
 
         EndMode2D();
+
+        DrawTexture(base, -23, -7, RAYWHITE);
+
+        DrawTexture(data, 13, 168, RAYWHITE);
+
+        DrawTexture(cover, 13, 0, RAYWHITE);
 
         // Draw inventory base
         DrawRectangle(1821, 0, 99, 1080, inventoryBase);
