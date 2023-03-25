@@ -40,10 +40,10 @@ void Game()
     while (!WindowShouldClose())
     {
         // Move the player
-        player->Move(player->getPosition());
+        player->move(player->getPosition());
 
         // Check and handle collision with the map boundary
-        player->CheckMapBoundary(boundaries);
+        player->checkMapBoundary(boundaries);
 
         // Update camera position
         playerCam.target = player->getPosition();

@@ -33,8 +33,8 @@ public:
 
 	// Methods
 	// Plater movement
-	void Move(Vector2 position);
+	void move(Vector2 position);
 
 	// Check and handle collision with the map boundary
-	void CheckMapBoundary(Rectangle boundaries[4]);
+	void checkMapBoundary(Rectangle boundaries[4]);
 };

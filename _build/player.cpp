@@ -28,7 +28,7 @@ Vector2 Player::getPosition()
 
 // Methods  
 // Move the player
-void Player::Move(Vector2 position)
+void Player::move(Vector2 position)
 {
 	// Intialize X and Y offset
 	float xOffset = 0, yOffset = 0;
@@ -56,7 +56,7 @@ void Player::Move(Vector2 position)
 }
 
 // Check and handle collision with the map boundary
-void Player::CheckMapBoundary(Rectangle boundaries[4])
+void Player::checkMapBoundary(Rectangle boundaries[4])
 {
 	if (CheckCollisionCircleRec(_position, 93, boundaries[0]))
 	{
