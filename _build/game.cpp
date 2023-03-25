@@ -11,14 +11,19 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     SetTargetFPS(60);
 
     Player* player = Player::getinstance();
 
     Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
-    Texture2D a = LoadTexture("./../assets/player/player.png");
-    Texture2D bg = LoadTexture("./../assets/UI/background.png");
+    Texture2D background = LoadTexture("./../assets/UI/background.png");
+    Rectangle boundaries[4] = {
+        {-50, 0, 50, 2160},
+        {3840, 0, 50, 2160},
+        {0, -50, 3840, 50},
+        {0, 2160, 3840, 50}
+    };
 
     // float recY = 100;
 
@@ -26,6 +31,9 @@ void Game()
     {
         // Move the player
         player->Move(player->getPosition());
+
+        // Check and handle collision with the map boundary
+        player->CheckMapBoundary(boundaries);
 
         // Update camera position
         playerCam.target = player->getPosition();
@@ -37,9 +45,7 @@ void Game()
 
         BeginMode2D(playerCam);
 
-        DrawTexture(a, 200, 200, RAYWHITE);
-
-        DrawTexture(bg, 200, 200, RAYWHITE);
+        DrawTexture(background, 0, 0, RAYWHITE);
 
         // Scrolls
         // recY -= GetMouseWheelMove() * 4;

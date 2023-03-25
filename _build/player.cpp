@@ -48,3 +48,25 @@ void Player::Move(Vector2 position)
 	// Update player position
 	setPosition(Vector2{ getPosition().x + xOffset, getPosition().y + yOffset });
 }
+
+// Check and handle collision with the map boundary
+void Player::CheckMapBoundary(Rectangle boundaries[4])
+{
+	if (CheckCollisionCircleRec(_position, 93, boundaries[0]))
+	{
+		_position.x += 2;
+	}
+	if (CheckCollisionCircleRec(_position, 93, boundaries[1]))
+	{
+		_position.x -= 2;
+	}
+	if (CheckCollisionCircleRec(_position, 93, boundaries[2]))
+	{
+		_position.y += 2;
+	}
+	if (CheckCollisionCircleRec(_position, 93, boundaries[2]))
+	{
+		_position.y -= 2;
+	}
+}
+
