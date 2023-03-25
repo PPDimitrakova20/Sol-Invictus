@@ -18,6 +18,7 @@ void Game()
 
     Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
     Texture2D a = LoadTexture("./../assets/player/player.png");
+    Texture2D bg = LoadTexture("./../assets/UI/background.png");
 
     // float recY = 100;
 
@@ -37,6 +38,8 @@ void Game()
         BeginMode2D(playerCam);
 
         DrawTexture(a, 200, 200, RAYWHITE);
+
+        DrawTexture(bg, 200, 200, RAYWHITE);
 
         // Scrolls
         // recY -= GetMouseWheelMove() * 4;
