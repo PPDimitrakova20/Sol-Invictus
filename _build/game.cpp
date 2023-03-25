@@ -4,6 +4,7 @@
 #include "player.h"
 #include "activeTextAndObjects.h"
 #include "aminoAcids.h"
+#include <iostream>
 
 void Game()
 {
@@ -46,6 +47,7 @@ void Game()
     Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
     Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
+    float dataY = 168, scrollSpeed = 20;
 
     while (!WindowShouldClose())
     {
@@ -58,9 +60,22 @@ void Game()
         // Update camera position
         playerCam.target = player->getPosition();
 
-        // Draw
+        // Scoll the amino-acid repository up and down
+        dataY += (GetMouseWheelMove() * scrollSpeed);
+
+        // Scoll boundaries
+        if (dataY >= 168)
+        {
+            dataY = 168;
+        }
+        if (dataY <= -1952)
+        {
+            dataY = -1952;
+        }
+
         BeginDrawing();
 
+        // Clear framebuffer
         ClearBackground(BLANK);
 
         BeginMode2D(playerCam);
@@ -69,7 +84,7 @@ void Game()
         DrawRectangle(0, 0, 3840, 2160, WHITE);
 
         // Draw texture underglow
-        DrawTexture(player->getUnderglowTexture(), player->getPosition().x - 400, player->getPosition().y - 400, RAYWHITE);
+        DrawTexture(player->getUnderglowTexture(), int(player->getPosition().x - 400), int(player->getPosition().y - 400), RAYWHITE);
 
         // Draw background
         DrawTexture(background, 0, 0, RAYWHITE);
@@ -83,10 +98,13 @@ void Game()
 
         EndMode2D();
 
+        // Draw amino-acid repository base
         DrawTexture(base, -23, -7, RAYWHITE);
 
-        DrawTexture(data, 13, 168, RAYWHITE);
+        // Draw amino-acid repository data
+        DrawTexture(data, 13, int(dataY), RAYWHITE);
 
+        // Draw amino-acid repository cover
         DrawTexture(cover, 13, 0, RAYWHITE);
 
         // Draw inventory base
@@ -102,5 +120,6 @@ void Game()
     }
     CloseWindow();
 
+    // Free up alocated memory
     delete [] aminoAcids;
 }
