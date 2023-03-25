@@ -3,6 +3,7 @@
 #include "game.h"
 #include "player.h"
 #include "activeTextAndObjects.h"
+#include "aminoAcids.h"
 
 void Game()
 {
@@ -21,7 +22,7 @@ void Game()
 
     // Intialize player variables
     Player* player = Player::getinstance();
-    Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
+    Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
 
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
@@ -32,10 +33,14 @@ void Game()
         {0, 2160, 3840, 50}
     };
 
-    //Intialize inventory variables
+    // Intialize inventory variables
     Texture2D inventory = LoadTexture("./../assets/UI/inventory.png");
     Color elementaColors[6] = { carbonColor, hydrogenColor, nitrogenColor, oxygenColor, sulfurColor, seleniumColor };
     short int itemQuantity[6] = { 0, 0, 0, 0, 0, 0 };
+
+    // Initialize amino-acid variables
+    AminoAcid* aminoAcids = new AminoAcid[21];
+    aminoAcids = aminoAcids->initAminoAcids();
 
     while (!WindowShouldClose())
     {
@@ -85,4 +90,6 @@ void Game()
         EndDrawing();
     }
     CloseWindow();
+
+    delete [] aminoAcids;
 }

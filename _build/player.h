@@ -28,7 +28,9 @@ public:
 
 	// Getters
 	Texture2D getPlayerTexture();
+	
 	Texture2D getUnderglowTexture();
+	
 	Vector2 getPosition();
 
 	// Methods
