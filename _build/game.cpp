@@ -77,16 +77,19 @@ void Game()
         playerCam.target = player->getPosition();
 
         // Scoll the amino-acid repository up and down
-        dataY += int(GetMouseWheelMove() * 20);
+        if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+        {
+            dataY += int(GetMouseWheelMove() * 20);
 
-        // Scoll boundaries
-        if (dataY >= 160)
-        {
-            dataY = 160;
-        }
-        if (dataY <= -1952)
-        {
-            dataY = -1952;
+            // Scoll boundaries
+            if (dataY >= 160)
+            {
+                dataY = 160;
+            }
+            if (dataY <= -1952)
+            {
+                dataY = -1952;
+            }
         }
 
         BeginDrawing();
@@ -124,7 +127,10 @@ void Game()
         for (int i = 0; i < 21; i++)
         {
             // ADD CHECK BY THE AMINOACID CLASS
-            barriers[i].scrollBarrier(barriers[i]);
+            if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+            {
+                barriers[i].scrollBarrier(barriers[i]);
+            }
             DrawTexture(barriers[i].getTexture(), barriers[i].getX(), barriers[i].getScrollY(), RAYWHITE);
         }
 
