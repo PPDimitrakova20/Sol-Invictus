@@ -34,14 +34,25 @@ void Game()
     short int itemQuantity[6] = { 0, 0, 0, 0, 0, 0 };
 
     // Initialize amino-acid variables
-    AminoAcid* aminoAcids = new AminoAcid[21];
+    AminoAcid* aminoAcids = nullptr;
     aminoAcids = aminoAcids->initAminoAcids();
 
     // Intialize amino-acid repository variables
     Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
     Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
-    float dataY = 168, scrollSpeed = 20;
+    int dataY = 160;
+
+    // Intialize data barrier variables
+    Texture2D barrierTextures[5] = {
+        LoadTexture("./../assets/UI/barriers/barrier1.png"),
+        LoadTexture("./../assets/UI/barriers/barrier2.png"),
+        LoadTexture("./../assets/UI/barriers/barrier3.png"),
+        LoadTexture("./../assets/UI/barriers/barrier4.png"),
+        LoadTexture("./../assets/UI/barriers/barrier5.png")
+    };
+    Barrier* barriers = nullptr;
+    barriers = barriers->initBarriers(barrierTextures);
 
     // Initialize chemical elements arrays
     std::vector<ChemicalElement> carbon(10, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
@@ -66,12 +77,12 @@ void Game()
         playerCam.target = player->getPosition();
 
         // Scoll the amino-acid repository up and down
-        dataY += (GetMouseWheelMove() * scrollSpeed);
+        dataY += int(GetMouseWheelMove() * 20);
 
         // Scoll boundaries
-        if (dataY >= 168)
+        if (dataY >= 160)
         {
-            dataY = 168;
+            dataY = 160;
         }
         if (dataY <= -1952)
         {
@@ -96,10 +107,10 @@ void Game()
 
         // Draw the player
         DrawTexturePro(
-            player->getPlayerTexture(),
-            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
+        player->getPlayerTexture(),
+        Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+        Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+        Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
 
         EndMode2D();
 
@@ -107,7 +118,15 @@ void Game()
         DrawTexture(base, -23, -7, RAYWHITE);
 
         // Draw amino-acid repository data
-        DrawTexture(data, 13, int(dataY), RAYWHITE);
+        DrawTexture(data, 13, dataY, RAYWHITE);
+
+        // Draw data barriers
+        for (int i = 0; i < 21; i++)
+        {
+            // ADD CHECK BY THE AMINOACID CLASS
+            barriers[i].scrollBarrier(barriers[i]);
+            DrawTexture(barriers[i].getTexture(), barriers[i].getX(), barriers[i].getScrollY(), RAYWHITE);
+        }
 
         // Draw amino-acid repository cover
         DrawTexture(cover, 13, 0, RAYWHITE);
