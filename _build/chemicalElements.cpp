@@ -39,26 +39,9 @@ void ChemicalElement::setHitbox(Circle hitbox)
 // Randomise position
 void ChemicalElement::randomisePosition()
 {
-	// Reset values
-	srand(time(NULL));
-
 	// Initial randomisation
-	float randX = std::rand() % 3790 + 1;
-	float randY = std::rand() % 2110 + 1;
-
-	// Check if out of map
-	while (randX < 50)
-	{
-		// Randomise again
-		float randX = std::rand() % 3790 + 1;
-	}
-
-	// Check if out of map
-	while (randY < 50)
-	{
-		// Randomise again
-		float randY = std::rand() % 2110 + 1;
-	}
+	float randX = GetRandomValue(0, 3790);
+	float randY = GetRandomValue(0, 2110);
 
 	// Set new position
 	setPosition({ randX, randY });

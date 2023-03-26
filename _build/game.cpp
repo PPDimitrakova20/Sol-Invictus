@@ -65,6 +65,15 @@ void Game()
     // Initialize an array containing all chemical elements arrays
     std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, selenium, sulfur};
 
+    // Randomise positions
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            elements[i][j].randomisePosition();
+        }
+    }
+
     while (!WindowShouldClose())
     {
         // Move the player
@@ -108,6 +117,15 @@ void Game()
         // Draw background
         DrawTexture(background, 0, 0, RAYWHITE);
 
+        // Draw chemical elements
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
+            }
+        }
+
         // Draw the player
         DrawTexturePro(
         player->getPlayerTexture(),
@@ -145,18 +163,6 @@ void Game()
 
         // Draw inventory cover
         DrawTexture(inventory, 1752, 0, RAYWHITE);
-
-        // Draw chemical elements
-        // FIX:: MAKE ELEMENTS STAY IN ONE PLACE
-        /*for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                elements[i][j].randomisePosition();
-                DrawTexture(elements[i][j].getTexture(), GetScreenToWorld2D(elements[i][j].getPosition(), playerCam).x, GetScreenToWorld2D(elements[i][j].getPosition(), playerCam).y, RAYWHITE);
-            }
-        }*/
-        
 
         EndDrawing();
     }

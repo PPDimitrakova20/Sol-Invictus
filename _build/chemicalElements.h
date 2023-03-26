@@ -1,7 +1,6 @@
 #pragma once
 #include "raylib.h"
 #include <string>
-#include <time.h> // rand, srand
 
 struct Circle
 {
