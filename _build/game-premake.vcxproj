@@ -176,12 +176,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="activeTextAndObjects.cpp" />
+    <ClCompile Include="aminoAcids.cpp" />
+    <ClCompile Include="chemicalElements.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="activeTextAndObjects.h" />
+    <ClInclude Include="aminoAcids.h" />
+    <ClInclude Include="chemicalElements.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

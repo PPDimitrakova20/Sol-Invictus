@@ -3,6 +3,8 @@
 #include "game.h"
 #include "player.h"
 #include "activeTextAndObjects.h"
+#include "aminoAcids.h"
+#include <iostream>
 
 void Game()
 {
@@ -21,7 +23,7 @@ void Game()
 
     // Intialize player variables
     Player* player = Player::getinstance();
-    Camera2D playerCam = { {screenWidth/2, screenHeight/2}, player->getPosition(), 0, 1};
+    Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
 
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
@@ -32,10 +34,20 @@ void Game()
         {0, 2160, 3840, 50}
     };
 
-    //Intialize inventory variables
+    // Intialize inventory variables
     Texture2D inventory = LoadTexture("./../assets/UI/inventory.png");
     Color elementaColors[6] = { carbonColor, hydrogenColor, nitrogenColor, oxygenColor, sulfurColor, seleniumColor };
     short int itemQuantity[6] = { 0, 0, 0, 0, 0, 0 };
+
+    // Initialize amino-acid variables
+    AminoAcid* aminoAcids = new AminoAcid[21];
+    aminoAcids = aminoAcids->initAminoAcids();
+
+    // Intialize amino-acid repository variables
+    Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
+    Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
+    Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
+    float dataY = 168, scrollSpeed = 20;
 
     while (!WindowShouldClose())
     {
@@ -48,9 +60,22 @@ void Game()
         // Update camera position
         playerCam.target = player->getPosition();
 
-        // Draw
+        // Scoll the amino-acid repository up and down
+        dataY += (GetMouseWheelMove() * scrollSpeed);
+
+        // Scoll boundaries
+        if (dataY >= 168)
+        {
+            dataY = 168;
+        }
+        if (dataY <= -1952)
+        {
+            dataY = -1952;
+        }
+
         BeginDrawing();
 
+        // Clear framebuffer
         ClearBackground(BLANK);
 
         BeginMode2D(playerCam);
@@ -59,19 +84,28 @@ void Game()
         DrawRectangle(0, 0, 3840, 2160, WHITE);
 
         // Draw texture underglow
-        DrawTexture(player->getUnderglowTexture(), player->getPosition().x - 400, player->getPosition().y - 400, RAYWHITE);
+        DrawTexture(player->getUnderglowTexture(), int(player->getPosition().x - 400), int(player->getPosition().y - 400), RAYWHITE);
 
         // Draw background
         DrawTexture(background, 0, 0, RAYWHITE);
 
         // Draw the player
         DrawTexturePro(
-        player->getPlayerTexture(),
-        Rectangle{0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height)},
-        Rectangle{player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height)},
-        Vector2{float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2)}, 0, RAYWHITE);
+            player->getPlayerTexture(),
+            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
 
         EndMode2D();
+
+        // Draw amino-acid repository base
+        DrawTexture(base, -23, -7, RAYWHITE);
+
+        // Draw amino-acid repository data
+        DrawTexture(data, 13, int(dataY), RAYWHITE);
+
+        // Draw amino-acid repository cover
+        DrawTexture(cover, 13, 0, RAYWHITE);
 
         // Draw inventory base
         DrawRectangle(1821, 0, 99, 1080, inventoryBase);
@@ -85,4 +119,7 @@ void Game()
         EndDrawing();
     }
     CloseWindow();
+
+    // Free up alocated memory
+    delete[] aminoAcids;
 }

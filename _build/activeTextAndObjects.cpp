@@ -40,6 +40,6 @@ void DrawInventoryItems(Font font, short int itemQuantity[6], Color color[6])
 		}
 
 		// Draw quantity number
-		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ GetInventoryTextX(itemQuantity[i]), float(114 + 150 * i)}, 30, 1, WHITE);
+		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ GetInventoryTextX(itemQuantity[i]), float(114 + 150 * i) }, 30, 1, WHITE);
 	}
 }
