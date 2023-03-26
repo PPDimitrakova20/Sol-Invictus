@@ -22,10 +22,10 @@ void Game()
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
     Rectangle boundaries[4] = {
-        {-50, 0, 50, 2160},
-        {3840, 0, 50, 2160},
-        {0, -50, 3840, 50},
-        {0, 2160, 3840, 50}
+        {-50, 0, 50, 3320},
+        {5880, 0, 50, 3320},
+        {0, -50, 5880, 50},
+        {0, 3320, 5880, 50}
     };
 
     // Intialize inventory variables
@@ -55,20 +55,20 @@ void Game()
     barriers = barriers->initBarriers(barrierTextures);
 
     // Initialize chemical elements arrays
-    std::vector<ChemicalElement> carbon(10, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
-    std::vector<ChemicalElement> hydrogen(10, ChemicalElement("./../assets/elements/hydrogen.png", "hydrogen"));
-    std::vector<ChemicalElement> nitrogen(10, ChemicalElement("./../assets/elements/nitrogen.png", "nitrogen"));
-    std::vector<ChemicalElement> oxygen(10, ChemicalElement("./../assets/elements/oxygen.png", "oxygen"));
-    std::vector<ChemicalElement> selenium(10, ChemicalElement("./../assets/elements/selenium.png", "selenium"));
-    std::vector<ChemicalElement> sulfur(10, ChemicalElement("./../assets/elements/sulfur.png", "sulfur"));
+    std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
+    std::vector<ChemicalElement> hydrogen(15, ChemicalElement("./../assets/elements/hydrogen.png", "hydrogen"));
+    std::vector<ChemicalElement> nitrogen(15, ChemicalElement("./../assets/elements/nitrogen.png", "nitrogen"));
+    std::vector<ChemicalElement> oxygen(15, ChemicalElement("./../assets/elements/oxygen.png", "oxygen"));
+    std::vector<ChemicalElement> selenium(15, ChemicalElement("./../assets/elements/selenium.png", "selenium"));
+    std::vector<ChemicalElement> sulfur(15, ChemicalElement("./../assets/elements/sulfur.png", "sulfur"));
 
     // Initialize an array containing all chemical elements arrays
     std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, selenium, sulfur};
 
-    // Randomise positions
+    // Randomise elements' positions
     for (int i = 0; i < 6; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 15; j++)
         {
             elements[i][j].randomisePosition();
         }
@@ -104,23 +104,20 @@ void Game()
         BeginDrawing();
 
         // Clear framebuffer
-        ClearBackground(BLANK);
+        ClearBackground(WHITE);
 
         BeginMode2D(playerCam);
-
-        // Draw background base
-        DrawRectangle(0, 0, 3840, 2160, WHITE);
 
         // Draw texture underglow
         DrawTexture(player->getUnderglowTexture(), int(player->getPosition().x - 400), int(player->getPosition().y - 400), RAYWHITE);
 
         // Draw background
-        DrawTexture(background, 0, 0, RAYWHITE);
+        DrawTexture(background, -900, -500, RAYWHITE);
 
         // Draw chemical elements
         for (int i = 0; i < 6; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 15; j++)
             {
                 DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
             }
@@ -135,7 +132,7 @@ void Game()
 
         EndMode2D();
 
-        animateAcidRepo(int dataX, int state);
+       /* animateAcidRepo(int dataX, int state);*/
 
         // Draw amino-acid repository base
         DrawTexture(base, dataXBase, -7, RAYWHITE);
@@ -172,4 +169,5 @@ void Game()
 
     // Free up alocated memory
     delete[] aminoAcids;
+    delete[] barriers;
 }

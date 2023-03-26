@@ -40,8 +40,8 @@ void ChemicalElement::setHitbox(Circle hitbox)
 void ChemicalElement::randomisePosition()
 {
 	// Initial randomisation
-	float randX = GetRandomValue(0, 3790);
-	float randY = GetRandomValue(0, 2110);
+	float randX = GetRandomValue(10, 5800);
+	float randY = GetRandomValue(10, 3170);
 
 	// Set new position
 	setPosition({ randX, randY });

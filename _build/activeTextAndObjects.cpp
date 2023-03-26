@@ -72,7 +72,7 @@ Barrier* Barrier::initBarriers(Texture2D textures[5])
 	barriers[0] = { 37,  180, -1932, textures[1] }; // Tryptophan
 	barriers[1] = { 303, 180, -1932, textures[1] }; // Valine
 	barriers[2] = { 37,  447, -1666, textures[0] }; // Methonine
-	barriers[3] = { 390, 446, -1666, textures[4] }; // Arginine
+	barriers[3] = { 389, 446, -1666, textures[4] }; // Arginine
 	barriers[4] = { 37,  800, -1312, textures[3] }; // Alanine
 	barriers[5] = { 214, 800, -1312, textures[2] }; // Glutamic acid
 	barriers[6] = { 37,  976, -1136, textures[1] }; // Histidine
