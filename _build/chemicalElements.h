@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include <string>
+#include <time.h> // rand, srand
 
 struct Circle
 {
@@ -42,4 +43,7 @@ public:
 	void setPosition(Vector2 position);
 
 	void setHitbox(Circle hitbox);
+
+	// Randomise position
+	void randomisePosition();
 };
