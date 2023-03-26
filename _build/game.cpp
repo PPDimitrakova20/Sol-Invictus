@@ -43,13 +43,16 @@ void Game()
     Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
     float dataY = 168, scrollSpeed = 20;
 
-    // Initialize chemical elements array
+    // Initialize chemical elements arrays
     std::vector<ChemicalElement> carbon(10, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
     std::vector<ChemicalElement> hydrogen(10, ChemicalElement("./../assets/elements/hydrogen.png", "hydrogen"));
     std::vector<ChemicalElement> nitrogen(10, ChemicalElement("./../assets/elements/nitrogen.png", "nitrogen"));
     std::vector<ChemicalElement> oxygen(10, ChemicalElement("./../assets/elements/oxygen.png", "oxygen"));
     std::vector<ChemicalElement> selenium(10, ChemicalElement("./../assets/elements/selenium.png", "selenium"));
     std::vector<ChemicalElement> sulfur(10, ChemicalElement("./../assets/elements/sulfur.png", "sulfur"));
+
+    // Initialize an array containing all chemical elements arrays
+    std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, selenium, sulfur};
 
     while (!WindowShouldClose())
     {
@@ -117,6 +120,18 @@ void Game()
 
         // Draw inventory cover
         DrawTexture(inventory, 1752, 0, RAYWHITE);
+
+        // Draw chemical elements
+        // FIX:: MAKE ELEMENTS STAY IN ONE PLACE
+        /*for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                elements[i][j].randomisePosition();
+                DrawTexture(elements[i][j].getTexture(), GetScreenToWorld2D(elements[i][j].getPosition(), playerCam).x, GetScreenToWorld2D(elements[i][j].getPosition(), playerCam).y, RAYWHITE);
+            }
+        }*/
+        
 
         EndDrawing();
     }

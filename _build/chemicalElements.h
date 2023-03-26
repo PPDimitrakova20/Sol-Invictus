@@ -27,7 +27,7 @@ public:
 		_texture = LoadTexture(texturePath.c_str());
 		_position = { 0,0 };
 		_type = type;
-		_hitbox = { {0,0}, 85 };
+		_hitbox = { {0,0}, 50 };
 	};
 
 	// Getters

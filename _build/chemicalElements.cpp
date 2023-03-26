@@ -43,21 +43,21 @@ void ChemicalElement::randomisePosition()
 	srand(time(NULL));
 
 	// Initial randomisation
-	float randX = std::rand() % 1840 + 1;
-	float randY = std::rand() % 995 + 1;
+	float randX = std::rand() % 3790 + 1;
+	float randY = std::rand() % 2110 + 1;
 
 	// Check if out of map
-	while (randX < 85)
+	while (randX < 50)
 	{
 		// Randomise again
-		float randX = std::rand() % 1840 + 1;
+		float randX = std::rand() % 3790 + 1;
 	}
 
 	// Check if out of map
-	while (randY < 85)
+	while (randY < 50)
 	{
 		// Randomise again
-		float randY = std::rand() % 995 + 1;
+		float randY = std::rand() % 2110 + 1;
 	}
 
 	// Set new position
