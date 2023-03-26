@@ -1,10 +1,4 @@
-#include "raylib.h"
-#include "box2d/box2d.h"
 #include "game.h"
-#include "player.h"
-#include "activeTextAndObjects.h"
-#include "aminoAcids.h"
-#include <iostream>
 
 void Game()
 {
@@ -48,6 +42,14 @@ void Game()
     Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
     Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
     float dataY = 168, scrollSpeed = 20;
+
+    // Initialize chemical elements array
+    std::vector<ChemicalElement> carbon(10, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
+    std::vector<ChemicalElement> hydrogen(10, ChemicalElement("./../assets/elements/hydrogen.png", "hydrogen"));
+    std::vector<ChemicalElement> nitrogen(10, ChemicalElement("./../assets/elements/nitrogen.png", "nitrogen"));
+    std::vector<ChemicalElement> oxygen(10, ChemicalElement("./../assets/elements/oxygen.png", "oxygen"));
+    std::vector<ChemicalElement> selenium(10, ChemicalElement("./../assets/elements/selenium.png", "selenium"));
+    std::vector<ChemicalElement> sulfur(10, ChemicalElement("./../assets/elements/sulfur.png", "sulfur"));
 
     while (!WindowShouldClose())
     {
