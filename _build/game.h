@@ -5,6 +5,7 @@
 #include "activeTextAndObjects.h"
 #include "chemicalElements.h"
 #include "aminoAcids.h"
+#include "animations.h"
 #include <iostream>
 #include <string>
 #include <vector>

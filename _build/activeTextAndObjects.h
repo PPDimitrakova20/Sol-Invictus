@@ -48,6 +48,9 @@ public:
 	// Set scroll Y coordinate
 	void setScrollY(short int y);
 
+	//Set barrier X coordinate
+	void setX(short int x);
+
 	// Methods
 	// Initialize barriers
 	Barrier* initBarriers(Texture2D barriers[5]);

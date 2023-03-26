@@ -27,6 +27,9 @@
     <ClCompile Include="chemicalElements.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="animations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -42,6 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="chemicalElements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aminoRepo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

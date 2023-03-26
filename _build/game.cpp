@@ -41,7 +41,7 @@ void Game()
     Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
     Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
-    int dataY = 160;
+    int dataY = 160, dataX = 13, dataXBase = dataX - 30;
 
     // Intialize data barrier variables
     Texture2D barrierTextures[5] = {
@@ -135,11 +135,13 @@ void Game()
 
         EndMode2D();
 
+        animateAcidRepo(int dataX, int state);
+
         // Draw amino-acid repository base
-        DrawTexture(base, -23, -7, RAYWHITE);
+        DrawTexture(base, dataXBase, -7, RAYWHITE);
 
         // Draw amino-acid repository data
-        DrawTexture(data, 13, dataY, RAYWHITE);
+        DrawTexture(data, dataX, dataY, RAYWHITE);
 
         // Draw data barriers
         for (int i = 0; i < 21; i++)
@@ -153,7 +155,7 @@ void Game()
         }
 
         // Draw amino-acid repository cover
-        DrawTexture(cover, 13, 0, RAYWHITE);
+        DrawTexture(cover, dataX, 0, RAYWHITE);
 
         // Draw inventory base
         DrawRectangle(1821, 0, 99, 1080, inventoryBase);

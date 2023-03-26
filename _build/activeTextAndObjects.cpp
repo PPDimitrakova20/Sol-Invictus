@@ -59,6 +59,12 @@ void Barrier::setScrollY(short int y)
 	_scrollY = y;
 }
 
+// Set barrier X coordinate
+void Barrier::setX(short int x)
+{
+	_x = x;
+}
+
 // Initialize barriers
 Barrier* Barrier::initBarriers(Texture2D textures[5])
 {
