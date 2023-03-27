@@ -55,15 +55,15 @@ void Game()
     barriers = barriers->initBarriers(barrierTextures);
 
     // Initialize chemical elements arrays
-    std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", "carbon"));
-    std::vector<ChemicalElement> hydrogen(15, ChemicalElement("./../assets/elements/hydrogen.png", "hydrogen"));
-    std::vector<ChemicalElement> nitrogen(15, ChemicalElement("./../assets/elements/nitrogen.png", "nitrogen"));
-    std::vector<ChemicalElement> oxygen(15, ChemicalElement("./../assets/elements/oxygen.png", "oxygen"));
-    std::vector<ChemicalElement> selenium(15, ChemicalElement("./../assets/elements/selenium.png", "selenium"));
-    std::vector<ChemicalElement> sulfur(15, ChemicalElement("./../assets/elements/sulfur.png", "sulfur"));
+    std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", 0));
+    std::vector<ChemicalElement> hydrogen(15, ChemicalElement("./../assets/elements/hydrogen.png", 1));
+    std::vector<ChemicalElement> nitrogen(15, ChemicalElement("./../assets/elements/nitrogen.png", 2));
+    std::vector<ChemicalElement> oxygen(15, ChemicalElement("./../assets/elements/oxygen.png", 3));
+    std::vector<ChemicalElement> sulfur(15, ChemicalElement("./../assets/elements/sulfur.png", 4));
+    std::vector<ChemicalElement> selenium(15, ChemicalElement("./../assets/elements/selenium.png", 5));
 
     // Initialize an array containing all chemical elements arrays
-    std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, selenium, sulfur};
+    std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, sulfur, selenium};
 
     // Randomise elements' positions
     for (int i = 0; i < 6; i++)

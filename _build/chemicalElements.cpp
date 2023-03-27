@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Constructor
-ChemicalElement::ChemicalElement(std::string texturePath, std::string type)
+ChemicalElement::ChemicalElement(std::string texturePath, short int type)
 {
 	_texture = LoadTexture(texturePath.c_str());
 	_position = { 0,0 };
@@ -22,7 +22,7 @@ Vector2 ChemicalElement::getPosition()
 }
 
 // Get type
-std::string ChemicalElement::getType()
+short int ChemicalElement::getType()
 {
 	return _type;
 }
@@ -57,30 +57,7 @@ void ChemicalElement::checkPlayerCollision(Player* player, short int* itemQuanti
 				if (CheckCollisionCircles({ float(player->getPosition().x - 37.5), float(player->getPosition().y - 37.5) }, 37.5, _position, 40))
 				{
 					// Update inventory
-					if (_type == "carbon")
-					{
-						itemQuantity[0]++;
-					}
-					else if (_type == "hydrogen")
-					{
-						itemQuantity[1]++;
-					}
-					else if (_type == "nitrogen")
-					{
-						itemQuantity[2]++;
-					}
-					else if (_type == "oxygen")
-					{
-						itemQuantity[3]++;
-					}
-					else if (_type == "selenium")
-					{
-						itemQuantity[4]++;
-					}
-					else
-					{
-						itemQuantity[5]++;
-					}
+					itemQuantity[_type]++;
 
 					// Update chemical element position
 					randomisePosition();

@@ -9,11 +9,11 @@ class ChemicalElement
 private:
 	Texture2D _texture;
 	Vector2 _position;
-	std::string _type;
+	short int _type;
 
 public:
 	// Constructor
-	ChemicalElement(std::string texturePath, std::string type);
+	ChemicalElement(std::string texturePath, short int type);
 
 	// Getters
 	Texture2D getTexture();
@@ -22,7 +22,7 @@ public:
 	Vector2	getPosition();
 
 	// Get type
-	std::string getType();
+	short int getType();
 
 	// Setters
 	void setPosition(Vector2 position);
