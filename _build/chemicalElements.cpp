@@ -47,22 +47,13 @@ void ChemicalElement::randomisePosition()
 // Check player collision with a chemical element
 void ChemicalElement::checkPlayerCollision(Player* player, short int* itemQuantity)
 {
-	for (int i = 0; i < 6; i++)
+	// Check player collision
+	if (CheckCollisionCircles({ float(player->getPosition().x - 37.5), float(player->getPosition().y - 37.5) }, 37.5, _position, 40))
 	{
-		for (int j = 0; j < 15; j++)
-		{
-			for (int k = 0; k < 15; k++)
-			{
-				// Check player collision
-				if (CheckCollisionCircles({ float(player->getPosition().x - 37.5), float(player->getPosition().y - 37.5) }, 37.5, _position, 40))
-				{
-					// Update inventory
-					itemQuantity[_type]++;
+		// Update inventory
+		itemQuantity[_type]++;
 
-					// Update chemical element position
-					randomisePosition();
-				}
-			}
-		}
+		// Update chemical element position
+		randomisePosition();
 	}
 }

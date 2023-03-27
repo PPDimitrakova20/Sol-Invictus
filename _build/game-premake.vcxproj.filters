@@ -50,8 +50,5 @@
     <ClInclude Include="animations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aminoRepo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

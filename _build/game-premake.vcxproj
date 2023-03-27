@@ -186,7 +186,6 @@
   <ItemGroup>
     <ClInclude Include="activeTextAndObjects.h" />
     <ClInclude Include="aminoAcids.h" />
-    <ClInclude Include="aminoRepo.h" />
     <ClInclude Include="animations.h" />
     <ClInclude Include="chemicalElements.h" />
     <ClInclude Include="game.h" />

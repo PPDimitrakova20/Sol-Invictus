@@ -20,7 +20,7 @@ void Game()
 
     // Intialize player variables
     Player* player = Player::getinstance();
-    Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
+    Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 0.25 };
 
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
@@ -44,7 +44,8 @@ void Game()
     Texture2D base = LoadTexture("./../assets/UI/aminoAcidRepository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/aminoAcidRepository/baseCover.png");
     Texture2D data = LoadTexture("./../assets/UI/aminoAcidRepository/data.png");
-    int dataY = 160, dataX = 13, dataXBase = dataX - 30;
+    int baseX = -23, dataX = 13, coverX = 13, dataY = 160;
+    bool showRepobase = false;
 
     // Intialize data barrier variables
     Texture2D barrierTextures[5] = {
@@ -56,6 +57,20 @@ void Game()
     };
     Barrier* barriers = nullptr;
     barriers = barriers->initBarriers(barrierTextures);
+
+    // Initialize amino-acid repo slide animation variables
+    std::vector<SlideAnimationFrame*> aminoAcidRepoAnimationBase;
+    
+    //-> Initialize first 3 animation frames(for base, data, cover)
+    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(baseX - 607, baseX - 607, baseX, 'r', 0, showRepobase));
+    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(dataX - 607, dataX - 607, dataX, 'r', 0, showRepobase));
+    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(coverX - 607, coverX - 607, coverX, 'r', 0, showRepobase));
+
+    //-> Intialize the remaining animation frames(for the barriers)
+    for (int i = 0; i < 21; i++)
+    {
+        aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'r', 0, showRepobase));
+    }
 
     // Initialize chemical elements arrays
     std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", 0));
@@ -77,6 +92,7 @@ void Game()
         }
     }
 
+    // Main game loop
     while (!WindowShouldClose())
     {
         switch (currentLayer)
@@ -126,6 +142,37 @@ void Game()
                 }
             }
 
+            // Update barrier X coordinate for scroll functionality
+            for (int i = 0; i < 21; i++)
+            {
+                // ADD CHECK BY THE AMINOACID CLASS
+                if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+                {
+                    barriers[i].scrollBarrier(barriers[i]);
+                }
+            }
+
+            // Update animation keys based of keyboard input
+            for (SlideAnimationFrame* i : aminoAcidRepoAnimationBase)
+            {
+                if (!i->getShowComponent())
+                {
+                    if (IsKeyPressed(KEY_TAB))
+                    {
+                        i->setShowComponent(true);
+                    }
+                }
+                else
+                {
+                    if (IsKeyPressed(KEY_TAB))
+                    {
+                        i->setShowComponent(false);
+                    }
+                }
+
+                manageSlideAnimation(i);
+            }
+
             currentLayer = PRESENT;
             break;
 
@@ -165,24 +212,19 @@ void Game()
             /* animateAcidRepo(int dataX, int state);*/
 
             // Draw amino-acid repository base
-            DrawTexture(base, dataXBase, -7, RAYWHITE);
+            DrawTexture(base, aminoAcidRepoAnimationBase[0]->getX(), -7, RAYWHITE);
 
             // Draw amino-acid repository data
-            DrawTexture(data, dataX, dataY, RAYWHITE);
+            DrawTexture(data, aminoAcidRepoAnimationBase[1]->getX(), dataY, RAYWHITE);
 
             // Draw data barriers
             for (int i = 0; i < 21; i++)
             {
-                // ADD CHECK BY THE AMINOACID CLASS
-                if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
-                {
-                    barriers[i].scrollBarrier(barriers[i]);
-                }
-                DrawTexture(barriers[i].getTexture(), barriers[i].getX(), barriers[i].getScrollY(), RAYWHITE);
+                DrawTexture(barriers[i].getTexture(), aminoAcidRepoAnimationBase[i+3]->getX(), barriers[i].getScrollY(), RAYWHITE);
             }
 
             // Draw amino-acid repository cover
-            DrawTexture(cover, dataX, 0, RAYWHITE);
+            DrawTexture(cover, aminoAcidRepoAnimationBase[2]->getX(), 0, RAYWHITE);
 
             // Draw inventory base
             DrawRectangle(1821, 0, 99, 1080, inventoryBase);

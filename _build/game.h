@@ -11,7 +11,7 @@
 #include <vector>
 
 // Initialize new type
-typedef enum ProgrammeLayer { LOGIC, PRESENT};
+typedef enum ProgrammeLayer { LOGIC, PRESENT} ProgrammeLayer;
 
 // Main game fuction
 void Game();

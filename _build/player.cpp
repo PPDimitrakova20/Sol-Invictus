@@ -75,4 +75,3 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 		_position.y -= 5;
 	}
 }
-
