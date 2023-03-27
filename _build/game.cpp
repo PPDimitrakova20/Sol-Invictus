@@ -15,6 +15,9 @@ void Game()
     Font comfortaaRegular = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
     Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 25, 0, 250);
 
+    ProgrammeLayer currentLayer = LOGIC;
+
+
     // Intialize player variables
     Player* player = Player::getinstance();
     Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
@@ -38,9 +41,9 @@ void Game()
     aminoAcids = aminoAcids->initAminoAcids();
 
     // Intialize amino-acid repository variables
-    Texture2D base = LoadTexture("./../assets/UI/Amino-acid repository/base.png");
-    Texture2D cover = LoadTexture("./../assets/UI/Amino-acid repository/base cover.png");
-    Texture2D data = LoadTexture("./../assets/UI/Amino-acid repository/data.png");
+    Texture2D base = LoadTexture("./../assets/UI/aminoAcidRepository/base.png");
+    Texture2D cover = LoadTexture("./../assets/UI/aminoAcidRepository/baseCover.png");
+    Texture2D data = LoadTexture("./../assets/UI/aminoAcidRepository/data.png");
     int dataY = 160, dataX = 13, dataXBase = dataX - 30;
 
     // Intialize data barrier variables
@@ -76,112 +79,128 @@ void Game()
 
     while (!WindowShouldClose())
     {
-        // Move the player
-        player->move(player->getPosition());
-
-        // Check and handle collision with the map boundary
-        player->checkMapBoundary(boundaries);
-
-        // Update camera position
-        playerCam.target = player->getPosition();
-
-        // Inventory item quantity boundary
-        for (int i = 0; i < 6; i++)
+        switch (currentLayer)
         {
-            if (itemQuantity[i] > 20)
+        case LOGIC:
+
+            // Move the player
+            player->move(player->getPosition());
+
+            // Check and handle collision with the map boundary
+            player->checkMapBoundary(boundaries);
+
+            // Update camera position
+            playerCam.target = player->getPosition();
+
+            // Inventory item quantity boundary
+            for (int i = 0; i < 6; i++)
             {
-                itemQuantity[i] = 20;
+                if (itemQuantity[i] > 20)
+                {
+                    itemQuantity[i] = 20;
+                }
             }
-        }
 
-        // Check player collision with all chemical elements
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 15; j++)
+            // Check player collision with all chemical elements
+            for (int i = 0; i < 6; i++)
             {
-                elements[i][j].checkPlayerCollision(player, itemQuantity);;
+                for (int j = 0; j < 15; j++)
+                {
+                    elements[i][j].checkPlayerCollision(player, itemQuantity);;
+                }
             }
-        }
 
-        // Scoll the amino-acid repository up and down
-        if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
-        {
-            dataY += int(GetMouseWheelMove() * 20);
-
-            // Scoll boundaries
-            if (dataY >= 160)
-            {
-                dataY = 160;
-            }
-            if (dataY <= -1952)
-            {
-                dataY = -1952;
-            }
-        }
-
-        BeginDrawing();
-
-        // Clear framebuffer
-        ClearBackground(WHITE);
-
-        BeginMode2D(playerCam);
-
-        // Draw texture underglow
-        DrawTexture(player->getUnderglowTexture(), int(player->getPosition().x - 400), int(player->getPosition().y - 400), RAYWHITE);
-
-        // Draw background
-        DrawTexture(background, -900, -500, RAYWHITE);
-
-        // Draw chemical elements
-        for (int i = 0; i < 6; i++)
-        {
-            for (int j = 0; j < 15; j++)
-            {
-                DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
-            }
-        }
-
-        // Draw the player
-        DrawTexturePro(
-        player->getPlayerTexture(),
-        Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-        Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-        Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
-
-        EndMode2D();
-
-        /* animateAcidRepo(int dataX, int state);*/
-
-        // Draw amino-acid repository base
-        DrawTexture(base, dataXBase, -7, RAYWHITE);
-
-        // Draw amino-acid repository data
-        DrawTexture(data, dataX, dataY, RAYWHITE);
-
-        // Draw data barriers
-        for (int i = 0; i < 21; i++)
-        {
-            // ADD CHECK BY THE AMINOACID CLASS
+            // Scoll the amino-acid repository up and down
             if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
             {
-                barriers[i].scrollBarrier(barriers[i]);
+                dataY += int(GetMouseWheelMove() * 20);
+
+                // Scoll boundaries
+                if (dataY >= 160)
+                {
+                    dataY = 160;
+                }
+                if (dataY <= -1952)
+                {
+                    dataY = -1952;
+                }
             }
-            DrawTexture(barriers[i].getTexture(), barriers[i].getX(), barriers[i].getScrollY(), RAYWHITE);
+
+            currentLayer = PRESENT;
+            break;
+
+        case PRESENT:
+
+            BeginDrawing();
+
+            // Clear framebuffer
+            ClearBackground(WHITE);
+
+            BeginMode2D(playerCam);
+
+            // Draw texture underglow
+            DrawTexture(player->getUnderglowTexture(), int(player->getPosition().x - 400), int(player->getPosition().y - 400), RAYWHITE);
+
+            // Draw background
+            DrawTexture(background, -900, -500, RAYWHITE);
+
+            // Draw chemical elements
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 15; j++)
+                {
+                    DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
+                }
+            }
+
+            // Draw the player
+            DrawTexturePro(
+            player->getPlayerTexture(),
+            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
+
+            EndMode2D();
+
+            /* animateAcidRepo(int dataX, int state);*/
+
+            // Draw amino-acid repository base
+            DrawTexture(base, dataXBase, -7, RAYWHITE);
+
+            // Draw amino-acid repository data
+            DrawTexture(data, dataX, dataY, RAYWHITE);
+
+            // Draw data barriers
+            for (int i = 0; i < 21; i++)
+            {
+                // ADD CHECK BY THE AMINOACID CLASS
+                if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+                {
+                    barriers[i].scrollBarrier(barriers[i]);
+                }
+                DrawTexture(barriers[i].getTexture(), barriers[i].getX(), barriers[i].getScrollY(), RAYWHITE);
+            }
+
+            // Draw amino-acid repository cover
+            DrawTexture(cover, dataX, 0, RAYWHITE);
+
+            // Draw inventory base
+            DrawRectangle(1821, 0, 99, 1080, inventoryBase);
+
+            // Draw inventory items
+            DrawInventoryItems(comfortaaRegular, itemQuantity, elementaColors);
+
+            // Draw inventory cover
+            DrawTexture(inventory, 1752, 0, RAYWHITE);
+
+            EndDrawing();
+
+            currentLayer = LOGIC;
+            break;
+
+        default:
+            break;
         }
-
-        // Draw amino-acid repository cover
-        DrawTexture(cover, dataX, 0, RAYWHITE);
-
-        // Draw inventory base
-        DrawRectangle(1821, 0, 99, 1080, inventoryBase);
-
-        // Draw inventory items
-        DrawInventoryItems(comfortaaRegular, itemQuantity, elementaColors);
-
-        // Draw inventory cover
-        DrawTexture(inventory, 1752, 0, RAYWHITE);
-
-        EndDrawing();
     }
     CloseWindow();
 
