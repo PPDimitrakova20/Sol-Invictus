@@ -53,16 +53,16 @@ Texture2D Barrier::getTexture()
 }
 
 //Setters
-// Set scroll Y coordinate
-void Barrier::setScrollY(short int y)
-{
-	_scrollY = y;
-}
-
 // Set barrier X coordinate
 void Barrier::setX(short int x)
 {
 	_x = x;
+}
+
+// Set scroll Y coordinate
+void Barrier::setScrollY(short int y)
+{
+	_scrollY = y;
 }
 
 // Initialize barriers
@@ -130,7 +130,7 @@ float GetInventoryTextX(int n)
 	case 10: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 19:
 		return 1863;
 	default:
-		return 0;
+		return 1863;
 	}
 }
 

@@ -36,19 +36,19 @@ void Player::move(Vector2 position)
 	// Process keyboard movement input
 	if (IsKeyDown(KEY_W))
 	{
-		yOffset -= 3;
+		yOffset -= 5;
 	}	
 	if (IsKeyDown(KEY_S))
 	{
-		yOffset += 3;
+		yOffset += 5;
 	}	
 	if (IsKeyDown(KEY_A))
 	{
-		xOffset -= 3;
+		xOffset -= 5;
 	}
 	if (IsKeyDown(KEY_D))
 	{
-		xOffset += 3;
+		xOffset += 5;
 	}	
 
 	// Update player position
@@ -60,19 +60,19 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 {
 	if (CheckCollisionCircleRec(_position, 93, boundaries[0]))
 	{
-		_position.x += 3;
+		_position.x += 5;
 	}
 	if (CheckCollisionCircleRec(_position, 93, boundaries[1]))
 	{
-		_position.x -= 3;
+		_position.x -= 5;
 	}
 	if (CheckCollisionCircleRec(_position, 93, boundaries[2]))
 	{
-		_position.y += 3;
+		_position.y += 5;
 	}
 	if (CheckCollisionCircleRec(_position, 93, boundaries[3]))
 	{
-		_position.y -= 3;
+		_position.y -= 5;
 	}
 }
 

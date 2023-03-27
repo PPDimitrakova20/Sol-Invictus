@@ -31,7 +31,7 @@ void Game()
     // Intialize inventory variables
     Texture2D inventory = LoadTexture("./../assets/UI/inventory.png");
     Color elementaColors[6] = { carbonColor, hydrogenColor, nitrogenColor, oxygenColor, sulfurColor, seleniumColor };
-    short int itemQuantity[6] = { 0, 0, 0, 0, 0, 0 };
+    short int * itemQuantity = new short int[6]();
 
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;
@@ -85,6 +85,15 @@ void Game()
         // Update camera position
         playerCam.target = player->getPosition();
 
+        // Check player collision with all chemical elements
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 15; j++)
+            {
+                elements[i][j].checkPlayerCollision(player, itemQuantity);;
+            }
+        }
+
         // Scoll the amino-acid repository up and down
         if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
         {
@@ -132,7 +141,7 @@ void Game()
 
         EndMode2D();
 
-       /* animateAcidRepo(int dataX, int state);*/
+        /* animateAcidRepo(int dataX, int state);*/
 
         // Draw amino-acid repository base
         DrawTexture(base, dataXBase, -7, RAYWHITE);
@@ -168,6 +177,8 @@ void Game()
     CloseWindow();
 
     // Free up alocated memory
+    delete[] player;
     delete[] aminoAcids;
     delete[] barriers;
+    delete[] itemQuantity;
 }

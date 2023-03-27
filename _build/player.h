@@ -27,8 +27,13 @@ public:
 	void setPosition(Vector2 position);
 
 	// Getters
+	// Get player texture
 	Texture2D getPlayerTexture();
+
+	// Get underglow texture
 	Texture2D getUnderglowTexture();
+
+	// Get player position
 	Vector2 getPosition();
 
 	// Methods

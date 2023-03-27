@@ -45,11 +45,11 @@ public:
 	Texture2D getTexture();
 
 	// Setters
-	// Set scroll Y coordinate
-	void setScrollY(short int y);
-
 	//Set barrier X coordinate
 	void setX(short int x);
+
+	// Set scroll Y coordinate
+	void setScrollY(short int y);
 
 	// Methods
 	// Initialize barriers

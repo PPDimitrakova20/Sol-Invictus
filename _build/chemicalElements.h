@@ -1,15 +1,8 @@
 #pragma once
 #include "raylib.h"
+#include "player.h"
 #include <string>
-
-struct Circle
-{
-	// circle center positon
-	Vector2 centerPos;
-
-	// circle radius
-	float radius;
-};
+#include <vector>
 
 class ChemicalElement
 {
@@ -17,32 +10,26 @@ private:
 	Texture2D _texture;
 	Vector2 _position;
 	std::string _type;
-	Circle _hitbox;
 
 public:
-
-	ChemicalElement(std::string texturePath, std::string type)
-	{
-		_texture = LoadTexture(texturePath.c_str());
-		_position = { 0,0 };
-		_type = type;
-		_hitbox = { {0,0}, 50 };
-	};
+	// Constructor
+	ChemicalElement(std::string texturePath, std::string type);
 
 	// Getters
 	Texture2D getTexture();
 
+	// Get position
 	Vector2	getPosition();
 
+	// Get type
 	std::string getType();
-
-	Circle getHitbox();
 
 	// Setters
 	void setPosition(Vector2 position);
 
-	void setHitbox(Circle hitbox);
-
 	// Randomise position
 	void randomisePosition();
+
+	// Check player collision with a chemical element
+	void checkPlayerCollision(Player* player, short int* itemQuantity);
 };
