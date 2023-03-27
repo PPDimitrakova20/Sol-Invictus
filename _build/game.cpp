@@ -85,6 +85,15 @@ void Game()
         // Update camera position
         playerCam.target = player->getPosition();
 
+        // Inventory item quantity boundary
+        for (int i = 0; i < 6; i++)
+        {
+            if (itemQuantity[i] > 20)
+            {
+                itemQuantity[i] = 20;
+            }
+        }
+
         // Check player collision with all chemical elements
         for (int i = 0; i < 6; i++)
         {
