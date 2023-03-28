@@ -215,12 +215,6 @@ void Game()
             // Draw background
             DrawTexture(background, -900, -500, RAYWHITE);
 
-            if (!aminoAcidRepoAnimationBase[0]->getShowComponent())
-            {
-                // Draw taskbar
-                DrawTexture(taskbar, 461, -1, RAYWHITE);
-            }
-
             // Draw chemical elements
             for (int i = 0; i < 4; i++)
             {
@@ -275,7 +269,8 @@ void Game()
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
-            
+            // Draw taskbar
+            DrawTexture(taskbar, 461, -1, RAYWHITE);
 
             EndDrawing();
 
