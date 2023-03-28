@@ -37,4 +37,6 @@ public:
 	// Methods
 	// Initialize amino-acids
 	AminoAcid* initAminoAcids();
+
+	AminoAcid* randomiseAcid(AminoAcid* aminoAcids);
 };

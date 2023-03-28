@@ -62,3 +62,32 @@ AminoAcid* AminoAcid::initAminoAcids()
 
 	return aminoAcids;
 }
+
+// Return a random acid
+AminoAcid* AminoAcid::randomiseAcid(AminoAcid* aminoAcids)
+{
+	// Define a rarity
+	short int rarity = GetRandomValue(1, 10);
+
+	// Define an active acid
+	AminoAcid* activeAcid = new AminoAcid;
+
+	// Check rarity
+	// 6/10 chance
+	if (rarity >= 1 && rarity <= 6)
+	{
+		*activeAcid = aminoAcids[GetRandomValue(0, 8)];
+	}
+	// 3/10 chance
+	else if(rarity >= 7 && rarity <= 9)
+	{
+		*activeAcid = aminoAcids[GetRandomValue(9, 14)];
+	}
+	// 1/10 chance
+	else
+	{
+		*activeAcid = aminoAcids[GetRandomValue(15, 20)];
+	}
+
+	return activeAcid;
+}

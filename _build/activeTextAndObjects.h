@@ -60,5 +60,6 @@ public:
 
 };
 
+
 // Draw inventory items
 void DrawInventoryItems(Font comfortaaRegular, short int inventoryItems[6], Color elementaColors[6]);

@@ -39,6 +39,7 @@ void Game()
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;
     aminoAcids = aminoAcids->initAminoAcids();
+    AminoAcid* activeAcid = aminoAcids->randomiseAcid(aminoAcids);
 
     // Intialize amino-acid repository variables
     Texture2D base = LoadTexture("./../assets/UI/aminoAcidRepository/base.png");
@@ -194,6 +195,8 @@ void Game()
                 manageSlideAnimation(i);
             }
 
+            aminoAcids ;
+
             currentLayer = PRESENT;
             break;
 
@@ -211,6 +214,12 @@ void Game()
 
             // Draw background
             DrawTexture(background, -900, -500, RAYWHITE);
+
+            if (!aminoAcidRepoAnimationBase[0]->getShowComponent())
+            {
+                // Draw taskbar
+                DrawTexture(taskbar, 461, -1, RAYWHITE);
+            }
 
             // Draw chemical elements
             for (int i = 0; i < 4; i++)
@@ -266,8 +275,7 @@ void Game()
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
-            // Draw taskbar
-            DrawTexture(taskbar, 461, -1, RAYWHITE);
+            
 
             EndDrawing();
 
