@@ -32,7 +32,7 @@ void Game()
     };
 
     // Intialize inventory variables
-    Texture2D inventory = LoadTexture("./../assets/UI/inventory.png");
+    Texture2D inventory = LoadTexture("./../assets/UI/craftingBench/inventory.png");
     Color elementaColors[6] = { carbonColor, hydrogenColor, nitrogenColor, oxygenColor, sulfurColor, seleniumColor };
     short int * itemQuantity = new short int[6]();
 
@@ -252,6 +252,8 @@ void Game()
                 DrawTexture(barriers[i].getTexture(), aminoAcidRepoAnimationBase[i+3]->getX(), barriers[i].getScrollY(), RAYWHITE);
             }
 
+            
+
             // Draw amino-acid repository cover
             DrawTexture(cover, aminoAcidRepoAnimationBase[2]->getX(), 0, RAYWHITE);
 
@@ -264,9 +266,9 @@ void Game()
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
-
             // Draw taskbar
-            DrawTexture(taskbar, 476, -1, RAYWHITE);
+            DrawTexture(taskbar, 461, -1, RAYWHITE);
+
             EndDrawing();
 
             currentLayer = LOGIC;
