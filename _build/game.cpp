@@ -8,7 +8,7 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -66,11 +66,16 @@ void Game()
     aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(dataX - 607, dataX - 607, dataX, 'r', 0, showRepobase));
     aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(coverX - 607, coverX - 607, coverX, 'r', 0, showRepobase));
 
-    //-> Intialize the remaining animation frames(for the barriers)
+    //-> Initialize the remaining animation frames(for the barriers)
     for (int i = 0; i < 21; i++)
     {
         aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'r', 0, showRepobase));
     }
+
+    // Initialize taskbar
+    Texture2D taskbar = LoadTexture("./../assets/UI/taskbar/taskbar.png");
+    Texture2D seleniumExtra = LoadTexture("./../assets/UI/taskbar/seleniumExtra.png");
+    Texture2D sulfurExtra = LoadTexture("./../assets/UI/taskbar/sulfurExtra.png");
 
     // Initialize chemical elements arrays
     std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", 0));
@@ -259,10 +264,14 @@ void Game()
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
+
+            // Draw taskbar
+            DrawTexture(taskbar, 476, -1, RAYWHITE);
             EndDrawing();
 
             currentLayer = LOGIC;
             break;
+
 
         default:
             break;
