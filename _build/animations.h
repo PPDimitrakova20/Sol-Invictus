@@ -1,29 +1,30 @@
 #pragma once
 #include "raylib.h"
 
-class SlideAnimationFrame 
+class SlideAnimationFrame
 {
 private:
-	short int _xCoordinate;
-	short int _leftBoundary;
-	short int _rightBoundary;
+	short int _targetCoordinate;
+	short int _startBoundary;
+	short int _endBoundary;
 	char _direction;
 	short int _state;
+	short int _speed;
 	bool _showComponent;
 
 public:
 	// Constructor
-	SlideAnimationFrame(short int x, short int lBoundary, short int rBoundary, const char direction, short int state, bool showComponent);
+	SlideAnimationFrame(short int x, short int lBoundary, short int rBoundary, const char direction, short int state, short int speed, bool showComponent);
 
 	// Getters
 	// Get animation frame X
-	short int getX();
+	short int getTargetCoordinate();
 
 	// Get animation frame left boundary
-	short int getLeftBoundary();
+	short int getStartBoundary();
 
 	// Get animation frame right boundary
-	short int getRightBoundary();
+	short int getEndBoundary();
 
 	// Get animation frame direction
 	char getDirection();
@@ -31,12 +32,15 @@ public:
 	// Get animation frame state
 	short int getState();
 
+	// Get animation speed
+	short int getSpeed();
+
 	// Get animation frame driver boolean
 	bool getShowComponent();
 
 	// Setters
 	// Set animation frame X
-	void setX(short int x);
+	void setTargetCoordinate(short int x);
 
 	// Set animation frame direction
 	void setDirection(short int bnoundary);
@@ -49,7 +53,7 @@ public:
 };
 
 // Construct slide animation frames
-SlideAnimationFrame* constructAnimationFrame(short int x, short int lBoundary, short int rBoundary, const char direction, short int state, bool showComponent);
+SlideAnimationFrame* constructAnimationFrame(short int n, short int startBoundary, short int endBoundary, const char direction, short int state, short int speed, bool showComponent);
 
 // Universal slide animation 
 void manageSlideAnimation(SlideAnimationFrame* animationFrame);

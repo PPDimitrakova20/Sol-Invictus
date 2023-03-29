@@ -115,12 +115,19 @@ void Barrier::scrollBarrier(Barrier temp)
 }
 
 // Get inventory text x position
-float GetInventoryTextX(int n)
+float GetInventoryTextX(int n, int caller)
 {
 	switch (n)
 	{
 	case 0:
-		return 0;
+		if (caller == 1)
+		{
+			return 0;
+		}
+		else
+		{
+			return 2;
+		}
 	case 1:
 		return 3;
 	case 11:
@@ -156,18 +163,18 @@ void drawInventoryQuantityIndicators(Font font, short int itemQuantity[6], Color
 		}
 
 		// Draw quantity number
-		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ 1868 + GetInventoryTextX(itemQuantity[i]), float(114 + 150 * i) }, 30, 1, WHITE);
+		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ 1868 + GetInventoryTextX(itemQuantity[i], 1), float(114 + 150 * i) }, 30, 1, WHITE);
 	}
 }
 
 // Draw taskbar quantity indicators
-void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int itemQuantity[6], Color colors[6])
+void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Color colors[6])
 {
 	// Define relative quantity bar portion
 	float quantityBar = 0;
 
 	// Define local chemical element quantity
-	short int activeItemQuantity[5] = { 0,0,0,0,0};
+	short int activeItemQuantity[5] = { 0,0,0,0,0 };
 
 	// Update local chemical element quantity
 	for (int i = 0; i < 4; i++)
@@ -186,31 +193,32 @@ void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int 
 		// Draw quantity bars
 		if (itemQuantity[i] == 0)
 		{
-			DrawRectangle(968+ 128 * i, 66, 55, 2, colors[i]);
+			DrawRectangle(968 + 128 * i, 67 + base, 55, 2, colors[i]);
 		}
-		else if(itemQuantity[i] >= activeAcid->getChemicalMakeup()[i])
+		else if (itemQuantity[i] >= activeAcid->getChemicalMakeup()[i])
 		{
-			DrawRectangle(968 + 128 * i, 17, 55, 55, colors[i]);
+			// It's a feature now :D
+			DrawRectangle(968 + 128 * i, 17, 55, 56 + base, colors[i]);
 		}
 		else
 		{
 			quantityBar = float(itemQuantity[i] * (51 / activeAcid->getChemicalMakeup()[i]));
-			DrawRectangle(968 + 128 * i, 68 - int(quantityBar), 55, int(ceil(quantityBar)), colors[i]);
+			DrawRectangle(968 + 128 * i, 68 - int(quantityBar), 55, base + int(ceil(quantityBar)) + 1, colors[i]);
 		}
 
 		// Draw quantity number
-		DrawTextEx(items, TextFormat("%i", activeItemQuantity[i]), Vector2{ (987 + 128 * i) + GetInventoryTextX(activeItemQuantity[i]), 31 }, 30, 1, WHITE);
+		DrawTextEx(items, TextFormat("%i", activeItemQuantity[i]), Vector2{ (987 + 128 * i) + GetInventoryTextX(activeItemQuantity[i], 2), float(32 + base) }, 30, 1, WHITE);
 	}
 }
 
 // Draw active amino-acid name
-void drawTaskbarHeading(Font heading, AminoAcid* activeAcid)
+void drawTaskbarHeading(Font heading, AminoAcid* activeAcid, short int base)
 {
-	DrawTextEx(heading, TextFormat("%s", activeAcid->getName().c_str()), Vector2{ 558, 24 }, 40, 1, WHITE);
+	DrawTextEx(heading, TextFormat("%s", activeAcid->getName().c_str()), Vector2{ 558, float(25 + base) }, 40, 1, WHITE);
 }
 
 // Draw sulfur and selenium task targets
-void drawExtraTaskTarget(AminoAcid* activeAcid, short int itemQuantity[6], Texture2D extraTaskTargets[4])
+void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Texture2D extraTaskTargets[2], Color color, Color gradientSelection[6])
 {
 	// Check if the amino-acid contains sulfur or selenium
 	if (activeAcid->getChemicalMakeup().size() > 4)
@@ -218,27 +226,43 @@ void drawExtraTaskTarget(AminoAcid* activeAcid, short int itemQuantity[6], Textu
 		// Draw extra task targets for amino-acids containing sulfur
 		if (activeAcid->getName() == "Methionine" || activeAcid->getName() == "Cysteine")
 		{
-			// Switch between full and empty variants
-			if (itemQuantity[4] < 1)
+			// Draw sulfur task target base
+			DrawRectangle(1412, base + 1, 125, 85, color);
+
+			// Draw quantity indicators
+			if (itemQuantity[4] > 0) // Full indicator varient
 			{
-				DrawTexture(extraTaskTargets[0], 1412, 0, RAYWHITE);
+				DrawRectangleGradientV(1480, 17, 51, 52 + base, gradientSelection[3], gradientSelection[4]);
+				DrawTextEx(item, TextFormat("%i", 1), { 1499, float(30 + base) }, 30, 1, WHITE);
 			}
-			else
+			else // Empty indicator varient
 			{
-				DrawTexture(extraTaskTargets[1], 1412, 0, RAYWHITE);
+				DrawRectangleGradientH(1480, 68 + base, 51, 1, gradientSelection[3], gradientSelection[4]);
+				DrawTextEx(item, TextFormat("%i", 0), { 1499, float(30 + base) }, 30, 1, WHITE);
 			}
+
+			// Draw sulfur task target cover
+			DrawTexture(extraTaskTargets[0], 1412, base + 1, RAYWHITE);
 		}
 		else // Draw extra task targets for amino-acids containing selenium
 		{
-			// Switch between full and empty variants
-			if (itemQuantity[5] < 1)
+			// Draw selenium task target base
+			DrawRectangle(1412, base + 1, 146, 85, color);
+
+			// Draw quantity indicators
+			if (itemQuantity[5] > 0) // Full indicator varient
 			{
-				DrawTexture(extraTaskTargets[2], 1412, 0, RAYWHITE);
+				DrawRectangleGradientV(1503, 17, 51, 52 + base, gradientSelection[5], gradientSelection[1]);
+				DrawTextEx(item, TextFormat("%i", 1), { 1522, float(30 + base) }, 30, 1, WHITE);
 			}
-			else
+			else // Empty indicator varient
 			{
-				DrawTexture(extraTaskTargets[3], 1412, 0, RAYWHITE);
+				DrawRectangleGradientH(1503, 68 + base, 51, 1, gradientSelection[5], gradientSelection[1]);
+				DrawTextEx(item, TextFormat("%i", 0), { 1522, float(30 + base) }, 30, 1, WHITE);
 			}
+
+			// Draw selenium task target cover
+			DrawTexture(extraTaskTargets[1], 1412, base + 1, RAYWHITE);
 		}
 	}
 }

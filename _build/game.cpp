@@ -44,7 +44,7 @@ void Game()
     Texture2D base = LoadTexture("./../assets/UI/aminoAcidRepository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/aminoAcidRepository/baseCover.png");
     Texture2D data = LoadTexture("./../assets/UI/aminoAcidRepository/data.png");
-    int baseX = -23, dataX = 13, coverX = 13, dataY = 160;
+    short int dataY = 160;
     bool showRepobase = false;
 
     // Intialize data barrier variables
@@ -58,28 +58,13 @@ void Game()
     Barrier* barriers = nullptr;
     barriers = barriers->initBarriers(barrierTextures);
 
-    // Initialize amino-acid repo slide animation variables
-    std::vector<SlideAnimationFrame*> slideAnimationFrames;
-
-    //-> Initialize barriers animation frames
-    for (int i = 0; i < 21; i++)
-    {
-        slideAnimationFrames.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'r', 0, showRepobase));
-    }
-    
-    //-> Initialize remaining 4 animation frames(for base, data, cover)
-    slideAnimationFrames.push_back(constructAnimationFrame(baseX - 607, baseX - 607, baseX, 'r', 0, showRepobase));
-    slideAnimationFrames.push_back(constructAnimationFrame(dataX - 607, dataX - 607, dataX, 'r', 0, showRepobase));
-    slideAnimationFrames.push_back(constructAnimationFrame(coverX - 607, coverX - 607, coverX, 'r', 0, showRepobase));
-
     // Initialize taskbar variables
     Texture2D taskbar = LoadTexture("./../assets/UI/taskbar/taskbar.png");
-    Texture2D extraTaskTargets[4] = {
-        LoadTexture("./../assets/UI/taskbar/sulfurEmpty.png"), 
-        LoadTexture("./../assets/UI/taskbar/sulfurFull.png"), 
-        LoadTexture("./../assets/UI/taskbar/seleniumEmpty.png"),
-        LoadTexture("./../assets/UI/taskbar/seleniumFull.png")
+    Texture2D extraTaskTargets[2] = {
+        LoadTexture("./../assets/UI/taskbar/sulfurTaskTarget.png"),
+        LoadTexture("./../assets/UI/taskbar/seleniumTaskTarget.png"),
     };
+    bool showTaskbar = true;
 
     // Initialize chemical elements arrays
     // 0 -> carbon, 1 -> hydrogen, 2 -> nitrogen, 3 -> oxygen, 4 -> sulfur, 5 -> selenium
@@ -110,6 +95,21 @@ void Game()
         }
     }
 
+    // Initialize amino-acid repo slide animation variables
+    std::vector<SlideAnimationFrame*> slideAnimationFrames;
+
+    //-> Initialize barriers animation frames
+    for (int i = 0; i < 21; i++)
+    {
+        slideAnimationFrames.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'p', 0, 5, showRepobase));
+    }
+
+    //-> Initialize remaining 4 animation frames(for base, data, cover)
+    slideAnimationFrames.push_back(constructAnimationFrame(-630, -630, -23, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(constructAnimationFrame(-104, -104, -1, 'p', 0, 2, showTaskbar));
+
     // Main game loop
     while (!WindowShouldClose())
     {
@@ -127,6 +127,11 @@ void Game()
 
             // Update camera position
             playerCam.target = player->getPosition();
+
+            if (IsKeyPressed(KEY_UP))
+            {
+                activeAcid = aminoAcids->randomiseAcid(aminoAcids);
+            }
 
             // Inventory item quantity boundary
             for (int i = 0; i < 6; i++)
@@ -246,22 +251,22 @@ void Game()
             EndMode2D();
 
             // Draw amino-acid repository base
-            DrawTexture(base, slideAnimationFrames[21]->getX(), -7, RAYWHITE);
+            DrawTexture(base, slideAnimationFrames[21]->getTargetCoordinate(), -7, RAYWHITE);
 
             // Draw amino-acid repository data
-            DrawTexture(data, slideAnimationFrames[22]->getX(), dataY, RAYWHITE);
+            DrawTexture(data, slideAnimationFrames[22]->getTargetCoordinate(), dataY, RAYWHITE);
 
             // Draw data barriers
             for (int i = 0; i < 21; i++)
             {
                 if (!aminoAcids[i].getIsDiscovered())
                 {
-                    DrawTexture(barriers[i].getTexture(), slideAnimationFrames[i]->getX(), barriers[i].getScrollY(), RAYWHITE);
+                    DrawTexture(barriers[i].getTexture(), slideAnimationFrames[i]->getTargetCoordinate(), barriers[i].getScrollY(), RAYWHITE);
                 }
             }
 
             // Draw amino-acid repository cover
-            DrawTexture(cover, slideAnimationFrames[23]->getX(), 0, RAYWHITE);
+            DrawTexture(cover, slideAnimationFrames[23]->getTargetCoordinate(), 0, RAYWHITE);
 
             // Draw inventory base
             DrawRectangle(1821, 0, 99, 1080, UIBase);
@@ -273,19 +278,19 @@ void Game()
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
             // Draw sulfur and selenium task targets
-            drawExtraTaskTarget(activeAcid, itemQuantity, extraTaskTargets);
+            drawExtraTaskTarget(comfortaaRegular, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), extraTaskTargets, UIBase, elementaColors);
 
             // Draw taskbar base
-            DrawRectangleRounded({526, 0, 903, 85}, 0.3f, 1000, UIBase);
+            DrawRectangleRounded({ 526, float(slideAnimationFrames[24]->getTargetCoordinate() + 1), 903, 85 }, 0.3f, 1000, UIBase);
 
             // Draw taskbar items(numbers and quantity indicators)
-            drawTaskbarQuantityIndicators(comfortaaRegular, activeAcid, itemQuantity, elementaColors);
+            drawTaskbarQuantityIndicators(comfortaaRegular, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), elementaColors);
 
             // Draw taskbar
-            DrawTexture(taskbar, 461, -1, RAYWHITE);
+            DrawTexture(taskbar, 461, slideAnimationFrames[24]->getTargetCoordinate(), RAYWHITE);
 
             // Draw active amino-acid name
-            drawTaskbarHeading(comfortaaBold, activeAcid);
+            drawTaskbarHeading(comfortaaBold, activeAcid, slideAnimationFrames[24]->getTargetCoordinate());
 
             EndDrawing();
 
