@@ -2,8 +2,6 @@
 
 void Game()
 {
-    //b2World phsWorld = b2World(b2Vec2(0, -9.8));
-
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 

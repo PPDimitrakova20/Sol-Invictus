@@ -1,6 +1,5 @@
 #pragma once
 #include "raylib.h"
-#include "box2d/box2d.h"
 #include "player.h"
 #include "activeTextAndObjects.h"
 #include "chemicalElements.h"
