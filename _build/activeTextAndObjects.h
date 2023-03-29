@@ -1,9 +1,10 @@
 #pragma once
 #include "raylib.h"
+#include "aminoAcids.h"
 #include <string>
 
 // Define custom colors
-#define inventoryBase CLITERAL(Color){ 44, 44, 44, 255 }
+#define UIBase CLITERAL(Color){ 44, 44, 44, 255 }
 #define carbonColor CLITERAL(Color){ 255, 138, 0, 255}
 #define hydrogenColor CLITERAL(Color){ 97, 0, 255, 255}
 #define nitrogenColor CLITERAL(Color){ 0, 102, 255, 255}
@@ -61,5 +62,14 @@ public:
 };
 
 
-// Draw inventory items
-void DrawInventoryItems(Font comfortaaRegular, short int inventoryItems[6], Color elementaColors[6]);
+// Draw inventory quantity indicators
+void drawInventoryQuantityIndicators(Font comfortaaRegular, short int inventoryItems[6], Color elementaColors[6]);
+
+// Draw taskbar quantity indicators
+void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int itemQuantity[6], Color colors[6]);
+
+// Draw active amino-acid name
+void drawTaskbarHeading(Font heading, AminoAcid* activeAcid);
+
+// Draw sulfur and selenium task targets
+void drawExtraTaskTarget(AminoAcid* activeAcid, short int itemQuantity[6], Texture2D extraTaskTargets[4]);

@@ -1,5 +1,8 @@
 #include <cmath>
+#include <string>
 #include "activeTextAndObjects.h"
+#include "animations.h"
+
 
 // Barrier class methods
 // Default constructor
@@ -111,48 +114,131 @@ void Barrier::scrollBarrier(Barrier temp)
 	}
 }
 
-
 // Get inventory text x position
 float GetInventoryTextX(int n)
 {
 	switch (n)
 	{
 	case 0:
-		return 1868;
+		return 0;
 	case 1:
-		return 1871;
+		return 3;
 	case 11:
-		return 1865;
+		return -3;
 	case 20:
-		return 1861;
+		return -7;
 	case 2:	case 3:	case 4: case 5: case 6: case 7: case 8: case 9:
-		return 1869;
+		return 1;
 	case 10: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 19:
-		return 1863;
+		return -5;
 	default:
-		return 1863;
+		return -5;
 	}
 }
 
-// Draw inventory items
-void DrawInventoryItems(Font font, short int itemQuantity[6], Color color[6])
+// Draw inventory quantity indicators
+void drawInventoryQuantityIndicators(Font font, short int itemQuantity[6], Color colors[6])
 {
+	// Define relative rectangle portion
 	float quantityBar = 0;
 
 	for (int i = 0; i < 6; i++)
 	{
-		// Draw quantity bars
+		// Draw quantity bars 
 		if (itemQuantity[i] == 0)
 		{
-			DrawRectangle(1848, 152 + i * 150, 55, 1, color[i]);
+			DrawRectangle(1848, 152 + i * 150, 55, 1, colors[i]);
 		}
 		else
 		{
 			quantityBar = float(itemQuantity[i] * 2.55);
-			DrawRectangle(1847, (153 + i * 150) - int(quantityBar), 55, int(ceil(quantityBar)), color[i]);
+			DrawRectangle(1847, (153 + i * 150) - int(quantityBar), 55, int(ceil(quantityBar)), colors[i]);
 		}
 
 		// Draw quantity number
-		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ GetInventoryTextX(itemQuantity[i]), float(114 + 150 * i) }, 30, 1, WHITE);
+		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ 1868 + GetInventoryTextX(itemQuantity[i]), float(114 + 150 * i) }, 30, 1, WHITE);
+	}
+}
+
+// Draw taskbar quantity indicators
+void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int itemQuantity[6], Color colors[6])
+{
+	// Define relative quantity bar portion
+	float quantityBar = 0;
+
+	// Define local chemical element quantity
+	short int activeItemQuantity[5] = { 0,0,0,0,0};
+
+	// Update local chemical element quantity
+	for (int i = 0; i < 4; i++)
+	{
+		activeItemQuantity[i] = itemQuantity[i];
+
+		// Check for relevant boundaries
+		if (activeItemQuantity[i] >= activeAcid->getChemicalMakeup()[i])
+		{
+			activeItemQuantity[i] = activeAcid->getChemicalMakeup()[i];
+		}
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		// Draw quantity bars
+		if (itemQuantity[i] == 0)
+		{
+			DrawRectangle(968+ 128 * i, 66, 55, 2, colors[i]);
+		}
+		else if(itemQuantity[i] >= activeAcid->getChemicalMakeup()[i])
+		{
+			DrawRectangle(968 + 128 * i, 17, 55, 55, colors[i]);
+		}
+		else
+		{
+			quantityBar = float(itemQuantity[i] * (51 / activeAcid->getChemicalMakeup()[i]));
+			DrawRectangle(968 + 128 * i, 68 - int(quantityBar), 55, int(ceil(quantityBar)), colors[i]);
+		}
+
+		// Draw quantity number
+		DrawTextEx(items, TextFormat("%i", activeItemQuantity[i]), Vector2{ (987 + 128 * i) + GetInventoryTextX(activeItemQuantity[i]), 31 }, 30, 1, WHITE);
+	}
+}
+
+// Draw active amino-acid name
+void drawTaskbarHeading(Font heading, AminoAcid* activeAcid)
+{
+	DrawTextEx(heading, TextFormat("%s", activeAcid->getName().c_str()), Vector2{ 558, 24 }, 40, 1, WHITE);
+}
+
+// Draw sulfur and selenium task targets
+void drawExtraTaskTarget(AminoAcid* activeAcid, short int itemQuantity[6], Texture2D extraTaskTargets[4])
+{
+	// Check if the amino-acid contains sulfur or selenium
+	if (activeAcid->getChemicalMakeup().size() > 4)
+	{
+		// Draw extra task targets for amino-acids containing sulfur
+		if (activeAcid->getName() == "Methionine" || activeAcid->getName() == "Cysteine")
+		{
+			// Switch between full and empty variants
+			if (itemQuantity[4] < 1)
+			{
+				DrawTexture(extraTaskTargets[0], 1412, 0, RAYWHITE);
+			}
+			else
+			{
+				DrawTexture(extraTaskTargets[1], 1412, 0, RAYWHITE);
+			}
+		}
+		else // Draw extra task targets for amino-acids containing selenium
+		{
+			// Switch between full and empty variants
+			if (itemQuantity[5] < 1)
+			{
+				DrawTexture(extraTaskTargets[2], 1412, 0, RAYWHITE);
+			}
+			else
+			{
+				DrawTexture(extraTaskTargets[3], 1412, 0, RAYWHITE);
+			}
+		}
 	}
 }

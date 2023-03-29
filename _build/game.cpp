@@ -8,12 +8,12 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
     Font comfortaaRegular = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
-    Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 25, 0, 250);
+    Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
 
     ProgrammeLayer currentLayer = LOGIC;
 
@@ -60,25 +60,30 @@ void Game()
     barriers = barriers->initBarriers(barrierTextures);
 
     // Initialize amino-acid repo slide animation variables
-    std::vector<SlideAnimationFrame*> aminoAcidRepoAnimationBase;
-    
-    //-> Initialize first 3 animation frames(for base, data, cover)
-    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(baseX - 607, baseX - 607, baseX, 'r', 0, showRepobase));
-    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(dataX - 607, dataX - 607, dataX, 'r', 0, showRepobase));
-    aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(coverX - 607, coverX - 607, coverX, 'r', 0, showRepobase));
+    std::vector<SlideAnimationFrame*> slideAnimationFrames;
 
-    //-> Initialize the remaining animation frames(for the barriers)
+    //-> Initialize barriers animation frames
     for (int i = 0; i < 21; i++)
     {
-        aminoAcidRepoAnimationBase.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'r', 0, showRepobase));
+        slideAnimationFrames.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'r', 0, showRepobase));
     }
+    
+    //-> Initialize remaining 4 animation frames(for base, data, cover)
+    slideAnimationFrames.push_back(constructAnimationFrame(baseX - 607, baseX - 607, baseX, 'r', 0, showRepobase));
+    slideAnimationFrames.push_back(constructAnimationFrame(dataX - 607, dataX - 607, dataX, 'r', 0, showRepobase));
+    slideAnimationFrames.push_back(constructAnimationFrame(coverX - 607, coverX - 607, coverX, 'r', 0, showRepobase));
 
-    // Initialize taskbar
+    // Initialize taskbar variables
     Texture2D taskbar = LoadTexture("./../assets/UI/taskbar/taskbar.png");
-    Texture2D seleniumExtra = LoadTexture("./../assets/UI/taskbar/seleniumExtra.png");
-    Texture2D sulfurExtra = LoadTexture("./../assets/UI/taskbar/sulfurExtra.png");
+    Texture2D extraTaskTargets[4] = {
+        LoadTexture("./../assets/UI/taskbar/sulfurEmpty.png"), 
+        LoadTexture("./../assets/UI/taskbar/sulfurFull.png"), 
+        LoadTexture("./../assets/UI/taskbar/seleniumEmpty.png"),
+        LoadTexture("./../assets/UI/taskbar/seleniumFull.png")
+    };
 
     // Initialize chemical elements arrays
+    // 0 -> carbon, 1 -> hydrogen, 2 -> nitrogen, 3 -> oxygen, 4 -> sulfur, 5 -> selenium
     std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", 0));
     std::vector<ChemicalElement> hydrogen(15, ChemicalElement("./../assets/elements/hydrogen.png", 1));
     std::vector<ChemicalElement> nitrogen(15, ChemicalElement("./../assets/elements/nitrogen.png", 2));
@@ -136,7 +141,8 @@ void Game()
             {
                 for (int j = 0; j < 15; j++)
                 {
-                    elements[i][j].checkPlayerCollision(player, itemQuantity);;
+                
+                    elements[i][j].checkPlayerCollision(player, itemQuantity);
                 }
             }
 
@@ -144,11 +150,11 @@ void Game()
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    elements[i][j].checkPlayerCollision(player, itemQuantity);;
+                    elements[i][j].checkPlayerCollision(player, itemQuantity);
                 }
             }
 
-            // Scoll the amino-acid repository up and down
+            // Scoll the amino-acid repository base up and down
             if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
             {
                 dataY += int(GetMouseWheelMove() * 20);
@@ -167,7 +173,6 @@ void Game()
             // Update barrier X coordinate for scroll functionality
             for (int i = 0; i < 21; i++)
             {
-                // ADD CHECK BY THE AMINOACID CLASS
                 if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
                 {
                     barriers[i].scrollBarrier(barriers[i]);
@@ -175,27 +180,28 @@ void Game()
             }
 
             // Update animation keys based of keyboard input
-            for (SlideAnimationFrame* i : aminoAcidRepoAnimationBase)
+            for (short i = 0; i < slideAnimationFrames.size(); i++)
             {
-                if (!i->getShowComponent())
+                if (i != slideAnimationFrames.size() - 1)
                 {
-                    if (IsKeyPressed(KEY_TAB))
+                    if (!slideAnimationFrames[i]->getShowComponent())
                     {
-                        i->setShowComponent(true);
+                        if (IsKeyPressed(KEY_TAB))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(true);
+                        }
                     }
-                }
-                else
-                {
-                    if (IsKeyPressed(KEY_TAB))
+                    else
                     {
-                        i->setShowComponent(false);
+                        if (IsKeyPressed(KEY_TAB))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(false);
+                        }
                     }
-                }
+                }      
 
-                manageSlideAnimation(i);
+                manageSlideAnimation(slideAnimationFrames[i]);
             }
-
-            aminoAcids ;
 
             currentLayer = PRESENT;
             break;
@@ -241,42 +247,52 @@ void Game()
 
             EndMode2D();
 
-            /* animateAcidRepo(int dataX, int state);*/
-
             // Draw amino-acid repository base
-            DrawTexture(base, aminoAcidRepoAnimationBase[0]->getX(), -7, RAYWHITE);
+            DrawTexture(base, slideAnimationFrames[21]->getX(), -7, RAYWHITE);
 
             // Draw amino-acid repository data
-            DrawTexture(data, aminoAcidRepoAnimationBase[1]->getX(), dataY, RAYWHITE);
+            DrawTexture(data, slideAnimationFrames[22]->getX(), dataY, RAYWHITE);
 
             // Draw data barriers
             for (int i = 0; i < 21; i++)
             {
-                DrawTexture(barriers[i].getTexture(), aminoAcidRepoAnimationBase[i+3]->getX(), barriers[i].getScrollY(), RAYWHITE);
+                if (!aminoAcids[i].getIsDiscovered())
+                {
+                    DrawTexture(barriers[i].getTexture(), slideAnimationFrames[i]->getX(), barriers[i].getScrollY(), RAYWHITE);
+                }
             }
 
-            
-
             // Draw amino-acid repository cover
-            DrawTexture(cover, aminoAcidRepoAnimationBase[2]->getX(), 0, RAYWHITE);
+            DrawTexture(cover, slideAnimationFrames[23]->getX(), 0, RAYWHITE);
 
             // Draw inventory base
-            DrawRectangle(1821, 0, 99, 1080, inventoryBase);
+            DrawRectangle(1821, 0, 99, 1080, UIBase);
 
-            // Draw inventory items
-            DrawInventoryItems(comfortaaRegular, itemQuantity, elementaColors);
+            // Draw inventory items(numbers and quantity indicators)
+            drawInventoryQuantityIndicators(comfortaaRegular, itemQuantity, elementaColors);
 
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
+            // Draw sulfur and selenium task targets
+            drawExtraTaskTarget(activeAcid, itemQuantity, extraTaskTargets);
+
+            // Draw taskbar base
+            DrawRectangleRounded({526, 0, 903, 85}, 0.3f, 1000, UIBase);
+
+            // Draw taskbar items(numbers and quantity indicators)
+            drawTaskbarQuantityIndicators(comfortaaRegular, activeAcid, itemQuantity, elementaColors);
+
             // Draw taskbar
             DrawTexture(taskbar, 461, -1, RAYWHITE);
+
+            // Draw active amino-acid name
+            drawTaskbarHeading(comfortaaBold, activeAcid);
 
             EndDrawing();
 
             currentLayer = LOGIC;
             break;
-
 
         default:
             break;
