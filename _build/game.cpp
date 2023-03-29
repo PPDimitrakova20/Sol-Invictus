@@ -17,7 +17,6 @@ void Game()
 
     ProgrammeLayer currentLayer = LOGIC;
 
-
     // Intialize player variables
     Player* player = Player::getinstance();
     Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
@@ -180,27 +179,24 @@ void Game()
             }
 
             // Update animation keys based of keyboard input
-            for (short i = 0; i < slideAnimationFrames.size(); i++)
+            for (SlideAnimationFrame *i : slideAnimationFrames)
             {
-                if (i != slideAnimationFrames.size() - 1)
+                if (!i->getShowComponent())
                 {
-                    if (!slideAnimationFrames[i]->getShowComponent())
+                    if (IsKeyPressed(KEY_TAB))
                     {
-                        if (IsKeyPressed(KEY_TAB))
-                        {
-                            slideAnimationFrames[i]->setShowComponent(true);
-                        }
+                        i->setShowComponent(true);
                     }
-                    else
+                }
+                else
+                {
+                    if (IsKeyPressed(KEY_TAB))
                     {
-                        if (IsKeyPressed(KEY_TAB))
-                        {
-                            slideAnimationFrames[i]->setShowComponent(false);
-                        }
+                        i->setShowComponent(false);
                     }
-                }      
+                }    
 
-                manageSlideAnimation(slideAnimationFrames[i]);
+                manageSlideAnimation(i);
             }
 
             currentLayer = PRESENT;
