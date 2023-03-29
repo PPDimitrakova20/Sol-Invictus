@@ -26,6 +26,12 @@ Vector2 Player::getPosition()
 	return _position;
 }
 
+// Get player rotation
+float Player::getRotation()
+{
+	return _rotation;
+}
+
 // Methods  
 // Move the player
 void Player::move(Vector2 position)
@@ -73,5 +79,36 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 	if (CheckCollisionCircleRec(_position, 93, boundaries[3]))
 	{
 		_position.y -= 5;
+	}
+}
+
+void Player::roatePlayer()
+{
+	if (IsKeyDown(KEY_W))
+	{
+		_rotation = 0;
+	}
+
+	if (IsKeyDown(KEY_S))
+	{
+		_rotation = 180;
+	}
+
+	if (IsKeyDown(KEY_D))
+	{
+		_rotation = 90;
+		if (IsKeyDown(KEY_W))
+			_rotation = 45;
+		if (IsKeyDown(KEY_S))
+			_rotation = 135;
+	}
+
+	if (IsKeyDown(KEY_A))
+	{
+		_rotation = 270;
+		if (IsKeyDown(KEY_S))
+			_rotation = 225;
+		if (IsKeyDown(KEY_W))
+			_rotation = 315;
 	}
 }

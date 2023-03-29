@@ -120,6 +120,8 @@ void Game()
             // Move the player
             player->move(player->getPosition());
 
+            player->roatePlayer();
+
             // Check and handle collision with the map boundary
             player->checkMapBoundary(boundaries);
 
@@ -239,7 +241,7 @@ void Game()
             player->getPlayerTexture(),
             Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
             Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, 0, RAYWHITE);
+            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
 
             EndMode2D();
 
