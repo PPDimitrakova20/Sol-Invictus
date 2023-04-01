@@ -5,12 +5,13 @@
 #include "chemicalElements.h"
 #include "aminoAcids.h"
 #include "animations.h"
+#include "menu.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
 // Initialize new type
-enum ProgrammeLayer { LOGIC, PRESENT};
+enum ProgrammeLayer { MENU, GAMELOGIC, GAMEPRESENT};
 
 // Main game fuction
 void Game();

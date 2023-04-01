@@ -13,7 +13,15 @@ void Game()
     Font comfortaaRegular = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
     Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
 
-    ProgrammeLayer currentLayer = LOGIC;
+    ProgrammeLayer currentLayer = MENU;
+
+    // Load tutorial textures
+    Texture2D tutorialFirst = LoadTexture("./../assets/UI/tutorial/tutorial1.png");
+    Texture2D tutorialSecond = LoadTexture("./../assets/UI/tutorial/tutorial2.png");
+    Texture2D tutorialThird = LoadTexture("./../assets/UI/tutorial/tutorial3.png");
+
+    // Initialize menu
+    Menu gameMenu = Menu();
 
     // Intialize player variables
     Player* player = Player::getinstance();
@@ -111,9 +119,24 @@ void Game()
     // Main game loop
     while (!WindowShouldClose())
     {
+
         switch (currentLayer)
         {
-        case LOGIC:
+        case MENU:
+
+            BeginDrawing();
+
+            // Clear framebuffer
+            ClearBackground(WHITE);
+
+            gameMenu.drawMenu();
+
+            //currentLayer = GAMELOGIC;
+
+            EndDrawing();
+            break;
+
+        case GAMELOGIC:
 
             // Move the player
             player->move(player->getPosition());
@@ -204,10 +227,10 @@ void Game()
                 manageSlideAnimation(i);
             }
 
-            currentLayer = PRESENT;
+            currentLayer = GAMEPRESENT;
             break;
 
-        case PRESENT:
+        case GAMEPRESENT:
 
             BeginDrawing();
 
@@ -292,7 +315,7 @@ void Game()
 
             EndDrawing();
 
-            currentLayer = LOGIC;
+            currentLayer = GAMELOGIC;
             break;
 
         default:
