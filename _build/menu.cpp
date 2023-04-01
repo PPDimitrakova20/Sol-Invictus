@@ -19,6 +19,7 @@ short int Menu::getSelectedOption()
 {
 	return _selectedOption;
 }
+
 void Menu::manageMenu()
 {
 	for (int i = 0; i < 3; i++)

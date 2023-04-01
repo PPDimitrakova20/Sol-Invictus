@@ -11,7 +11,7 @@
 #include <vector>
 
 // Initialize new type
-enum ProgrammeLayer { MENU, GAMELOGIC, GAMEPRESENT};
+enum ProgramLayer { MENU, GAMELOGIC, GAMEPRESENT};
 
 // Main game fuction
 void Game();

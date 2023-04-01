@@ -13,7 +13,7 @@ void Game()
     Font comfortaaRegular = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
     Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
 
-    ProgrammeLayer currentLayer = MENU;
+    ProgramLayer currentLayer = MENU;
 
     // Load tutorial textures
     Texture2D tutorialFirst = LoadTexture("./../assets/UI/tutorial/tutorial1.png");
@@ -21,7 +21,8 @@ void Game()
     Texture2D tutorialThird = LoadTexture("./../assets/UI/tutorial/tutorial3.png");
 
     // Initialize menu
-    Menu gameMenu = Menu();
+    Menu gameMenu;
+    bool isQuitButtonPressed = false;
 
     // Intialize player variables
     Player* player = Player::getinstance();
@@ -141,7 +142,7 @@ void Game()
                 std::cout << 1; // change to tutorial layer
                 break;
             case 2:
-                CloseWindow();
+                isQuitButtonPressed = true;
             }
 
             EndDrawing();
@@ -332,9 +333,13 @@ void Game()
         default:
             break;
         }
-    }
-    CloseWindow();
 
+        if (isQuitButtonPressed)
+        {
+            CloseWindow();
+        }
+    }
+    
     // Free up alocated memory
     delete[] player;
     delete[] aminoAcids;

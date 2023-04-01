@@ -24,6 +24,7 @@ private:
     };
     
     short int _selectedOption = -1;
+
 public:
     Menu(){};
 
