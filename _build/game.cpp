@@ -90,20 +90,28 @@ void Game()
 
     // Initialize chemical elements arrays
     // 0 -> carbon, 1 -> hydrogen, 2 -> nitrogen, 3 -> oxygen, 4 -> sulfur, 5 -> selenium
-    std::vector<ChemicalElement> carbon(15, ChemicalElement("./../assets/elements/carbon.png", 0));
-    std::vector<ChemicalElement> hydrogen(15, ChemicalElement("./../assets/elements/hydrogen.png", 1));
-    std::vector<ChemicalElement> nitrogen(15, ChemicalElement("./../assets/elements/nitrogen.png", 2));
-    std::vector<ChemicalElement> oxygen(15, ChemicalElement("./../assets/elements/oxygen.png", 3));
-    std::vector<ChemicalElement> sulfur(5, ChemicalElement("./../assets/elements/sulfur.png", 4));
-    std::vector<ChemicalElement> selenium(5, ChemicalElement("./../assets/elements/selenium.png", 5));
+    std::vector<ChemicalElement> carbon(25, ChemicalElement("./../assets/elements/carbon.png", 0));
+    std::vector<ChemicalElement> hydrogen(25, ChemicalElement("./../assets/elements/hydrogen.png", 1));
+    std::vector<ChemicalElement> nitrogen(5, ChemicalElement("./../assets/elements/nitrogen.png", 2));
+    std::vector<ChemicalElement> oxygen(5, ChemicalElement("./../assets/elements/oxygen.png", 3));
+    std::vector<ChemicalElement> sulfur(2, ChemicalElement("./../assets/elements/sulfur.png", 4));
+    std::vector<ChemicalElement> selenium(2, ChemicalElement("./../assets/elements/selenium.png", 5));
 
     // Initialize an array containing all chemical elements arrays
     std::vector<std::vector <ChemicalElement>> elements = {carbon, hydrogen, nitrogen, oxygen, sulfur, selenium};
 
     // Randomise elements' positions
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 2; i++)
     {
-        for (int j = 0; j < 15; j++)
+        for (int j = 0; j < 25; j++)
+        {
+            elements[i][j].randomisePosition();
+        }
+    }
+
+    for (int i = 2; i < 4; i++)
+    {
+        for (int j = 0; j < 5; j++)
         {
             elements[i][j].randomisePosition();
         }
@@ -111,7 +119,7 @@ void Game()
 
     for (int i = 4; i < 6; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 2; j++)
         {
             elements[i][j].randomisePosition();
         }
@@ -219,18 +227,25 @@ void Game()
             }
 
             // Check player collision with all chemical elements
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < 25; j++)
                 {
-                
+                    elements[i][j].checkPlayerCollision(player, itemQuantity);
+                }
+            }
+
+            for (int i = 2; i < 4; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
                     elements[i][j].checkPlayerCollision(player, itemQuantity);
                 }
             }
 
             for (int i = 4; i < 6; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 2; j++)
                 {
                     elements[i][j].checkPlayerCollision(player, itemQuantity);
                 }
@@ -408,18 +423,25 @@ void Game()
             DrawTexture(background, -900, -500, RAYWHITE);
 
             // Draw chemical elements
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < 25; j++)
                 {
+                    DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
+                }
+            }
 
+            for (int i = 2; i < 4; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
                     DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
                 }
             }
 
             for (int i = 4; i < 6; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 2; j++)
                 {
                     DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
                 }
