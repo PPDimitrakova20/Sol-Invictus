@@ -82,7 +82,7 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 	}
 }
 
-void Player::roatePlayer()
+void Player::rotatePlayer()
 {
 	if (IsKeyDown(KEY_W))
 	{

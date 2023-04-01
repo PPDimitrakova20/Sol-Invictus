@@ -48,5 +48,5 @@ public:
 	void checkMapBoundary(Rectangle boundaries[4]);
 
 	// Rotate player
-	void roatePlayer();
+	void rotatePlayer();
 };

@@ -6,7 +6,7 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -118,7 +118,7 @@ void Game()
             // Move the player
             player->move(player->getPosition());
 
-            player->roatePlayer();
+            player->rotatePlayer();
 
             // Check and handle collision with the map boundary
             player->checkMapBoundary(boundaries);
