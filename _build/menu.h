@@ -1,6 +1,10 @@
 #pragma once
 #include "raylib.h"
 
+#define menuOrange CLITERAL(Color){ 255, 138, 0, 255}
+#define menuPurple CLITERAL(Color){ 143, 0, 255, 255}
+#define menuBlue CLITERAL(Color){ 42, 191, 241, 255}
+
 class Menu
 {
 private:
@@ -17,10 +21,10 @@ private:
         {825, 819}
     };
 
-    Rectangle _buttonHitBoxes[3] = {
-        {825, 461, 484, 113},
-        {825, 641, 484, 113},
-        {825, 819, 484, 113}
+    Rectangle _buttonHitboxes[3] = {
+        {825, 431, 484, 113},
+        {825, 631, 484, 113},
+        {825, 809, 484, 113}
     };
     
     short int _selectedOption = -1;
