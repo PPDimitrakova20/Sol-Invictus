@@ -55,7 +55,7 @@ void Game()
     };
     std::vector<CraftingRecipe> craftingRecipes;
     CraftingRecipe accessPoint = CraftingRecipe();
-    bool hasAminoAcid = false, taskRecipeComplete = false;
+    bool showCraftingBench = false, hasAminoAcid = false, taskRecipeComplete = false;
 
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;
@@ -131,6 +131,7 @@ void Game()
     slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
     slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
     slideAnimationFrames.push_back(constructAnimationFrame(-104, -104, -1, 'p', 0, 2, showTaskbar));
+    slideAnimationFrames.push_back(constructAnimationFrame(1821, 1401, 1821, 'n', 0, 5, showCraftingBench));
 
     // Main game loop
     while (!WindowShouldClose())
@@ -307,13 +308,13 @@ void Game()
             // Set active acid discovery status
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
                 CheckCollisionPointRec(GetMousePosition(), craftingRecipes[0].getHitbox()) &&
-                taskRecipeComplete)
+                taskRecipeComplete && slideAnimationFrames[25]->getTargetCoordinate() == 1401)
             {
                 activeAcid->setIsDiscovered(true);
             }
 
             // Update the iventory element count after crafting an acid
-            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes);
+            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate());
 
             // Update the discovery status of the amino-acid corresponding to active acid
             for (short int i = 0; i < 21; i++)
@@ -372,7 +373,7 @@ void Game()
             }
 
             // Update taskbar animation frame
-            if (!slideAnimationFrames[21]->getShowComponent())
+            if (!slideAnimationFrames[21]->getShowComponent() && !slideAnimationFrames[25]->getShowComponent())
             {
                 slideAnimationFrames[24]->setShowComponent(true);
             }
@@ -455,13 +456,13 @@ void Game()
 
             /*---------- Crafting bench ----------*/
             // Draw crafting bench base
-            DrawTexture(craftingBenchBase, 1401, 0, RAYWHITE);
+            DrawTexture(craftingBenchBase, slideAnimationFrames[25]->getTargetCoordinate(), 0, RAYWHITE);
 
             // Draw crafting bench base
-            DrawTexture(craftingTableCover, 1417, 0, RAYWHITE);
+            DrawTexture(craftingTableCover, slideAnimationFrames[25]->getTargetCoordinate() + 16, 0, RAYWHITE);
 
             // Draw crafting recipes
-            drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, craftingRecipes);
+            drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate());
 
             /*---------- Inventory ----------*/
             // Draw inventory base

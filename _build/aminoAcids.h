@@ -77,7 +77,7 @@ public:
 	void updateCraftingRecipeStatus(short int* itemQuantity, AminoAcid* activeAcid);
 
 	// Update inventory element count after crafting an amino-acid
-	void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList);
+	void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX);
 
 	// Sort crafting recipes vector
 	std::vector<CraftingRecipe> sortCraftingRecipes(std::vector<CraftingRecipe> craftingRecipes);

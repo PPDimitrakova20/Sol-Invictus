@@ -224,41 +224,42 @@ bool isRecipeComplete(short int* itemQuantity, CraftingRecipe recipe)
 }
 
 // Update inventory element count after crafting an amino-acid
-void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList)
+void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX)
 {
-	for (short int i = 0; i < recipeList.size(); i++)
+	if (craftingBenchX == 1401)
 	{
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-			CheckCollisionPointRec(GetMousePosition(), recipeList[i].getHitbox()) &&
-			(recipeList[i].getStatus() == 1 || isRecipeComplete(itemQuantity, recipeList[i])))
+		for (short int i = 0; i < recipeList.size(); i++)
 		{
-			if (recipeList[i].getName() != "Selenocysteine")
+
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+				CheckCollisionPointRec(GetMousePosition(), recipeList[i].getHitbox()) &&
+				(recipeList[i].getStatus() == 1 || isRecipeComplete(itemQuantity, recipeList[i])))
 			{
-				for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
+				if (recipeList[i].getName() != "Selenocysteine")
 				{
-					itemQuantity[j] -= recipeList[i].getChemicalMakeup()[j];
-				}
-			}
-			else
-			{
-				for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
-				{
-					if (j != recipeList[i].getChemicalMakeup().size() - 1)
+					for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
 					{
 						itemQuantity[j] -= recipeList[i].getChemicalMakeup()[j];
 					}
-					else
+				}
+				else
+				{
+					for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
 					{
-						itemQuantity[j + 1] -= recipeList[i].getChemicalMakeup()[j];
+						if (j != recipeList[i].getChemicalMakeup().size() - 1)
+						{
+							itemQuantity[j] -= recipeList[i].getChemicalMakeup()[j];
+						}
+						else
+						{
+							itemQuantity[j + 1] -= recipeList[i].getChemicalMakeup()[j];
+						}
 					}
 				}
 			}
 		}
 	}
-
 }
-
 // Get the difference between the target class members
 bool compareCraftingRecipes(CraftingRecipe i1, CraftingRecipe i2)
 {
