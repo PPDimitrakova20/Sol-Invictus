@@ -1,0 +1,10 @@
+^C:\USERS\HRIS\DESKTOP\SOL-INVICTUS\BOX2D\CMAKEFILES\5D9A3A318AF11B036BA012F13BCBDE45\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Hris/Desktop/Sol-Invictus/box2d -BC:/Users/Hris/Desktop/Sol-Invictus/box2d --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Hris/Desktop/Sol-Invictus/box2d/box2d.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

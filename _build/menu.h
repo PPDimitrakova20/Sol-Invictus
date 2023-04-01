@@ -16,8 +16,14 @@ private:
         {825, 641},
         {825, 819}
     };
+
+    Rectangle _buttonHitBoxes[3] = {
+        {825, 461, 484, 113},
+        {825, 641, 484, 113},
+        {825, 819, 484, 113}
+    };
     
-    short int _selectedOption = 0;
+    short int _selectedOption = -1;
 public:
     Menu(){};
 
@@ -26,4 +32,6 @@ public:
     void setSelectedOption(short int selectedOption);
 
     short int getSelectedOption();
+
+    void manageMenu();
 };

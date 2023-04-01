@@ -1,0 +1,10 @@
+^C:\USERS\HRIS\DESKTOP\SOL-INVICTUS\BOX2D\TESTBED\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Hris/Desktop/Sol-Invictus/box2d -BC:/Users/Hris/Desktop/Sol-Invictus/box2d --check-stamp-file C:/Users/Hris/Desktop/Sol-Invictus/box2d/testbed/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

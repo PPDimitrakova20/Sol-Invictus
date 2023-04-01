@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\draw.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\imgui_impl_glfw.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\main.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\settings.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\test.cpp" />
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\benchmark_boxes.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\add_pair.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\apply_force.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\body_types.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\box_stack.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\breakable.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\bridge.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\bullet_test.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\cantilever.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\car.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\chain.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\chain_problem.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\character_collision.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\circle_stack.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\collision_filtering.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\collision_processing.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\compound_shapes.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\confined.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\continuous_test.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\convex_hull.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\conveyor_belt.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\distance_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\distance_test.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\dominos.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\dump_loader.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\dynamic_tree.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\edge_shapes.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\edge_test.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\friction.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\gear_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\heavy1.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\heavy2.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\mobile_balanced.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\mobile_unbalanced.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\motor_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\pinball.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\platformer.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\polygon_collision.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\polygon_shapes.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\prismatic_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\pulley_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\pyramid.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\ray_cast.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\restitution.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\revolute_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\rope.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\sensor.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\shape_cast.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\shape_editing.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\skier.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\slider_crank_1.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\slider_crank_2.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\theo_jansen.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\tiles.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\time_of_impact.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\tumbler.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\web.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\wheel_joint.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\tests\wrecking_ball.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\draw.h" />
+    <ClInclude Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\imgui_impl_glfw.h" />
+    <ClInclude Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\imgui_impl_opengl3.h" />
+    <ClInclude Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\settings.h" />
+    <ClInclude Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Hris\Desktop\Sol-Invictus\box2d\testbed\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="tests">
+      <UniqueIdentifier>{9F1DE8BA-5D37-33BE-82E3-F8386336651D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

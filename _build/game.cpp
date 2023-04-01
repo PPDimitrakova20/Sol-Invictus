@@ -130,8 +130,19 @@ void Game()
             ClearBackground(WHITE);
 
             gameMenu.drawMenu();
+            gameMenu.manageMenu();
 
-            //currentLayer = GAMELOGIC;
+            switch (gameMenu.getSelectedOption())
+            {
+            case 0:
+                currentLayer = GAMELOGIC;
+                break;
+            case 1:
+                std::cout << 1; // change to tutorial layer
+                break;
+            case 2:
+                CloseWindow();
+            }
 
             EndDrawing();
             break;
