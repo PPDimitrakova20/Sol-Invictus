@@ -34,10 +34,10 @@ void Game()
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
     Rectangle boundaries[4] = {
-        {-50, 0, 50, 3320},
-        {5880, 0, 50, 3320},
-        {0, -50, 5880, 50},
-        {0, 3320, 5880, 50}
+        {-50, -50, 25, 3395},
+        {5880, -50, 25, 3395},
+        {-50, -50, 5955, 25},
+        {-50, 3320, 5955, 25}
     };
 
     // Intialize inventory and crafting bench variables
@@ -205,6 +205,8 @@ void Game()
             player->move(player->getPosition());
 
             player->rotatePlayer();
+
+            player->movePlayerRec();
 
             // Check and handle collision with the map boundary
             player->checkMapBoundary(boundaries);
@@ -453,6 +455,12 @@ void Game()
                 Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
                 Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
                 Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
+
+            // Draw boundary when player is close to map border
+            for (int i = 0; i < 4; i++)
+            {
+                player->drawMapBoundary(boundaries[i]);
+            }
 
             EndMode2D();
 

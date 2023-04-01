@@ -112,3 +112,24 @@ void Player::rotatePlayer()
 			_rotation = 315;
 	}
 }
+
+// Move boundary hitbox rectangle with player
+void Player::movePlayerRec()
+{
+	_boundaryHitbox = { getPosition().x - 480, getPosition().y - 480, 1000, 1000 };
+}
+
+// Get boundary hitbox
+Rectangle Player::getBoundaryHitbox()
+{
+	return _boundaryHitbox;
+}
+
+// Draw boundary when player is close to map border
+void Player::drawMapBoundary(Rectangle mapBoundary)
+{
+	if (CheckCollisionRecs(mapBoundary, _boundaryHitbox))
+	{
+		DrawRectangleRounded(GetCollisionRec(mapBoundary, _boundaryHitbox), 30, 1, { 142,9,238,255 });
+	}
+}

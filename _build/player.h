@@ -9,6 +9,7 @@ private:
 	Texture2D _underglow = LoadTexture("./../assets/player/playerUnderglow.png");
 	Vector2 _position = {960, 540};
 	float _rotation = 0;
+	Rectangle _boundaryHitbox = { _position.x, _position.y, 300, 300 };
 
 	// Constructor
 	Player() {};
@@ -37,6 +38,9 @@ public:
 	// Get player position
 	Vector2 getPosition();
 
+	// Get boundary hitbox
+	Rectangle getBoundaryHitbox();
+
 	// Get player rotation
 	float getRotation();
 
@@ -49,4 +53,10 @@ public:
 
 	// Rotate player
 	void rotatePlayer();
+
+	// Move boundary hitbox rectangle with player
+	void movePlayerRec();
+
+	// Draw boundary when player is close to map border
+	void drawMapBoundary(Rectangle mapBoundary);
 };
