@@ -82,6 +82,7 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 	}
 }
 
+// Rotate the player
 void Player::rotatePlayer()
 {
 	if (IsKeyDown(KEY_W))
@@ -98,18 +99,26 @@ void Player::rotatePlayer()
 	{
 		_rotation = 90;
 		if (IsKeyDown(KEY_W))
+		{
 			_rotation = 45;
+		}	
 		if (IsKeyDown(KEY_S))
+		{
 			_rotation = 135;
+		}	
 	}
 
 	if (IsKeyDown(KEY_A))
 	{
 		_rotation = 270;
 		if (IsKeyDown(KEY_S))
+		{
 			_rotation = 225;
+		}		
 		if (IsKeyDown(KEY_W))
+		{
 			_rotation = 315;
+		}		
 	}
 }
 

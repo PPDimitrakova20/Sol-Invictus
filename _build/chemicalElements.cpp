@@ -37,11 +37,11 @@ void ChemicalElement::setPosition(Vector2 position)
 void ChemicalElement::randomisePosition()
 {
 	// Initial randomisation
-	float randX = GetRandomValue(10, 5800);
-	float randY = GetRandomValue(10, 3170);
+	int randX = GetRandomValue(10, 5800);
+	int randY = GetRandomValue(10, 3170);
 
 	// Set new position
-	setPosition({ randX, randY });
+	setPosition({ float(randX), float(randY) });
 }
 
 // Check player collision with a chemical element

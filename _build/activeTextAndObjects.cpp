@@ -72,27 +72,27 @@ void Barrier::setScrollY(short int y)
 Barrier* Barrier::initBarriers(Texture2D textures[5])
 {
 	Barrier* barriers = new Barrier[21];
-	barriers[0] = { 37,  180, -1932, textures[1] }; // Tryptophan
-	barriers[1] = { 303, 180, -1932, textures[1] }; // Valine
-	barriers[2] = { 37,  447, -1666, textures[0] }; // Methonine
-	barriers[3] = { 389, 446, -1666, textures[4] }; // Arginine
-	barriers[4] = { 37,  800, -1312, textures[3] }; // Alanine
-	barriers[5] = { 214, 800, -1312, textures[2] }; // Glutamic acid
-	barriers[6] = { 37,  976, -1136, textures[1] }; // Histidine
-	barriers[7] = { 303, 976, -1136, textures[1] }; // Threonine
-	barriers[8] = { 37,  1239, -873, textures[3] }; // Serine
-	barriers[9] = { 214, 1239, -873, textures[0] }; // Phenylalanine
-	barriers[10] = { 37,  1416, -696, textures[4] }; // Proline
-	barriers[11] = { 214, 1593, -519, textures[0] }; // Isoleucine
-	barriers[12] = { 37,  1770, -342, textures[4] }; // Trosine
-	barriers[13] = { 214, 1947, -165, textures[2] }; // Selenocysteine
-	barriers[14] = { 37,  2124, 12,   textures[0] }; // Leucine
-	barriers[15] = { 390, 2124, 12,   textures[4] }; // Cysteine
-	barriers[16] = { 37,  2478, 366,  textures[4] }; // Glutamine
-	barriers[17] = { 214, 2478, 366,  textures[0] }; // Lysine
-	barriers[18] = { 37,  2832, 720,  textures[2] }; // Aspartic acid
-	barriers[19] = { 390, 2832, 720,  textures[4] }; // Glycine
-	barriers[20] = { 37,  3009, 897,  textures[2] }; // Asparagine
+	barriers[0] = { 37,  976, -1136, textures[1] }; // Histidine
+	barriers[1] = { 214, 1593, -519, textures[0] }; // Isoleucine
+	barriers[2] = { 37,  2124, 12,   textures[0] }; // Leucine
+	barriers[3] = { 214, 2478, 366,  textures[0] }; // Lysine
+	barriers[4] = { 37,  447, -1666, textures[0] }; // Methonine
+	barriers[5] = { 214, 1239, -873, textures[0] }; // Phenylalanine
+	barriers[6] = { 303, 976, -1136, textures[1] }; // Threonine
+	barriers[7] = { 37,  180, -1932, textures[1] }; // Tryptophan
+	barriers[8] = { 303, 180, -1932, textures[1] }; // Valine
+	barriers[9] = { 389, 446, -1666, textures[4] }; // Arginine
+	barriers[10] = { 390, 2124, 12,   textures[4] }; // Cysteine
+	barriers[11] = { 37,  2478, 366,  textures[4] }; // Glutamine
+	barriers[12] = { 390, 2832, 720,  textures[4] }; // Glycine
+	barriers[13] = { 37,  1416, -696, textures[4] }; // Proline
+	barriers[14] = { 37,  1770, -342, textures[4] }; // Trosine
+	barriers[15] = { 37,  800, -1312, textures[3] }; // Alanine
+	barriers[16] = { 37,  2832, 720,  textures[2] }; // Aspartic acid
+	barriers[17] = { 37,  3009, 897,  textures[2] }; // Asparagine
+	barriers[18] = { 214, 800, -1312, textures[2] }; // Glutamic acid
+	barriers[19] = { 37,  1239, -873, textures[3] }; // Serine
+	barriers[20] = { 214, 1947, -165, textures[2] }; // Selenocysteine
 
 	return barriers;
 }
