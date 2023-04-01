@@ -6,12 +6,13 @@
 #include "aminoAcids.h"
 #include "animations.h"
 #include "menu.h"
+#include "tutorial.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
 // Initialize new type
-enum ProgramLayer { MENU, GAMELOGIC, GAMEPRESENT};
+enum ProgramLayer { MENU, TUTORIAL, GAMELOGIC, GAMEPRESENT};
 
 // Main game fuction
 void Game();

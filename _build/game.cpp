@@ -6,7 +6,7 @@ void Game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -15,14 +15,12 @@ void Game()
 
     ProgramLayer currentLayer = MENU;
 
-    // Load tutorial textures
-    Texture2D tutorialFirst = LoadTexture("./../assets/UI/tutorial/tutorial1.png");
-    Texture2D tutorialSecond = LoadTexture("./../assets/UI/tutorial/tutorial2.png");
-    Texture2D tutorialThird = LoadTexture("./../assets/UI/tutorial/tutorial3.png");
-
     // Initialize menu
     Menu gameMenu;
     bool isQuitButtonPressed = false;
+
+    // Initialize tutorial
+    Tutorial tutorialScreen;
 
     // Intialize player variables
     Player* player = Player::getinstance();
@@ -135,15 +133,42 @@ void Game()
 
             switch (gameMenu.getSelectedOption())
             {
+            case -1:
+                currentLayer = MENU;
+                break;
             case 0:
                 currentLayer = GAMELOGIC;
                 break;
             case 1:
-                std::cout << 1; // change to tutorial layer
+                currentLayer = TUTORIAL;
                 break;
             case 2:
                 isQuitButtonPressed = true;
             }
+
+            EndDrawing();
+            break;
+
+        case TUTORIAL:
+            BeginDrawing();
+
+            // Clear framebuffer
+            ClearBackground(WHITE);
+            
+            switch (tutorialScreen.getTutorialProgress())
+            {
+            case -1:
+            case 3:
+                currentLayer = MENU;
+                tutorialScreen.setTutorialProgress(0);
+                gameMenu.setSelectedOption(-1);
+                break;
+            default:
+                tutorialScreen.drawTutorial();
+                break;
+            }
+
+            tutorialScreen.updateTutorialProgress();
 
             EndDrawing();
             break;
