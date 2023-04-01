@@ -55,7 +55,8 @@ void Game()
     };
     std::vector<CraftingRecipe> craftingRecipes;
     CraftingRecipe accessPoint = CraftingRecipe();
-    bool showCraftingBench = false, hasAminoAcid = false, taskRecipeComplete = false;
+    bool showCraftingBench = false, autoCloseCraftingBench = false, *autoCloseCraftingBenchPtr = &autoCloseCraftingBench;
+    bool hasAminoAcid = false, taskRecipeComplete = false, taskRecipeCrafted = false;
 
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;
@@ -322,16 +323,22 @@ void Game()
                 }
             }
 
+            // Reset the crafting requirement check 
+            taskRecipeCrafted = false;
+            autoCloseCraftingBench = false;
+
             // Set active acid discovery status
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
                 CheckCollisionPointRec(GetMousePosition(), craftingRecipes[0].getHitbox()) &&
                 taskRecipeComplete && slideAnimationFrames[25]->getTargetCoordinate() == 1401)
             {
                 activeAcid->setIsDiscovered(true);
+                taskRecipeCrafted = true;
+                autoCloseCraftingBench = true;
             }
 
             // Update the iventory element count after crafting an acid
-            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate());
+            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate(), autoCloseCraftingBenchPtr);
 
             // Update the discovery status of the amino-acid corresponding to active acid
             for (short int i = 0; i < 21; i++)
@@ -344,7 +351,7 @@ void Game()
             }
 
             // Update active amino-acid
-            if (activeAcid->getIsDiscovered())
+            if (activeAcid->getIsDiscovered() && taskRecipeCrafted)
             {
                 activeAcid = aminoAcids->randomiseAcid(aminoAcids);
             }
@@ -399,6 +406,11 @@ void Game()
                 slideAnimationFrames[24]->setShowComponent(false);
             }
 
+            if (autoCloseCraftingBench)
+            {
+                slideAnimationFrames[25]->setShowComponent(false);
+            }
+
             // Apply the slide animation to its frames
             for (short int i = 0; i < slideAnimationFrames.size(); i++)
             {
@@ -451,10 +463,10 @@ void Game()
 
             // Draw the player
             DrawTexturePro(
-                player->getPlayerTexture(),
-                Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-                Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-                Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
+            player->getPlayerTexture(),
+            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
 
             // Draw boundary when player is close to map border
             for (int i = 0; i < 4; i++)

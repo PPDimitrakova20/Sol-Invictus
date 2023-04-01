@@ -224,13 +224,12 @@ bool isRecipeComplete(short int* itemQuantity, CraftingRecipe recipe)
 }
 
 // Update inventory element count after crafting an amino-acid
-void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX)
+void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX, bool* autoCloseCraftingBenchPtr)
 {
 	if (craftingBenchX == 1401)
 	{
 		for (short int i = 0; i < recipeList.size(); i++)
 		{
-
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
 				CheckCollisionPointRec(GetMousePosition(), recipeList[i].getHitbox()) &&
 				(recipeList[i].getStatus() == 1 || isRecipeComplete(itemQuantity, recipeList[i])))
@@ -256,6 +255,8 @@ void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::
 						}
 					}
 				}
+
+				*autoCloseCraftingBenchPtr = true;
 			}
 		}
 	}
