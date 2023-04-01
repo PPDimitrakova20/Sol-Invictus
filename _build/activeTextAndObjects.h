@@ -72,3 +72,6 @@ void drawTaskbarHeading(Font heading, AminoAcid* activeAcid, short int base);
 
 // Draw sulfur and selenium task targets
 void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Texture2D extraTaskTargets[2], Color color, Color gradientSelection[6]);
+
+// Draw crafting recipes
+void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes);

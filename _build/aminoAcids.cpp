@@ -1,4 +1,5 @@
 #include "aminoAcids.h"
+#include <vector>
 
 // Constructor
 AminoAcid::AminoAcid(std::string name, std::vector<short int> chemicalMakeup)
@@ -32,6 +33,8 @@ void AminoAcid::setIsDiscovered(bool isDiscovered)
 {
 	_isDiscovered = isDiscovered;
 }
+
+
 
 // Methods
 // Initialize amino-acids
@@ -79,7 +82,7 @@ AminoAcid* AminoAcid::randomiseAcid(AminoAcid* aminoAcids)
 		*activeAcid = aminoAcids[GetRandomValue(0, 8)];
 	}
 	// 3/10 chance
-	else if(rarity >= 7 && rarity <= 9)
+	else if (rarity >= 7 && rarity <= 9)
 	{
 		*activeAcid = aminoAcids[GetRandomValue(9, 14)];
 	}
@@ -108,4 +111,171 @@ short int CraftingRecipe::getStatus()
 void CraftingRecipe::setHitbox(Rectangle hitbox)
 {
 	_hitbox = hitbox;
+}
+
+// Update the crafting recipes' status
+void CraftingRecipe::updateCraftingRecipeStatus(short int* itemQuantity, AminoAcid* activeAcid)
+{
+	if (_name == activeAcid->getName())
+	{
+		_status = 0;
+	}
+	else
+	{
+		if (_name != "Selenocysteine")
+		{
+			for (int i = 0; i < _chemicalMakeup.size(); i++)
+			{
+				if (_chemicalMakeup[i] > itemQuantity[i])
+				{
+					_status = 2;
+					break;
+				}
+				else
+				{
+					_status = 1;
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < _chemicalMakeup.size(); i++)
+			{
+				if (i != _chemicalMakeup.size() - 1)
+				{
+					if (_chemicalMakeup[i] > itemQuantity[i])
+					{
+						_status = 2;
+						break;
+					}
+					else
+					{
+						_status = 1;
+					}
+				}
+				else
+				{
+					if (_chemicalMakeup[4] > itemQuantity[5])
+					{
+						_status = 2;
+					}
+					else
+					{
+						_status = 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Check if a crafting recipe has been completed
+bool isRecipeComplete(short int* itemQuantity, CraftingRecipe recipe)
+{
+	bool check = false;
+
+	if (recipe.getName() != "Selenocysteine")
+	{
+		for (int i = 0; i < recipe.getChemicalMakeup().size(); i++)
+		{
+			if (recipe.getChemicalMakeup()[i] > itemQuantity[i])
+			{
+				check = false;
+				break;
+			}
+			else
+			{
+				check = true;
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < recipe.getChemicalMakeup().size(); i++)
+		{
+			if (i != recipe.getChemicalMakeup().size() - 1)
+			{
+				if (recipe.getChemicalMakeup()[i] > itemQuantity[i])
+				{
+					check = false;
+					break;
+				}
+				else
+				{
+					check = true;
+				}
+			}
+			else
+			{
+				if (recipe.getChemicalMakeup()[4] > itemQuantity[5])
+				{
+					check = false;
+					break;
+				}
+				else
+				{
+					check = true;
+				}
+			}
+		}
+	}
+
+	return check;
+}
+
+// Update inventory element count after crafting an amino-acid
+void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList)
+{
+	for (short int i = 0; i < recipeList.size(); i++)
+	{
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+			CheckCollisionPointRec(GetMousePosition(), recipeList[i].getHitbox()) &&
+			(recipeList[i].getStatus() == 1 || isRecipeComplete(itemQuantity, recipeList[i])))
+		{
+			if (recipeList[i].getName() != "Selenocysteine")
+			{
+				for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
+				{
+					itemQuantity[j] -= recipeList[i].getChemicalMakeup()[j];
+				}
+			}
+			else
+			{
+				for (int j = 0; j < recipeList[i].getChemicalMakeup().size(); j++)
+				{
+					if (j != recipeList[i].getChemicalMakeup().size() - 1)
+					{
+						itemQuantity[j] -= recipeList[i].getChemicalMakeup()[j];
+					}
+					else
+					{
+						itemQuantity[j + 1] -= recipeList[i].getChemicalMakeup()[j];
+					}
+				}
+			}
+		}
+	}
+
+}
+
+// Get the difference between the target class members
+bool compareCraftingRecipes(CraftingRecipe i1, CraftingRecipe i2)
+{
+	return(i1.getStatus() < i2.getStatus());
+}
+
+// Sort crafting recipes vector
+std::vector<CraftingRecipe> CraftingRecipe::sortCraftingRecipes(std::vector<CraftingRecipe> craftingRecipes)
+{
+	// Sort the crafting recipes vector in a increasing manner based on recipes status
+	sort(craftingRecipes.begin(), craftingRecipes.end(), compareCraftingRecipes);
+
+	// Update the recipes hitbox to suit the vector's new arrangement
+	for (short int i = 0; i < craftingRecipes.size(); i++)
+	{
+		craftingRecipes[i].setHitbox(Rectangle{ 1446,float(155 + i * 168),355,134 });
+	}
+
+	return craftingRecipes;
 }

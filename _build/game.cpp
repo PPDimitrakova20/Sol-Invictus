@@ -10,8 +10,13 @@ void Game()
     SetTargetFPS(60);
 
     // Load font variants from the file structure
-    Font comfortaaRegular = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
-    Font comfortaaBold = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
+    Font taskbarTitleFont = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
+    Font quantityIndicatorsFont = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
+    Font craftingBenchFonts[3] = {
+        LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 20, 0, 250),
+        LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 30, 0, 250),
+        LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 15, 0, 250),
+    };
 
     ProgramLayer currentLayer = MENU;
 
@@ -50,6 +55,7 @@ void Game()
     };
     std::vector<CraftingRecipe> craftingRecipes;
     CraftingRecipe accessPoint = CraftingRecipe();
+    bool hasAminoAcid = false, taskRecipeComplete = false;
 
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;
@@ -205,7 +211,7 @@ void Game()
             // Inventory item quantity boundary
             for (int i = 0; i < 6; i++)
             {
-                if (itemQuantity[i] > 20)
+                if (itemQuantity[i] >= 20)
                 {
                     itemQuantity[i] = 20;
                 }
@@ -254,25 +260,132 @@ void Game()
                 }
             }
 
-            // Update animation keys based of keyboard input
-            for (SlideAnimationFrame *i : slideAnimationFrames)
+            /*---------- Crafting bench logic ----------*/
+            // Check if the active acid is already in the recipe list
+            if (!craftingRecipes.empty())
             {
-                if (!i->getShowComponent())
+                hasAminoAcid = false;
+                for (int i = 0; i < craftingRecipes.size(); i++)
                 {
-                    if (IsKeyPressed(KEY_TAB))
+                    if (craftingRecipes[i].getName() == activeAcid->getName())
                     {
-                        i->setShowComponent(true);
+                        hasAminoAcid = true;
+                        break;
+                    }
+                }
+            }
+
+            // Add crafting recipes to the recipe list 
+            if (!hasAminoAcid || craftingRecipes.empty())
+            {
+                craftingRecipes.push_back(CraftingRecipe(Rectangle{ 1446,float(155 + craftingRecipes.size() * 168),355,134 }, activeAcid->getName(), activeAcid->getChemicalMakeup()));
+            }
+
+            // Update the recipes' status
+            for (CraftingRecipe& i : craftingRecipes)
+            {
+                i.updateCraftingRecipeStatus(itemQuantity, activeAcid);
+            }
+
+            // Sort the recipe list
+            craftingRecipes = accessPoint.sortCraftingRecipes(craftingRecipes);
+
+            // Check if the task required recipe is complete
+            for (int i = 0; i < craftingRecipes[0].getChemicalMakeup().size(); i++)
+            {
+                if (craftingRecipes[0].getChemicalMakeup()[i] > itemQuantity[i])
+                {
+                    taskRecipeComplete = false;
+                    break;
+                }
+                else
+                {
+                    taskRecipeComplete = true;
+                }
+            }
+
+            // Set active acid discovery status
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+                CheckCollisionPointRec(GetMousePosition(), craftingRecipes[0].getHitbox()) &&
+                taskRecipeComplete)
+            {
+                activeAcid->setIsDiscovered(true);
+            }
+
+            // Update the iventory element count after crafting an acid
+            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes);
+
+            // Update the discovery status of the amino-acid corresponding to active acid
+            for (short int i = 0; i < 21; i++)
+            {
+                if (aminoAcids[i].getName() == activeAcid->getName() && activeAcid->getIsDiscovered())
+                {
+                    aminoAcids[i].setIsDiscovered(true);
+                    break;
+                }
+            }
+
+            // Update active amino-acid
+            if (activeAcid->getIsDiscovered())
+            {
+                activeAcid = aminoAcids->randomiseAcid(aminoAcids);
+            }
+
+            /*---------- Slide animation logic ----------*/
+            // Update animation keys based of keyboard input
+            for (short int i = 0; i < slideAnimationFrames.size(); i++)
+            {
+                if (i != slideAnimationFrames.size() - 1)
+                {
+                    if (!slideAnimationFrames[i]->getShowComponent())
+                    {
+                        if (IsKeyPressed(KEY_TAB))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(true);
+                        }
+                    }
+                    else
+                    {
+                        if (IsKeyPressed(KEY_TAB))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(false);
+                        }
                     }
                 }
                 else
                 {
-                    if (IsKeyPressed(KEY_TAB))
+                    if (!slideAnimationFrames[i]->getShowComponent())
                     {
-                        i->setShowComponent(false);
+                        if (IsKeyPressed(KEY_E))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(true);
+                        }
                     }
-                }    
+                    else
+                    {
+                        if (IsKeyPressed(KEY_E))
+                        {
+                            slideAnimationFrames[i]->setShowComponent(false);
+                        }
+                    }
+                }
+            }
 
-                manageSlideAnimation(i);
+            // Update taskbar animation frame
+            if (!slideAnimationFrames[21]->getShowComponent())
+            {
+                slideAnimationFrames[24]->setShowComponent(true);
+            }
+            else
+            {
+                slideAnimationFrames[24]->setShowComponent(false);
+            }
+
+            // Apply the slide animation to its frames
+            for (short int i = 0; i < slideAnimationFrames.size(); i++)
+            {
+
+                manageSlideAnimation(slideAnimationFrames[i]);
             }
 
             currentLayer = GAMEPRESENT;
@@ -298,6 +411,7 @@ void Game()
             {
                 for (int j = 0; j < 15; j++)
                 {
+
                     DrawTextureV(elements[i][j].getTexture(), elements[i][j].getPosition(), RAYWHITE);
                 }
             }
@@ -312,19 +426,21 @@ void Game()
 
             // Draw the player
             DrawTexturePro(
-            player->getPlayerTexture(),
-            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
+                player->getPlayerTexture(),
+                Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+                Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
+                Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
 
             EndMode2D();
 
+            /*---------- Amino-acid repository -----------*/
             // Draw amino-acid repository base
             DrawTexture(base, slideAnimationFrames[21]->getTargetCoordinate(), -7, RAYWHITE);
 
             // Draw amino-acid repository data
             DrawTexture(data, slideAnimationFrames[22]->getTargetCoordinate(), dataY, RAYWHITE);
 
+            /*----------- Cells barriers ----------*/
             // Draw data barriers
             for (int i = 0; i < 21; i++)
             {
@@ -337,29 +453,41 @@ void Game()
             // Draw amino-acid repository cover
             DrawTexture(cover, slideAnimationFrames[23]->getTargetCoordinate(), 0, RAYWHITE);
 
+            /*---------- Crafting bench ----------*/
+            // Draw crafting bench base
+            DrawTexture(craftingBenchBase, 1401, 0, RAYWHITE);
+
+            // Draw crafting bench base
+            DrawTexture(craftingTableCover, 1417, 0, RAYWHITE);
+
+            // Draw crafting recipes
+            drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, craftingRecipes);
+
+            /*---------- Inventory ----------*/
             // Draw inventory base
             DrawRectangle(1821, 0, 99, 1080, UIBase);
 
             // Draw inventory items(numbers and quantity indicators)
-            drawInventoryQuantityIndicators(comfortaaRegular, itemQuantity, elementaColors);
+            drawInventoryQuantityIndicators(quantityIndicatorsFont, itemQuantity, elementaColors);
 
             // Draw inventory cover
             DrawTexture(inventory, 1752, 0, RAYWHITE);
 
+            /*---------- Taskbar ---------*/
             // Draw sulfur and selenium task targets
-            drawExtraTaskTarget(comfortaaRegular, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), extraTaskTargets, UIBase, elementaColors);
+            drawExtraTaskTarget(quantityIndicatorsFont, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), extraTaskTargets, UIBase, elementaColors);
 
             // Draw taskbar base
             DrawRectangleRounded({ 526, float(slideAnimationFrames[24]->getTargetCoordinate() + 1), 903, 85 }, 0.3f, 1000, UIBase);
 
             // Draw taskbar items(numbers and quantity indicators)
-            drawTaskbarQuantityIndicators(comfortaaRegular, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), elementaColors);
+            drawTaskbarQuantityIndicators(quantityIndicatorsFont, activeAcid, itemQuantity, slideAnimationFrames[24]->getTargetCoordinate(), elementaColors);
 
             // Draw taskbar
             DrawTexture(taskbar, 461, slideAnimationFrames[24]->getTargetCoordinate(), RAYWHITE);
 
             // Draw active amino-acid name
-            drawTaskbarHeading(comfortaaBold, activeAcid, slideAnimationFrames[24]->getTargetCoordinate());
+            drawTaskbarHeading(taskbarTitleFont, activeAcid, slideAnimationFrames[24]->getTargetCoordinate());
 
             EndDrawing();
 

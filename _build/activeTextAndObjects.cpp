@@ -266,3 +266,36 @@ void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantit
 		}
 	}
 }
+
+// Draw crafting recipes
+void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes)
+{
+	for (short int i = 0; i < craftingRecipes.size(); i++)
+	{
+		// Draw recipe base
+		DrawTexture(craftingRecipeBases[craftingRecipes[i].getStatus()], 1446, 156 + i * 168, RAYWHITE);
+
+		// Draw recipe number
+		DrawTextEx(craftingBenchFonts[0], TextFormat("#%i", i + 1), { 1457, float(165 + i * 168) }, 20, 1, WHITE);
+
+		// Draw recipe product name
+		DrawTextEx(craftingBenchFonts[1], TextFormat("%s", craftingRecipes[i].getName().c_str()), { 1457, float(207 + i * 168) }, 30, float(0.15), WHITE);
+
+		// Draw recipe requirement text
+		if (craftingRecipes[i].getName() == "Methionine" || craftingRecipes[i].getName() == "Cysteine")
+		{
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { 1457, float(251 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 sulfur", craftingRecipes[i].getChemicalMakeup()[3]), { 1457, float(267 + i * 168) }, 15, float(0.15), WHITE);
+		}
+		else if (craftingRecipes[i].getName() == "Selenocysteine")
+		{
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { 1457, float(251 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 selenium", craftingRecipes[i].getChemicalMakeup()[3]), { 1457, float(267 + i * 168) }, 15, float(0.15), WHITE);
+		}
+		else
+		{
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { 1457, float(251 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("and %i oxygen", craftingRecipes[i].getChemicalMakeup()[3]), { 1457, float(267 + i * 168) }, 15, float(0.15), WHITE);
+		}
+	}
+}

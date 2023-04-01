@@ -71,4 +71,14 @@ public:
 	// Setters
 	// Set crafting recipe hitbox
 	void setHitbox(Rectangle hitbox);
+
+	// Methods
+	// Update the crafting recipes' status
+	void updateCraftingRecipeStatus(short int* itemQuantity, AminoAcid* activeAcid);
+
+	// Update inventory element count after crafting an amino-acid
+	void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList);
+
+	// Sort crafting recipes vector
+	std::vector<CraftingRecipe> sortCraftingRecipes(std::vector<CraftingRecipe> craftingRecipes);
 };
