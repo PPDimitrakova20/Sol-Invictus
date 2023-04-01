@@ -2,11 +2,13 @@
 #include "raylib.h"
 #include <vector>
 #include <string>
+#include<algorithm>
 
+using namespace std;
 
 class AminoAcid
 {
-private:
+protected:
 	std::string _name;
 	std::vector<short int> _chemicalMakeup;
 	bool _isDiscovered = false;
@@ -39,4 +41,34 @@ public:
 	AminoAcid* initAminoAcids();
 
 	AminoAcid* randomiseAcid(AminoAcid* aminoAcids);
+};
+
+class CraftingRecipe : public AminoAcid
+{
+private:
+	Rectangle _hitbox = { 0,0,0,0 };
+	short int _status = 2;
+	// 0 -> task required, 1 -> craftable, 2 -> insufficient materials
+
+public:
+	// Constructors
+	// Default constructor
+	CraftingRecipe() {};
+
+	// Parameterized constructor
+	CraftingRecipe(Rectangle hitbox, std::string name, std::vector<short int> chemicalMakeup) : AminoAcid(name, chemicalMakeup)
+	{
+		_hitbox = hitbox;
+	}
+
+	// Getters
+	// Get crafting recipe hitbox
+	Rectangle getHitbox();
+
+	// Get crafting recipe status
+	short int getStatus();
+
+	// Setters
+	// Set crafting recipe hitbox
+	void setHitbox(Rectangle hitbox);
 };

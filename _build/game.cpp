@@ -35,10 +35,21 @@ void Game()
         {0, 3320, 5880, 50}
     };
 
-    // Intialize inventory variables
-    Texture2D inventory = LoadTexture("./../assets/UI/craftingBench/inventory.png");
+    // Intialize inventory and crafting bench variables
     Color elementaColors[6] = { carbonColor, hydrogenColor, nitrogenColor, oxygenColor, sulfurColor, seleniumColor };
-    short int * itemQuantity = new short int[6]();
+    Texture2D inventory = LoadTexture("./../assets/UI/craftingBench/inventory.png");
+    short int* itemQuantity = new short int[6]();
+
+    // -> Intialize crafting bench variables
+    Texture2D craftingBenchBase = LoadTexture("./../assets/UI/craftingBench/craftingBenchBase.png");
+    Texture2D craftingTableCover = LoadTexture("./../assets/UI/craftingBench/craftingBenchCover.png");
+    Texture2D craftingRecipeBases[3] = {
+        LoadTexture("./../assets/UI/craftingBench/craftingRecipes/taskRequired.png"),
+        LoadTexture("./../assets/UI/craftingBench/craftingRecipes/craftable.png"),
+        LoadTexture("./../assets/UI/craftingBench/craftingRecipes/insufficientMaterials.png")
+    };
+    std::vector<CraftingRecipe> craftingRecipes;
+    CraftingRecipe accessPoint = CraftingRecipe();
 
     // Initialize amino-acid variables
     AminoAcid* aminoAcids = nullptr;

@@ -91,3 +91,21 @@ AminoAcid* AminoAcid::randomiseAcid(AminoAcid* aminoAcids)
 
 	return activeAcid;
 }
+
+// Get crafting recipe hitbox
+Rectangle CraftingRecipe::getHitbox()
+{
+	return _hitbox;
+}
+
+// Get crafting recipe status
+short int CraftingRecipe::getStatus()
+{
+	return _status;
+}
+
+// Set crafting recipe hitbox
+void CraftingRecipe::setHitbox(Rectangle hitbox)
+{
+	_hitbox = hitbox;
+}
