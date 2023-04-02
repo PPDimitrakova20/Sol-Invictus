@@ -30,13 +30,19 @@ private:
     short int _selectedOption = -1;
 
 public:
+
+    // Default constructor
     Menu(){};
 
+    // Draws the menu
     void drawMenu();
 
+    // Sets selected option
     void setSelectedOption(short int selectedOption);
 
+    // Gets selected option
     short int getSelectedOption();
 
+    // Changes the selected option depending on which button is clicked
     void manageMenu();
 };

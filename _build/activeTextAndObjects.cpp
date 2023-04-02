@@ -3,7 +3,13 @@
 #include "activeTextAndObjects.h"
 #include "animations.h"
 
-// Get inventory text x position
+/**
+ * Get inventory text x position.
+ * 
+ * \param n
+ * \param caller
+ * \return 
+ */
 float GetInventoryTextX(int n, int caller)
 {
 	switch (n)
@@ -32,7 +38,13 @@ float GetInventoryTextX(int n, int caller)
 	}
 }
 
-// Draw inventory quantity indicators
+/**
+ * Draw inventory quantity indicators.
+ * 
+ * \param font
+ * \param itemQuantity
+ * \param colors
+ */
 void drawInventoryQuantityIndicators(Font font, short int itemQuantity[6], Color colors[6])
 {
 	// Define relative rectangle portion
@@ -56,7 +68,15 @@ void drawInventoryQuantityIndicators(Font font, short int itemQuantity[6], Color
 	}
 }
 
-// Draw taskbar quantity indicators
+/**
+ * Draw taskbar quantity indicators.
+ * 
+ * \param items
+ * \param activeAcid
+ * \param itemQuantity
+ * \param base
+ * \param colors
+ */
 void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Color colors[6])
 {
 	// Define relative quantity bar portion
@@ -100,13 +120,25 @@ void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int 
 	}
 }
 
-// Draw active amino-acid name
+/**
+ * Draw active amino - acid name.
+ */
 void drawTaskbarHeading(Font heading, AminoAcid* activeAcid, short int base)
 {
 	DrawTextEx(heading, TextFormat("%s", activeAcid->getName().c_str()), Vector2{ 558, float(25 + base) }, 40, 1, WHITE);
 }
 
-// Draw sulfur and selenium task targets
+/**
+ * Draw sulfurand selenium task targets.
+ * 
+ * \param item
+ * \param activeAcid
+ * \param itemQuantity
+ * \param base
+ * \param extraTaskTargets
+ * \param color
+ * \param gradientSelection
+ */
 void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Texture2D extraTaskTargets[2], Color color, Color gradientSelection[6])
 {
 	// Check if the amino-acid contains sulfur or selenium
@@ -156,7 +188,15 @@ void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantit
 	}
 }
 
-// Draw crafting recipes
+/**
+ * Draw crafting recipes.
+ * 
+ * \param craftingBenchFonts
+ * \param craftingRecipeBases
+ * \param craftingRecipes
+ * \param baseX
+ * \param baseY
+ */
 void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes, short int baseX, short int baseY)
 {
 	for (short int i = 0; i < craftingRecipes.size(); i++)

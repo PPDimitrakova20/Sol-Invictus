@@ -88,4 +88,4 @@ public:
 };
 
 // Universal scroll animation
-void manageScollAnimation(ScrollAnimation* animationFrame);
+void manageScrollAnimation(ScrollAnimation* animationFrame);

@@ -1,6 +1,10 @@
 #include "game.h"
 
-void Game()
+/**
+ * Main game function.
+ * 
+ */
+void game()
 {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
@@ -430,14 +434,14 @@ void Game()
                 {
                     if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
                     {
-                        manageScollAnimation(scrollAnimationFrames[i]);
+                        manageScrollAnimation(scrollAnimationFrames[i]);
                     }
                 }
                 else
                 {
                     if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 1413,154,408,926 }))
                     {
-                        manageScollAnimation(scrollAnimationFrames[i]);
+                        manageScrollAnimation(scrollAnimationFrames[i]);
                     }
                 }
             } 

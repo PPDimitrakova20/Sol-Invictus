@@ -1,7 +1,9 @@
 #pragma once
 #include "raylib.h"
 
-// Player class
+/**
+ * Player class.
+ */
 class Player
 {
 private:

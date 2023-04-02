@@ -1,7 +1,13 @@
 #include "aminoAcids.h"
 #include <vector>
 
-// Constructor
+/**
+ * Constructor.
+ * 
+ * \param name
+ * \param chemicalMakeup
+ * \return 
+ */
 AminoAcid::AminoAcid(std::string name, std::vector<short int> chemicalMakeup)
 {
 	_name = name;
@@ -9,13 +15,21 @@ AminoAcid::AminoAcid(std::string name, std::vector<short int> chemicalMakeup)
 }
 
 // Getters
-// Get amino-acid name
+/**
+ * Get amino - acid name.
+ * 
+ * \return 
+ */
 std::string AminoAcid::getName()
 {
 	return _name;
 }
 
-// Get amino-acid chemical makeup
+/**
+ * Get amino - acid chemical makeup.
+ * 
+ * \return 
+ */
 std::vector<short int> AminoAcid::getChemicalMakeup()
 {
 	return _chemicalMakeup;
@@ -28,7 +42,9 @@ bool AminoAcid::getIsDiscovered()
 }
 
 // Setters
-// Set amino-acid discovery status
+/**
+ * Set amino - acid discovery status.
+ */
 void AminoAcid::setIsDiscovered(bool isDiscovered)
 {
 	_isDiscovered = isDiscovered;
@@ -37,7 +53,11 @@ void AminoAcid::setIsDiscovered(bool isDiscovered)
 
 
 // Methods
-// Initialize amino-acids
+/**
+ * Initialize amino - acids.
+ * 
+ * \return 
+ */
 AminoAcid* AminoAcid::initAminoAcids()
 {
 	AminoAcid* aminoAcids = new AminoAcid[21];
@@ -66,7 +86,12 @@ AminoAcid* AminoAcid::initAminoAcids()
 	return aminoAcids;
 }
 
-// Return a random acid
+/**
+ * Return a random acid.
+ * 
+ * \param aminoAcids
+ * \return 
+ */
 AminoAcid* AminoAcid::randomiseAcid(AminoAcid* aminoAcids)
 {
 	// Define a rarity
@@ -95,25 +120,42 @@ AminoAcid* AminoAcid::randomiseAcid(AminoAcid* aminoAcids)
 	return activeAcid;
 }
 
-// Get crafting recipe hitbox
+/**
+ * Get crafting recipe hitbox.
+ * 
+ * \return 
+ */
 Rectangle CraftingRecipe::getHitbox()
 {
 	return _hitbox;
 }
 
-// Get crafting recipe status
+/**
+ * Get crafting recipe status.
+ * 
+ * \return 
+ */
 short int CraftingRecipe::getStatus()
 {
 	return _status;
 }
 
-// Set crafting recipe hitbox
+/**
+ * Set crafting recipe hitbox.
+ * 
+ * \param hitbox
+ */
 void CraftingRecipe::setHitbox(Rectangle hitbox)
 {
 	_hitbox = hitbox;
 }
 
-// Update the crafting recipes' status
+/**
+ * Update the crafting recipes' status.
+ * 
+ * \param itemQuantity
+ * \param activeAcid
+ */
 void CraftingRecipe::updateCraftingRecipeStatus(short int* itemQuantity, AminoAcid* activeAcid)
 {
 	if (_name == activeAcid->getName())
@@ -169,7 +211,9 @@ void CraftingRecipe::updateCraftingRecipeStatus(short int* itemQuantity, AminoAc
 	}
 }
 
-// Check if a crafting recipe has been completed
+/**
+ * Check if a crafting recipe has been completed.
+ */
 bool isRecipeComplete(short int* itemQuantity, CraftingRecipe recipe)
 {
 	bool check = false;
@@ -223,7 +267,9 @@ bool isRecipeComplete(short int* itemQuantity, CraftingRecipe recipe)
 	return check;
 }
 
-// Update inventory element count after crafting an amino-acid
+/**
+ * Update inventory element count after crafting an amino - acid.
+ */
 void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX, bool* autoCloseCraftingBenchPtr)
 {
 	if (craftingBenchX == 1401)
@@ -261,13 +307,26 @@ void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::
 		}
 	}
 }
-// Get the difference between the target class members
+
+/**
+ * Get the difference between the target class members.
+ * 
+ * \param i1
+ * \param i2
+ * \return 
+ */
 bool compareCraftingRecipes(CraftingRecipe i1, CraftingRecipe i2)
 {
 	return(i1.getStatus() < i2.getStatus());
 }
 
-// Sort crafting recipes vector
+/**
+ * Sort crafting recipes vector.
+ * 
+ * \param craftingRecipes
+ * \param baseY
+ * \return 
+ */
 std::vector<CraftingRecipe> CraftingRecipe::sortCraftingRecipes(std::vector<CraftingRecipe> craftingRecipes, short int baseY)
 {
 	// Sort the crafting recipes vector in a increasing manner based on recipes status
@@ -283,7 +342,11 @@ std::vector<CraftingRecipe> CraftingRecipe::sortCraftingRecipes(std::vector<Craf
 }
 
 // Barrier class methods
-// Default constructor
+/**
+ * Default constructor.
+ * 
+ * \return 
+ */
 Barrier::Barrier()
 {
 	_x = 0;
@@ -291,7 +354,15 @@ Barrier::Barrier()
 	_topScrollBoundary = 0;
 }
 
-// Parameterized constructor
+/**
+ * Parameterized constructor.
+ * 
+ * \param x
+ * \param y
+ * \param boundary
+ * \param texture
+ * \return 
+ */
 Barrier::Barrier(short int x, short int y, short int boundary, Texture2D texture)
 {
 	_x = x;
@@ -301,38 +372,63 @@ Barrier::Barrier(short int x, short int y, short int boundary, Texture2D texture
 };
 
 // Getters
-// Get barrier X coordinate
+/**
+ * Get barrier X coordinate.
+ * 
+ * \return 
+ */
 short int Barrier::getX()
 {
 	return _x;
 }
 
-// Get barrier scroll boundary
+/**
+ * Get barrier scroll boundary.
+ * 
+ * \return 
+ */
 short int Barrier::getTopScrollBoundary()
 {
 	return _topScrollBoundary;
 }
 
-// Get barrier scroll Y coordinate
+/**
+ * Get barrier scroll Y coordinate.
+ * 
+ * \return 
+ */
 short int Barrier::getBottomScrollBoundary()
 {
 	return _bottomScrollBoundary;
 }
 
-// Get barrier texture
+/**
+ * Get barrier texture.
+ * 
+ * \return 
+ */
 Texture2D Barrier::getTexture()
 {
 	return _texture;
 }
 
-//Setters
-// Set barrier X coordinate
+// Setters
+/**
+ * Set barrier X coordinate.
+ * 
+ * \param x
+ */
 void Barrier::setX(short int x)
 {
 	_x = x;
 }
 
-// Initialize barriers
+/**
+ * Initialize barriers.
+ * 
+ * \param textures
+ * \return 
+ */
 Barrier* Barrier::initBarriers(Texture2D textures[5])
 {
 	Barrier* barriers = new Barrier[21];

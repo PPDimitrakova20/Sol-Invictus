@@ -1,5 +1,9 @@
 #include "menu.h"
 
+/**
+ * Draw the menu.
+ * 
+ */
 void Menu::drawMenu()
 {
 	// Draw the menu background
@@ -32,16 +36,32 @@ void Menu::drawMenu()
 	}
 }
 
+// Setters
+/**
+ * Set selected option.
+ * 
+ * \param selectedOption
+ */
 void Menu::setSelectedOption(short int selectedOption)
 {
 	_selectedOption = selectedOption;
 }
 
+// Getters
+/**
+ * Get selected option.
+ * 
+ * \return 
+ */
 short int Menu::getSelectedOption()
 {
 	return _selectedOption;
 }
 
+/**
+ * Change the selected option depending on which button is clicked.
+ * 
+ */
 void Menu::manageMenu()
 {
 	for (int i = 0; i < 3; i++)

@@ -11,8 +11,16 @@
 #include <string>
 #include <vector>
 
-// Initialize new type
+/**
+ * Initialize new type.
+ */
 enum ProgramLayer { MENU, TUTORIAL, GAMELOGIC, GAMEPRESENT};
 
-// Main game fuction
-void Game();
+/**
+ * Main game fuction.
+ */
+void game();
+
+
+
+

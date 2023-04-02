@@ -1,7 +1,13 @@
 #include "chemicalElements.h"
 #include <iostream>
 
-// Constructor
+/**
+ * Constructor.
+ * 
+ * \param texturePath
+ * \param type
+ * \return 
+ */
 ChemicalElement::ChemicalElement(std::string texturePath, short int type)
 {
 	_texture = LoadTexture(texturePath.c_str());
@@ -9,31 +15,52 @@ ChemicalElement::ChemicalElement(std::string texturePath, short int type)
 	_type = type;
 }
 
-// Get texture
+// Getters
+/**
+ * Get texture.
+ * 
+ * \return 
+ */
 Texture2D ChemicalElement::getTexture()
 {
 	return _texture;
 }
 
-// Get position
+/**
+ * Get position.
+ * 
+ * \return 
+ */
 Vector2 ChemicalElement::getPosition()
 {
 	return _position;
 }
 
-// Get type
+/**
+ * Get type.
+ * 
+ * \return 
+ */
 short int ChemicalElement::getType()
 {
 	return _type;
 }
 
-// Set position
+// Setters
+/**
+ * Set position.
+ * 
+ * \param position
+ */
 void ChemicalElement::setPosition(Vector2 position)
 {
 	_position = position;
 }
 
-// Randomise position
+/**
+ * Randomise position.
+ * 
+ */
 void ChemicalElement::randomisePosition()
 {
 	// Initial randomisation
@@ -44,7 +71,12 @@ void ChemicalElement::randomisePosition()
 	setPosition({ float(randX), float(randY) });
 }
 
-// Check player collision with a chemical element
+/**
+ * Check player collision with a chemical element.
+ * 
+ * \param player
+ * \param itemQuantity
+ */
 void ChemicalElement::checkPlayerCollision(Player* player, short int* itemQuantity)
 {
 	// Check player collision

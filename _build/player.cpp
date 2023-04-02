@@ -1,7 +1,11 @@
 #include "player.h"
 
 // Setters
-// Set player position
+/**
+ * / Set player position.
+ * 
+ * \param position
+ */
 void Player::setPosition(Vector2 position)
 {
 	_position = position;
@@ -13,32 +17,52 @@ void Player::setPlayerTexture(Texture2D texture)
 }
 
 // Getters
-// Get player texture
+/**
+ * / Get player texture.
+ * 
+ * \return 
+ */
 Texture2D Player::getPlayerTexture()
 {
 	return _texture;
 }
 
-// Get underglow texture
+/**
+ * Get underglow texture.
+ * 
+ * \return 
+ */
 Texture2D Player::getUnderglowTexture()
 {
 	return _underglow;
 }
 
-// Get player position
+/**
+ * Get player position.
+ * 
+ * \return 
+ */
 Vector2 Player::getPosition()
 {
 	return _position;
 }
 
-// Get player rotation
+/**
+ * Get player rotation.
+ * 
+ * \return 
+ */
 float Player::getRotation()
 {
 	return _rotation;
 }
 
 // Methods  
-// Move the player
+/**
+ * Move the player.
+ * 
+ * \param position
+ */
 void Player::move(Vector2 position)
 {
 	// Intialize X and Y offset
@@ -66,7 +90,11 @@ void Player::move(Vector2 position)
 	setPosition(Vector2{ getPosition().x + xOffset, getPosition().y + yOffset });
 }
 
-// Check and handle collision with the map boundary
+/**
+ * Checkand handle collision with the map boundary.
+ * 
+ * \param boundaries
+ */
 void Player::checkMapBoundary(Rectangle boundaries[4])
 {
 	if (CheckCollisionCircleRec(_position, 93, boundaries[0]))
@@ -87,7 +115,10 @@ void Player::checkMapBoundary(Rectangle boundaries[4])
 	}
 }
 
-// Rotate the player
+/**
+ * Rotate the player.
+ * 
+ */
 void Player::rotatePlayer()
 {
 	if (IsKeyDown(KEY_W))
@@ -127,19 +158,30 @@ void Player::rotatePlayer()
 	}
 }
 
-// Move boundary hitbox rectangle with player
+/**
+ * Move boundary hitbox rectangle with player.
+ * 
+ */
 void Player::updatePlayerBoundaryHitbox()
 {
 	_boundaryHitbox = { getPosition().x - 480, getPosition().y - 480, 1000, 1000 };
 }
 
-// Get boundary hitbox
+/**
+ * Get boundary hitbox.
+ * 
+ * \return 
+ */
 Rectangle Player::getBoundaryHitbox()
 {
 	return _boundaryHitbox;
 }
 
-// Draw boundary when player is close to map border
+/**
+ * Draw boundary when player is close to map border.
+ * 
+ * \param mapBoundary
+ */
 void Player::drawMapBoundary(Rectangle mapBoundary)
 {
 	if (CheckCollisionRecs(mapBoundary, _boundaryHitbox))
