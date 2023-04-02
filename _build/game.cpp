@@ -30,6 +30,9 @@ void Game()
     // Intialize player variables
     Player* player = Player::getinstance();
     Camera2D playerCam = { {screenWidth / 2, screenHeight / 2}, player->getPosition(), 0, 1 };
+    Texture2D normalPlayerTexture = LoadTexture("./../assets/player/player.png");
+    Texture2D rotatedPlayerTexture = LoadTexture("./../assets/player/player45.png");
+    short int rotationSpecifier;
 
     // Intialize camera variables
     Texture2D background = LoadTexture("./../assets/UI/background.png");
@@ -219,6 +222,17 @@ void Game()
 
             // Rotate player
             player->rotatePlayer();
+
+            if (int(player->getRotation()) % 45 == 0 && int(player->getRotation()) % 90 != 0)
+            {
+                player->setPlayerTexture(rotatedPlayerTexture);
+                rotationSpecifier = 45;
+            }
+            else
+            {
+                player->setPlayerTexture(normalPlayerTexture);
+                rotationSpecifier = 0;
+            }
 
             // Update player boundary hitbox
             player->updatePlayerBoundaryHitbox();
@@ -471,12 +485,13 @@ void Game()
                 }
             }
 
+
             // Draw the player
             DrawTexturePro(
-            player->getPlayerTexture(),
-            Rectangle{ 0, 0, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Rectangle{ player->getPosition().x, player->getPosition().y, float(player->getPlayerTexture().width), float(player->getPlayerTexture().height) },
-            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation(), RAYWHITE);
+                player->getPlayerTexture(),
+                Rectangle{ 0, 0, 186, 186 },
+                Rectangle{ player->getPosition().x, player->getPosition().y, 186, 186 },
+                Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation() - rotationSpecifier, RAYWHITE);
 
             // Draw boundary when player is close to map border
             for (int i = 0; i < 4; i++)

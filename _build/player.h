@@ -5,7 +5,7 @@
 class Player
 {
 private:
-	Texture2D _texture = LoadTexture("./../assets/player/player.png");
+	Texture2D _texture;
 	Texture2D _underglow = LoadTexture("./../assets/player/playerUnderglow.png");
 	Vector2 _position = {960, 540};
 	float _rotation = 0;
@@ -27,6 +27,8 @@ public:
 
 	// Setters
 	void setPosition(Vector2 position);
+
+	void setPlayerTexture(Texture2D texture);
 
 	// Getters
 	// Get player texture

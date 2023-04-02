@@ -7,6 +7,11 @@ void Player::setPosition(Vector2 position)
 	_position = position;
 }
 
+void Player::setPlayerTexture(Texture2D texture)
+{
+	_texture = texture;
+}
+
 // Getters
 // Get player texture
 Texture2D Player::getPlayerTexture()
