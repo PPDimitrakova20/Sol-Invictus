@@ -50,10 +50,13 @@ void ChemicalElement::checkPlayerCollision(Player* player, short int* itemQuanti
 	// Check player collision
 	if (CheckCollisionCircles({ float(player->getPosition().x - 37.5), float(player->getPosition().y - 37.5) }, 37.5, _position, 40))
 	{
-		// Update inventory
-		itemQuantity[_type]++;
+		if (itemQuantity[_type] < 20)
+		{
+			// Update inventory
+			itemQuantity[_type]++;
 
-		// Update chemical element position
-		randomisePosition();
+			// Update chemical element position
+			randomisePosition();
+		}
 	}
 }
