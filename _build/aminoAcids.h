@@ -16,28 +16,54 @@ protected:
 public:
 
 	// Constructors
-	// Default constructor
+	/**
+	 * Default constructor.
+	 */
 	AminoAcid() {};
 
-	// Parameterized constructor
+	/**
+	 * Parameterized constructor.
+	 * 
+	 * \param name
+	 * \param chemicalMakeup
+	 * \return 
+	 */
 	AminoAcid(std::string name, std::vector<short int> chemicalMakeup);
 
 	// Getters
-	// Get amino-acid name
+	/**
+	 * Get amino - acid name.
+	 * 
+	 * \return 
+	 */
 	std::string getName();
 
-	// Get amino-acid chemical makeup
+	/**
+	 * Get amino - acid chemical makeup.
+	 * 
+	 * \return 
+	 */
 	std::vector<short int> getChemicalMakeup();
 
-	// Get amino-acid discovery status
+	/**
+	 * Get amino - acid discovery status.
+	 */
 	bool getIsDiscovered();
 
 	// Setters
-	// Set amino-acid discovery status
+	/**
+	 * Set amino - acid discovery status.
+	 * 
+	 * \return 
+	 */
 	void setIsDiscovered(bool isDiscovered);
 
 	// Methods
-	// Initialize amino-acids
+	/**
+	 * Initialize amino - acids.
+	 * 
+	 * \return 
+	 */
 	AminoAcid* initAminoAcids();
 
 	AminoAcid* randomiseAcid(AminoAcid* aminoAcids);
@@ -52,34 +78,68 @@ private:
 
 public:
 	// Constructors
-	// Default constructor
+	/**
+	 * Default constructor.
+	 */
 	CraftingRecipe() {};
 
-	// Parameterized constructor
+	/**
+	 * Parameterized constructor.
+	 * 
+	 * \param hitbox
+	 * \param name
+	 * \param chemicalMakeup
+	 * \return 
+	 */
 	CraftingRecipe(Rectangle hitbox, std::string name, std::vector<short int> chemicalMakeup) : AminoAcid(name, chemicalMakeup)
 	{
 		_hitbox = hitbox;
 	}
 
 	// Getters
-	// Get crafting recipe hitbox
+	/**
+	 * Get crafting recipe hitbox.
+	 * 
+	 * \return 
+	 */
 	Rectangle getHitbox();
 
-	// Get crafting recipe status
+	/**
+	 * Get crafting recipe status.
+	 * 
+	 * \return 
+	 */
 	short int getStatus();
 
 	// Setters
-	// Set crafting recipe hitbox
+	/**
+	 * Set crafting recipe hitbox.
+	 * 
+	 * \param hitbox
+	 */
 	void setHitbox(Rectangle hitbox);
 
 	// Methods
-	// Update the crafting recipes' status
+	/**
+	 * Update the crafting recipes' status.
+	 * 
+	 * \param itemQuantity
+	 * \param activeAcid
+	 */
 	void updateCraftingRecipeStatus(short int* itemQuantity, AminoAcid* activeAcid);
 
-	// Update inventory element count after crafting an amino-acid
+	/**
+	 * Update inventory element count after crafting an amino - acid.
+	 */
 	void CraftingRecipe::updateInventoryElementsCount(short int* itemQuantity, std::vector<CraftingRecipe> recipeList, short int craftingBenchX, bool* autoCloseCraftingBenchPtr);
 
-	// Sort crafting recipes vector
+	/**
+	 * Sort crafting recipes vector.
+	 * 
+	 * \param craftingRecipes
+	 * \param baseY
+	 * \return 
+	 */
 	std::vector<CraftingRecipe> sortCraftingRecipes(std::vector<CraftingRecipe> craftingRecipes, short int baseY);
 };
 
@@ -92,31 +152,68 @@ private:
 	Texture2D _texture;
 
 public:
-	/// Constructors
-	// Default constructor
+	// Constructors
+	/**
+	 * Default constructor.
+	 * 
+	 * \return 
+	 */
 	Barrier();
 
-	// Parameterized constructor
+	/**
+	 * Parameterized constructor.
+	 * 
+	 * \param x
+	 * \param y
+	 * \param boundary
+	 * \param texture
+	 * \return 
+	 */
 	Barrier(short int x, short int y, short int boundary, Texture2D texture);
 
 	// Getters
-	// Get barrier X coordinate
+	/**
+	 * Get barrier X coordinate.
+	 * 
+	 * \return 
+	 */
 	short int getX();
 
-	// Get barrier scroll boundary
+	/**
+	 * Get barrier scroll boundary.
+	 * 
+	 * \return 
+	 */
 	short int getTopScrollBoundary();
 
-	// Get barrier scroll Y coordinate
+	/**
+	 * Get barrier scroll Y coordinate.
+	 * 
+	 * \return 
+	 */
 	short int getBottomScrollBoundary();
 
-	// Get barrier texture
+	/**
+	 * Get barrier texture.
+	 * 
+	 * \return 
+	 */
 	Texture2D getTexture();
 
 	// Setters
-	//Set barrier X coordinate
+	/**
+	 * Set barrier X coordinate.
+	 * 
+	 * \param x
+	 */
 	void setX(short int x);
 
 	// Methods
-	// Initialize barriers
+	/**
+	 * Initialize barriers.
+	 * 
+	 * \param barriers
+	 * \return 
+	 */
 	Barrier* initBarriers(Texture2D barriers[5]);
 };

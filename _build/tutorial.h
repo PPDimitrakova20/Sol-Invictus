@@ -20,15 +20,30 @@ private:
 	int _tutorialProgess = 0;
 
 public:
-    // Gets tutorial progress
+    /**
+     * Gets tutorial progress.
+     * 
+     * \return 
+     */
     int getTutorialProgress();
 
-    // Sets tutorial progress
+    /**
+     * Sets tutorial progress.
+     * 
+     * \param tutorialProgess
+     */
     void setTutorialProgress(int tutorialProgess);
 
-    // Draws the tutorial
+    /**
+     * Draws the tutorial.
+     * 
+     * \param background
+     */
     void drawTutorial(Texture background);
 
-    // Changes the tutorial pages depending on which arrow is clicked
+    /**
+     * Changes the tutorial pages depending on which arrow is clicked.
+     * 
+     */
     void updateTutorialProgress();
 };

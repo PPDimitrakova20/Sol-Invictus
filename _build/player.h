@@ -13,54 +13,87 @@ private:
 	float _rotation = 0;
 	Rectangle _boundaryHitbox = { _position.x, _position.y, 300, 300 };
 
-	// Constructor
+	/**
+	 * Constructor.
+	 */
 	Player() {};
 
 public:
-	// Singleton instantiating
+	/**
+	 * Singleton instantiating.
+	 */
 	static Player* getinstance()
 	{
 		static Player* s = new Player();
 		return s;
 	}
 
+	/**
+	 * Override the = operator.
+	 */
 	Player(Player& s) = delete;
 	void operator=(Player& s) = delete;
 
 	// Setters
+	/**
+	 * Set the position.
+	 */
 	void setPosition(Vector2 position);
 
+	/**
+	 * Set the texture.
+	 */
 	void setPlayerTexture(Texture2D texture);
 
 	// Getters
-	// Get player texture
+	/**
+	 * Get player texture.
+	 */
 	Texture2D getPlayerTexture();
 
-	// Get underglow texture
+	/**
+	 * Get underglow texture.
+	 */
 	Texture2D getUnderglowTexture();
 
-	// Get player position
+	/**
+	 * Get player position.
+	 * 
+	 */
 	Vector2 getPosition();
 
-	// Get boundary hitbox
+	/**
+	 * Get boundary hitbox.
+	 */
 	Rectangle getBoundaryHitbox();
 
-	// Get player rotation
+	/**
+	 * Get player rotation.
+	 */
 	float getRotation();
 
-	// Methods
-	// Plater movement
+	/**
+	 * Plater movement.
+	 */
 	void move(Vector2 position);
 
-	// Check and handle collision with the map boundary
+	/**
+	 * Checkand handle collision with the map boundary.
+	 */
 	void checkMapBoundary(Rectangle boundaries[4]);
 
-	// Rotate player
+	/**
+	 * Rotate player.
+	 */
 	void rotatePlayer();
 
-	// Move boundary hitbox rectangle with player
+	/**
+	 * Move boundary hitbox rectangle with player.
+	 */
 	void updatePlayerBoundaryHitbox();
 
-	// Draw boundary when player is close to map border
+	/**
+	 * Draw boundary when player is close to map border.
+	 */
 	void drawMapBoundary(Rectangle mapBoundary);
 };

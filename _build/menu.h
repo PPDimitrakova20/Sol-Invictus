@@ -1,6 +1,9 @@
 #pragma once
 #include "raylib.h"
 
+/**
+ * Define custom colors.
+ */
 #define menuOrange CLITERAL(Color){ 255, 138, 0, 255}
 #define menuPurple CLITERAL(Color){ 143, 0, 255, 255}
 #define menuBlue CLITERAL(Color){ 42, 191, 241, 255}
@@ -31,18 +34,34 @@ private:
 
 public:
 
-    // Default constructor
+    /**
+     * Default constructor.
+     */
     Menu(){};
 
-    // Draws the menu
+    /**
+     * Draws the menu.
+     * 
+     */
     void drawMenu();
 
-    // Sets selected option
+    /**
+     * Sets selected option.
+     * 
+     * \param selectedOption
+     */
     void setSelectedOption(short int selectedOption);
 
-    // Gets selected option
+    /**
+     * Gets selected option.
+     * 
+     * \return 
+     */
     short int getSelectedOption();
 
-    // Changes the selected option depending on which button is clicked
+    /**
+     * Changes the selected option depending on which button is clicked.
+     * 
+     */
     void manageMenu();
 };

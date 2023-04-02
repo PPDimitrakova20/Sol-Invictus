@@ -1,5 +1,4 @@
 #include "chemicalElements.h"
-#include <iostream>
 
 /**
  * Constructor.
