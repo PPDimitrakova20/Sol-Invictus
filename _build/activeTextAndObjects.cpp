@@ -3,117 +3,6 @@
 #include "activeTextAndObjects.h"
 #include "animations.h"
 
-
-// Barrier class methods
-// Default constructor
-Barrier::Barrier()
-{
-	_x = 0;
-	_y = 0;
-	_scrollY = 0;
-	_scrollBoundary = 0;
-}
-
-// Parameterized constructor
-Barrier::Barrier(short int x, short int y, short int boundary, Texture2D texture)
-{
-	_x = x;
-	_y = y;
-	_scrollY = y;
-	_scrollBoundary = boundary;
-	_texture = texture;
-};
-
-// Getters
-// Get barrier X coordinate
-short int Barrier::getX()
-{
-	return _x;
-}
-
-// Get barrier Y coordinate
-short int Barrier::getY()
-{
-	return _y;
-}
-
-// Get barrier scroll Y coordinate
-short int Barrier::getScrollY()
-{
-	return _scrollY;
-}
-
-// Get barrier scroll boundary
-short int Barrier::getScrollBoundary()
-{
-	return _scrollBoundary;
-}
-
-// Get barrier texture
-Texture2D Barrier::getTexture()
-{
-	return _texture;
-}
-
-//Setters
-// Set barrier X coordinate
-void Barrier::setX(short int x)
-{
-	_x = x;
-}
-
-// Set scroll Y coordinate
-void Barrier::setScrollY(short int y)
-{
-	_scrollY = y;
-}
-
-// Initialize barriers
-Barrier* Barrier::initBarriers(Texture2D textures[5])
-{
-	Barrier* barriers = new Barrier[21];
-	barriers[0] = { 37,  976, -1136, textures[1] }; // Histidine
-	barriers[1] = { 214, 1593, -519, textures[0] }; // Isoleucine
-	barriers[2] = { 37,  2124, 12,   textures[0] }; // Leucine
-	barriers[3] = { 214, 2478, 366,  textures[0] }; // Lysine
-	barriers[4] = { 37,  447, -1666, textures[0] }; // Methonine
-	barriers[5] = { 214, 1239, -873, textures[0] }; // Phenylalanine
-	barriers[6] = { 303, 976, -1136, textures[1] }; // Threonine
-	barriers[7] = { 37,  180, -1932, textures[1] }; // Tryptophan
-	barriers[8] = { 303, 180, -1932, textures[1] }; // Valine
-	barriers[9] = { 389, 446, -1666, textures[4] }; // Arginine
-	barriers[10] = { 390, 2124, 12,   textures[4] }; // Cysteine
-	barriers[11] = { 37,  2478, 366,  textures[4] }; // Glutamine
-	barriers[12] = { 390, 2832, 720,  textures[4] }; // Glycine
-	barriers[13] = { 37,  1416, -696, textures[4] }; // Proline
-	barriers[14] = { 37,  1770, -342, textures[4] }; // Trosine
-	barriers[15] = { 37,  800, -1312, textures[3] }; // Alanine
-	barriers[16] = { 37,  2832, 720,  textures[2] }; // Aspartic acid
-	barriers[17] = { 37,  3009, 897,  textures[2] }; // Asparagine
-	barriers[18] = { 214, 800, -1312, textures[2] }; // Glutamic acid
-	barriers[19] = { 37,  1239, -873, textures[3] }; // Serine
-	barriers[20] = { 214, 1947, -165, textures[2] }; // Selenocysteine
-
-	return barriers;
-}
-
-// Scoll the data barriers and check for boundaries
-void Barrier::scrollBarrier(Barrier temp)
-{
-	// Update barrier Y coordinate
-	_scrollY += int(GetMouseWheelMove() * 20);
-
-	// Check boundaries
-	if (_scrollY >= _y)
-	{
-		_scrollY = _y;
-	}
-	if (_scrollY <= _scrollBoundary)
-	{
-		_scrollY = _scrollBoundary;
-	}
-}
-
 // Get inventory text x position
 float GetInventoryTextX(int n, int caller)
 {
@@ -268,34 +157,34 @@ void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantit
 }
 
 // Draw crafting recipes
-void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes, short int base)
+void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes, short int baseX, short int baseY)
 {
 	for (short int i = 0; i < craftingRecipes.size(); i++)
 	{
 		// Draw recipe base
-		DrawTexture(craftingRecipeBases[craftingRecipes[i].getStatus()], base + 45, 156 + i * 168, RAYWHITE);
+		DrawTexture(craftingRecipeBases[craftingRecipes[i].getStatus()], baseX + 45, baseY + i * 168, RAYWHITE);
 
 		// Draw recipe number
-		DrawTextEx(craftingBenchFonts[0], TextFormat("#%i", i + 1), { float(base + 56), float(165 + i * 168) }, 20, 1, WHITE);
+		DrawTextEx(craftingBenchFonts[0], TextFormat("#%i", i + 1), { float(baseX + 56), float(baseY + 9 + i * 168) }, 20, 1, WHITE);
 
 		// Draw recipe product name
-		DrawTextEx(craftingBenchFonts[1], TextFormat("%s", craftingRecipes[i].getName().c_str()), { float(base + 56), float(207 + i * 168) }, 30, float(0.15), WHITE);
+		DrawTextEx(craftingBenchFonts[1], TextFormat("%s", craftingRecipes[i].getName().c_str()), { float(baseX + 56), float(baseY+ 51 + i * 168) }, 30, float(0.15), WHITE);
 
 		// Draw recipe requirement text
 		if (craftingRecipes[i].getName() == "Methionine" || craftingRecipes[i].getName() == "Cysteine")
 		{
-			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(base + 56), float(251 + i * 168) }, 15, float(0.15), WHITE);
-			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 sulfur", craftingRecipes[i].getChemicalMakeup()[3]), { float(base + 56), float(267 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(baseX + 56), float(baseY + 95 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 sulfur", craftingRecipes[i].getChemicalMakeup()[3]), { float(baseX + 56), float(baseY + 111 + i * 168) }, 15, float(0.15), WHITE);
 		}
 		else if (craftingRecipes[i].getName() == "Selenocysteine")
 		{
-			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(base + 56), float(251 + i * 168) }, 15, float(0.15), WHITE);
-			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 selenium", craftingRecipes[i].getChemicalMakeup()[3]), { float(base + 56), float(267 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen,", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(baseX + 56), float(baseY + 95 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("%i oxygen and 1 selenium", craftingRecipes[i].getChemicalMakeup()[3]), { float(baseX + 56), float(baseY + 111 + i * 168) }, 15, float(0.15), WHITE);
 		}
 		else
 		{
-			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(base + 56), float(251 + i * 168) }, 15, float(0.15), WHITE);
-			DrawTextEx(craftingBenchFonts[2], TextFormat("and %i oxygen", craftingRecipes[i].getChemicalMakeup()[3]), { float(base + 56), float(267 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("Requirements: %i carbon, %i hydrogen, %i nitrogen", craftingRecipes[i].getChemicalMakeup()[0], craftingRecipes[i].getChemicalMakeup()[1], craftingRecipes[i].getChemicalMakeup()[2]), { float(baseX + 56), float(baseY + 95 + i * 168) }, 15, float(0.15), WHITE);
+			DrawTextEx(craftingBenchFonts[2], TextFormat("and %i oxygen", craftingRecipes[i].getChemicalMakeup()[3]), { float(baseX + 56), float(baseY + 111 + i * 168) }, 15, float(0.15), WHITE);
 		}
 	}
 }

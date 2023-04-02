@@ -12,55 +12,6 @@
 #define sulfurColor CLITERAL(Color){ 255, 215, 0, 255}
 #define seleniumColor CLITERAL(Color){ 250, 1, 255, 255}
 
-class Barrier
-{
-private:
-	short int _x;
-	short int _y;
-	short int _scrollY;
-	short int _scrollBoundary;
-	Texture2D _texture;
-
-public:
-	/// Constructors
-	// Default constructor
-	Barrier();
-
-	// Parameterized constructor
-	Barrier(short int x, short int y, short int boundary, Texture2D texture);
-
-	// Getters
-	// Get barrier X coordinate
-	short int getX();
-
-	// Get barrier Y coordinate
-	short int getY();
-
-	// Get barrier scroll Y coordinate
-	short int getScrollY();
-
-	// Get barrier scroll boundary
-	short int getScrollBoundary();
-
-	// Get barrier texture
-	Texture2D getTexture();
-
-	// Setters
-	//Set barrier X coordinate
-	void setX(short int x);
-
-	// Set scroll Y coordinate
-	void setScrollY(short int y);
-
-	// Methods
-	// Initialize barriers
-	Barrier* initBarriers(Texture2D barriers[5]);
-
-	// Scoll the data barriers and check for boundaries
-	void scrollBarrier(Barrier barrier);
-
-};
-
 // Draw inventory quantity indicators
 void drawInventoryQuantityIndicators(Font comfortaaRegular, short int inventoryItems[6], Color elementaColors[6]);
 
@@ -74,4 +25,4 @@ void drawTaskbarHeading(Font heading, AminoAcid* activeAcid, short int base);
 void drawExtraTaskTarget(Font item, AminoAcid* activeAcid, short int itemQuantity[6], short int base, Texture2D extraTaskTargets[2], Color color, Color gradientSelection[6]);
 
 // Draw crafting recipes
-void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes, short int base);
+void drawCraftingRecipes(Font craftingBenchFonts[3], Texture2D craftingRecipeBases[3], std::vector<CraftingRecipe> craftingRecipes, short int baseX, short int baseY);

@@ -53,7 +53,7 @@ void Game()
         LoadTexture("./../assets/UI/craftingBench/craftingRecipes/craftable.png"),
         LoadTexture("./../assets/UI/craftingBench/craftingRecipes/insufficientMaterials.png")
     };
-    std::vector<CraftingRecipe> craftingRecipes;
+    std::vector<CraftingRecipe> recipeList;
     CraftingRecipe accessPoint = CraftingRecipe();
     bool showCraftingBench = false, autoCloseCraftingBench = false, *autoCloseCraftingBenchPtr = &autoCloseCraftingBench;
     bool hasAminoAcid = false, taskRecipeComplete = false, taskRecipeCrafted = false;
@@ -67,7 +67,6 @@ void Game()
     Texture2D base = LoadTexture("./../assets/UI/aminoAcidRepository/base.png");
     Texture2D cover = LoadTexture("./../assets/UI/aminoAcidRepository/baseCover.png");
     Texture2D data = LoadTexture("./../assets/UI/aminoAcidRepository/data.png");
-    short int dataY = 160;
     bool showRepobase = false;
 
     // Intialize data barrier variables
@@ -126,26 +125,38 @@ void Game()
         }
     }
 
-    // Initialize amino-acid repo slide animation variables
+    // Initialize slide animation variables
     std::vector<SlideAnimationFrame*> slideAnimationFrames;
 
-    //-> Initialize barriers animation frames
-    for (int i = 0; i < 21; i++)
+    //-> Initialize barriers slide animation frames
+    for (short int i = 0; i < 21; i++)
     {
-        slideAnimationFrames.push_back(constructAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'p', 0, 5, showRepobase));
+        slideAnimationFrames.push_back(new SlideAnimationFrame(barriers[i].getX() - 607, barriers[i].getX() - 607, barriers[i].getX(), 'p', 0, 5, showRepobase));
     }
 
-    //-> Initialize remaining 4 animation frames(for base, data, cover)
-    slideAnimationFrames.push_back(constructAnimationFrame(-630, -630, -23, 'p', 0, 5, showRepobase));
-    slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
-    slideAnimationFrames.push_back(constructAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
-    slideAnimationFrames.push_back(constructAnimationFrame(-104, -104, -1, 'p', 0, 2, showTaskbar));
-    slideAnimationFrames.push_back(constructAnimationFrame(1821, 1401, 1821, 'n', 0, 5, showCraftingBench));
+    //-> Initialize remaining 5 slide animation frames(for amino-acid base, data, cover and crafting bench)
+    slideAnimationFrames.push_back(new SlideAnimationFrame(-630, -630, -23, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(new SlideAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(new SlideAnimationFrame(-594, -594, 13, 'p', 0, 5, showRepobase));
+    slideAnimationFrames.push_back(new SlideAnimationFrame(-104, -104, -1, 'p', 0, 2, showTaskbar));
+    slideAnimationFrames.push_back(new SlideAnimationFrame(1821, 1401, 1821, 'n', 0, 5, showCraftingBench));
+
+    // Initialize scroll animation variables
+    std::vector<ScrollAnimation*> scrollAnimationFrames;
+
+    // -> Initialize barriers scroll animation frames
+    for (short int i = 0; i < 21; i++)
+    {
+        scrollAnimationFrames.push_back(new ScrollAnimation(barriers[i].getBottomScrollBoundary(), barriers[i].getTopScrollBoundary(), barriers[i].getBottomScrollBoundary()));
+    }
+
+    // -> Initialize remaining 2 scroll animation frames(for amino-acid data and crafting bench)
+    scrollAnimationFrames.push_back(new ScrollAnimation(160, -1952, 160));
+    scrollAnimationFrames.push_back(new ScrollAnimation(156, 0, 156));
 
     // Main game loop
     while (!WindowShouldClose())
     {
-
         switch (currentLayer)
         {
         case MENU:
@@ -202,12 +213,15 @@ void Game()
 
         case GAMELOGIC:
 
+            /*---------- Player logic ---------- */
             // Move the player
             player->move(player->getPosition());
 
+            // Rotate player
             player->rotatePlayer();
 
-            player->movePlayerRec();
+            // Update player boundary hitbox
+            player->updatePlayerBoundaryHitbox();
 
             // Check and handle collision with the map boundary
             player->checkMapBoundary(boundaries);
@@ -215,20 +229,7 @@ void Game()
             // Update camera position
             playerCam.target = player->getPosition();
 
-            if (IsKeyPressed(KEY_UP))
-            {
-                activeAcid = aminoAcids->randomiseAcid(aminoAcids);
-            }
-
-            // Inventory item quantity boundary
-            for (int i = 0; i < 6; i++)
-            {
-                if (itemQuantity[i] >= 20)
-                {
-                    itemQuantity[i] = 20;
-                }
-            }
-
+            /*---------- Iventory logic ----------*/
             // Check player collision with all chemical elements
             for (int i = 0; i < 2; i++)
             {
@@ -254,39 +255,23 @@ void Game()
                 }
             }
 
-            // Scoll the amino-acid repository base up and down
-            if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+            // Inventory item quantity boundary
+            for (int i = 0; i < 6; i++)
             {
-                dataY += int(GetMouseWheelMove() * 20);
-
-                // Scoll boundaries
-                if (dataY >= 160)
+                if (itemQuantity[i] >= 20)
                 {
-                    dataY = 160;
+                    itemQuantity[i] = 20;
                 }
-                if (dataY <= -1952)
-                {
-                    dataY = -1952;
-                }
-            }
-
-            // Update barrier X coordinate for scroll functionality
-            for (int i = 0; i < 21; i++)
-            {
-                if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
-                {
-                    barriers[i].scrollBarrier(barriers[i]);
-                }
-            }
+            }   
 
             /*---------- Crafting bench logic ----------*/
             // Check if the active acid is already in the recipe list
-            if (!craftingRecipes.empty())
+            if (!recipeList.empty())
             {
                 hasAminoAcid = false;
-                for (int i = 0; i < craftingRecipes.size(); i++)
+                for (int i = 0; i < recipeList.size(); i++)
                 {
-                    if (craftingRecipes[i].getName() == activeAcid->getName())
+                    if (recipeList[i].getName() == activeAcid->getName())
                     {
                         hasAminoAcid = true;
                         break;
@@ -295,24 +280,24 @@ void Game()
             }
 
             // Add crafting recipes to the recipe list 
-            if (!hasAminoAcid || craftingRecipes.empty())
+            if (!hasAminoAcid || recipeList.empty())
             {
-                craftingRecipes.push_back(CraftingRecipe(Rectangle{ 1446,float(155 + craftingRecipes.size() * 168),355,134 }, activeAcid->getName(), activeAcid->getChemicalMakeup()));
+                recipeList.push_back(CraftingRecipe(Rectangle{ 1446,float(155 + recipeList.size() * 168),355,134 }, activeAcid->getName(), activeAcid->getChemicalMakeup()));
             }
 
             // Update the recipes' status
-            for (CraftingRecipe& i : craftingRecipes)
+            for (CraftingRecipe& i : recipeList)
             {
                 i.updateCraftingRecipeStatus(itemQuantity, activeAcid);
             }
 
             // Sort the recipe list
-            craftingRecipes = accessPoint.sortCraftingRecipes(craftingRecipes);
+            recipeList = accessPoint.sortCraftingRecipes(recipeList, scrollAnimationFrames[22]->getTargetCoordinate());
 
             // Check if the task required recipe is complete
-            for (int i = 0; i < craftingRecipes[0].getChemicalMakeup().size(); i++)
+            for (int i = 0; i < recipeList[0].getChemicalMakeup().size(); i++)
             {
-                if (craftingRecipes[0].getChemicalMakeup()[i] > itemQuantity[i])
+                if (recipeList[0].getChemicalMakeup()[i] > itemQuantity[i])
                 {
                     taskRecipeComplete = false;
                     break;
@@ -323,13 +308,13 @@ void Game()
                 }
             }
 
-            // Reset the crafting requirement check 
+            // Reset the crafting requirement and autoClose check 
             taskRecipeCrafted = false;
             autoCloseCraftingBench = false;
 
             // Set active acid discovery status
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-                CheckCollisionPointRec(GetMousePosition(), craftingRecipes[0].getHitbox()) &&
+                CheckCollisionPointRec(GetMousePosition(), recipeList[0].getHitbox()) &&
                 taskRecipeComplete && slideAnimationFrames[25]->getTargetCoordinate() == 1401)
             {
                 activeAcid->setIsDiscovered(true);
@@ -338,7 +323,7 @@ void Game()
             }
 
             // Update the iventory element count after crafting an acid
-            accessPoint.updateInventoryElementsCount(itemQuantity, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate(), autoCloseCraftingBenchPtr);
+            accessPoint.updateInventoryElementsCount(itemQuantity, recipeList, slideAnimationFrames[25]->getTargetCoordinate(), autoCloseCraftingBenchPtr);
 
             // Update the discovery status of the amino-acid corresponding to active acid
             for (short int i = 0; i < 21; i++)
@@ -357,7 +342,7 @@ void Game()
             }
 
             /*---------- Slide animation logic ----------*/
-            // Update animation keys based of keyboard input
+            // Update animation frames based of keyboard input
             for (short int i = 0; i < slideAnimationFrames.size(); i++)
             {
                 if (i != slideAnimationFrames.size() - 1)
@@ -414,9 +399,34 @@ void Game()
             // Apply the slide animation to its frames
             for (short int i = 0; i < slideAnimationFrames.size(); i++)
             {
-
                 manageSlideAnimation(slideAnimationFrames[i]);
             }
+
+            /*---------- Scoll animation logic ----------*/
+            // Update crafting bench top scroll bpundary based on the number of recipes
+            if (recipeList.size() >= 6)
+            {
+                scrollAnimationFrames[22]->setTopBoundary(int(72 - (recipeList.size() - 6) * 168));
+            }
+
+            // Apply the scroll animation to its frames based on the mouse position
+            for (short int i = 0; i < scrollAnimationFrames.size(); i++)
+            {
+                if (i != scrollAnimationFrames.size() - 1)
+                {
+                    if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 0,0,607,1080 }))
+                    {
+                        manageScollAnimation(scrollAnimationFrames[i]);
+                    }
+                }
+                else
+                {
+                    if (CheckCollisionPointRec(GetMousePosition(), Rectangle{ 1413,154,408,926 }))
+                    {
+                        manageScollAnimation(scrollAnimationFrames[i]);
+                    }
+                }
+            } 
 
             currentLayer = GAMEPRESENT;
             break;
@@ -481,7 +491,7 @@ void Game()
             DrawTexture(base, slideAnimationFrames[21]->getTargetCoordinate(), -7, RAYWHITE);
 
             // Draw amino-acid repository data
-            DrawTexture(data, slideAnimationFrames[22]->getTargetCoordinate(), dataY, RAYWHITE);
+            DrawTexture(data, slideAnimationFrames[22]->getTargetCoordinate(), scrollAnimationFrames[21]->getTargetCoordinate(), RAYWHITE);
 
             /*----------- Cells barriers ----------*/
             // Draw data barriers
@@ -489,7 +499,7 @@ void Game()
             {
                 if (!aminoAcids[i].getIsDiscovered())
                 {
-                    DrawTexture(barriers[i].getTexture(), slideAnimationFrames[i]->getTargetCoordinate(), barriers[i].getScrollY(), RAYWHITE);
+                    DrawTexture(barriers[i].getTexture(), slideAnimationFrames[i]->getTargetCoordinate(), scrollAnimationFrames[i]->getTargetCoordinate(), RAYWHITE);
                 }
             }
 
@@ -500,11 +510,18 @@ void Game()
             // Draw crafting bench base
             DrawTexture(craftingBenchBase, slideAnimationFrames[25]->getTargetCoordinate(), 0, RAYWHITE);
 
+            // Draw crafting recipes
+            if (recipeList.size() >= 6)
+            {
+                drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, recipeList, slideAnimationFrames[25]->getTargetCoordinate(), scrollAnimationFrames[22]->getTargetCoordinate());
+            }
+            else
+            {
+                drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, recipeList, slideAnimationFrames[25]->getTargetCoordinate(), 156);
+            }
+
             // Draw crafting bench base
             DrawTexture(craftingTableCover, slideAnimationFrames[25]->getTargetCoordinate() + 16, 0, RAYWHITE);
-
-            // Draw crafting recipes
-            drawCraftingRecipes(craftingBenchFonts, craftingRecipeBases, craftingRecipes, slideAnimationFrames[25]->getTargetCoordinate());
 
             /*---------- Inventory ----------*/
             // Draw inventory base

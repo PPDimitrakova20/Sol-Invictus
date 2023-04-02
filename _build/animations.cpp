@@ -1,6 +1,6 @@
 #include "animations.h"
 
-// Constructor
+// Slide animation constructor
 SlideAnimationFrame::SlideAnimationFrame(short int n, short int startBoundary, short int endBoundary, const char direction, short int state, short int speed, bool showComponent)
 {
 	_targetCoordinate = n;
@@ -13,81 +13,74 @@ SlideAnimationFrame::SlideAnimationFrame(short int n, short int startBoundary, s
 }
 
 // Getters
-// Get animation frame X
+// Get slide animation frame target coordinate
 short int SlideAnimationFrame::getTargetCoordinate()
 {
 	return _targetCoordinate;
 }
 
-// Get animation frame left boundary
+// Get slide animation frame left boundary
 short int SlideAnimationFrame::getStartBoundary()
 {
 	return _startBoundary;
 }
 
-// Get animation frame right boundary
+// Get slide animation frame right boundary
 short int SlideAnimationFrame::getEndBoundary()
 {
 	return _endBoundary;
 }
 
-// Get animation frame direction
+// Get slide animation frame direction
 char SlideAnimationFrame::getDirection()
 {
 	return _direction;
 }
 
-// Get animation frame state
+// Get slide animation frame state
 short int SlideAnimationFrame::getState()
 {
 	return _state;
 }
 
-// Get animation speed
+// Get slide animation frame speed
 short int SlideAnimationFrame::getSpeed()
 {
 	return _speed;
 }
 
-// Get animation frame driver boolean
+// Get slide animation frame driver boolean
 bool SlideAnimationFrame::getShowComponent()
 {
 	return _showComponent;
 }
 
 // Setters
-// Set animation frame X
-void SlideAnimationFrame::setTargetCoordinate(short int x)
+// Set slide animation frame X
+void SlideAnimationFrame::setTargetCoordinate(short int n)
 {
-	_targetCoordinate = x;
+	_targetCoordinate = n;
 }
 
-// Set animation frame direction
+// Set slide animation frame direction
 void SlideAnimationFrame::setDirection(short int boundary)
 {
 	_endBoundary = boundary;
 }
 
-// Set animation frame state
+// Set slide animation frame state
 void SlideAnimationFrame::setState(short int state)
 {
 	_state = state;
 }
 
-// Set animation frame driver boolean
+// Set slide animation frame driver boolean
 void SlideAnimationFrame::setShowComponent(bool showComponent)
 {
 	_showComponent = showComponent;
 }
 
-// Construct slide animation frames
-SlideAnimationFrame* constructAnimationFrame(short int n, short int startBoundary, short int endBoundary, const char direction, short int state, short int speed, bool showComponent)
-{
-	SlideAnimationFrame* animationframe = new SlideAnimationFrame(n, startBoundary, endBoundary, direction, state, speed, showComponent);
-	return animationframe;
-}
-
-// Universal slide animation 
+// Slide animation 
 void manageSlideAnimation(SlideAnimationFrame* animationFrame)
 {
 	// Set animation status 
@@ -174,5 +167,67 @@ void manageSlideAnimation(SlideAnimationFrame* animationFrame)
 		case 0:
 			break;
 		}
+	}
+}
+
+// Scroll animation constructor
+ScrollAnimation::ScrollAnimation(short int n, short int startBoundary, short int endBoundary)
+{
+	_targetCoordinate = n;
+	_topBoundary = startBoundary;
+	_bottomBoundary = endBoundary;
+}
+
+// Getters
+// Get scroll animation frame target coordinate
+short int ScrollAnimation::getTargetCoordinate()
+{
+	return _targetCoordinate;
+}
+
+// Get scroll animation frame top boundary
+short int ScrollAnimation::getTopBoundary()
+{
+	return _topBoundary;
+}
+
+// Get scroll animation frame bottom boundary 
+short int ScrollAnimation::getBottomBoundary()
+{
+	return _bottomBoundary;
+}
+
+// Set scroll animation frame target coordinate
+void ScrollAnimation::setTargetCoordinate(short int n)
+{
+	_targetCoordinate = n;
+}
+ 
+// Set scroll animation frame top boundary
+void ScrollAnimation::setTopBoundary(short int startBoundary)
+{
+	_topBoundary = startBoundary;
+}
+
+// Set scroll animation frame bottom boundary 
+void ScrollAnimation::setBottomBoundary(short int endBoundary)
+{
+	_bottomBoundary = endBoundary;
+}
+
+// Scroll animation
+void manageScollAnimation(ScrollAnimation* animationFrame)
+{
+	// Update scroll animation target coordinate
+	animationFrame->setTargetCoordinate(animationFrame->getTargetCoordinate() + int(GetMouseWheelMove() * 20));
+
+	// Check and enforce top and bottom boundaries
+	if (animationFrame->getTargetCoordinate() <= animationFrame->getTopBoundary())
+	{
+		animationFrame->setTargetCoordinate(animationFrame->getTopBoundary());
+	}
+	if(animationFrame->getTargetCoordinate() >= animationFrame->getBottomBoundary())
+	{
+		animationFrame->setTargetCoordinate(animationFrame->getBottomBoundary());
 	}
 }

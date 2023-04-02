@@ -123,7 +123,7 @@ void Player::rotatePlayer()
 }
 
 // Move boundary hitbox rectangle with player
-void Player::movePlayerRec()
+void Player::updatePlayerBoundaryHitbox()
 {
 	_boundaryHitbox = { getPosition().x - 480, getPosition().y - 480, 1000, 1000 };
 }

@@ -55,7 +55,7 @@ public:
 	void rotatePlayer();
 
 	// Move boundary hitbox rectangle with player
-	void movePlayerRec();
+	void updatePlayerBoundaryHitbox();
 
 	// Draw boundary when player is close to map border
 	void drawMapBoundary(Rectangle mapBoundary);
