@@ -23,8 +23,10 @@ private:
 public:
 
     int getTutorialProgress();
+
     void setTutorialProgress(int tutorialProgess);
 
-    void drawTutorial();
+    void drawTutorial(Texture background);
+
     void updateTutorialProgress();
 };

@@ -191,7 +191,7 @@ void Game()
                 gameMenu.setSelectedOption(-1);
                 break;
             default:
-                tutorialScreen.drawTutorial();
+                tutorialScreen.drawTutorial(background);
                 break;
             }
 

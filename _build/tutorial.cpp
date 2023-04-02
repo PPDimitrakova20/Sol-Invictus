@@ -10,8 +10,9 @@ void Tutorial::setTutorialProgress(int tutorialProgess)
 	_tutorialProgess = tutorialProgess;
 }
 
-void Tutorial::drawTutorial()
+void Tutorial::drawTutorial(Texture background)
 {
+	DrawTexture(background, -900, -500, RAYWHITE);
 	DrawTexture(_tutorialPages[_tutorialProgess], 360, 90,RAYWHITE);
 }
 
