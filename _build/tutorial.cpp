@@ -12,7 +12,7 @@ void Tutorial::setTutorialProgress(int tutorialProgess)
 
 void Tutorial::drawTutorial()
 {
-	DrawTexture(_tutorialPages[_tutorialProgess], 0,0,RAYWHITE);
+	DrawTexture(_tutorialPages[_tutorialProgess], 360, 90,RAYWHITE);
 }
 
 void Tutorial::updateTutorialProgress()
