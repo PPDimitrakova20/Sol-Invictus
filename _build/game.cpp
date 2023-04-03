@@ -338,14 +338,13 @@ void game()
             {
                 if (CheckCollisionPointRec(GetMousePosition(), i.getHitbox()))
                 {
-                    if (i.getStatus() == 1)
+                    if (taskRecipeComplete || i.getStatus() == 1)
                     {
                         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                     }
-
-                    if (taskRecipeComplete)
+                    if (i.getStatus() > 1)
                     {
-                        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
                     }
                 }
             }
