@@ -1,0 +1,215 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+
+
+{\ttfamily \#include $<$player.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_a5f9f0a3c0359f362beea029fdd6e09e4}{Player}} (\mbox{\hyperlink{class_player}{Player}} \&s)=delete
+\item 
+\mbox{\Hypertarget{class_player_a7ca7b7be10b493012ccd64c9d302e8d5}\label{class_player_a7ca7b7be10b493012ccd64c9d302e8d5}} 
+void {\bfseries operator=} (\mbox{\hyperlink{class_player}{Player}} \&s)=delete
+\item 
+void \mbox{\hyperlink{class_player_a80c3c9fb36fad58f536106bd032c1ee5}{set\+Position}} (Vector2 position)
+\item 
+void \mbox{\hyperlink{class_player_adc57786049aafb4ce1f1cfa7ad6700a0}{set\+Player\+Texture}} (Texture2D texture)
+\item 
+Texture2D \mbox{\hyperlink{class_player_a42ce923a08775ad8b4be45e5c4e9c63f}{get\+Player\+Texture}} ()
+\item 
+Texture2D \mbox{\hyperlink{class_player_ab86c557c1237df31a55c4401cd42b95f}{get\+Underglow\+Texture}} ()
+\item 
+Vector2 \mbox{\hyperlink{class_player_ac4d11b36116592dfa1ed8c782ebd3d7b}{get\+Position}} ()
+\item 
+Rectangle \mbox{\hyperlink{class_player_a7261e36c06fcdc218fc023724cba2e74}{get\+Boundary\+Hitbox}} ()
+\item 
+float \mbox{\hyperlink{class_player_aa2890f51b31e33f439f6bd67092168f7}{get\+Rotation}} ()
+\item 
+void \mbox{\hyperlink{class_player_aa9bf4875036d7faa83b6ec7305fc615c}{move}} (Vector2 position)
+\item 
+void \mbox{\hyperlink{class_player_a880cff833ecfe158e419d3a62007aa08}{check\+Map\+Boundary}} (Rectangle boundaries\mbox{[}4\mbox{]})
+\item 
+void \mbox{\hyperlink{class_player_a77272705898cc659bb796dc7e910911f}{rotate\+Player}} ()
+\item 
+void \mbox{\hyperlink{class_player_a7728447f81898b4afd53eb39746d00e4}{update\+Player\+Boundary\+Hitbox}} ()
+\item 
+void \mbox{\hyperlink{class_player_a53b4420836d635526659d055da2f9e71}{draw\+Map\+Boundary}} (Rectangle map\+Boundary)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_player}{Player}} $\ast$ \mbox{\hyperlink{class_player_ab36b767b32ea10923f6330984dd71be4}{getinstance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_player}{Player}} class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_player_a5f9f0a3c0359f362beea029fdd6e09e4}\label{class_player_a5f9f0a3c0359f362beea029fdd6e09e4}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Override the = operator. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_a880cff833ecfe158e419d3a62007aa08}\label{class_player_a880cff833ecfe158e419d3a62007aa08}} 
+\index{Player@{Player}!checkMapBoundary@{checkMapBoundary}}
+\index{checkMapBoundary@{checkMapBoundary}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{checkMapBoundary()}{checkMapBoundary()}}
+{\footnotesize\ttfamily void Player\+::check\+Map\+Boundary (\begin{DoxyParamCaption}\item[{Rectangle}]{boundaries\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+
+Checkand handle collision with the map boundary.
+
+Checkand handle collision with the map boundary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em boundaries} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a53b4420836d635526659d055da2f9e71}\label{class_player_a53b4420836d635526659d055da2f9e71}} 
+\index{Player@{Player}!drawMapBoundary@{drawMapBoundary}}
+\index{drawMapBoundary@{drawMapBoundary}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{drawMapBoundary()}{drawMapBoundary()}}
+{\footnotesize\ttfamily void Player\+::draw\+Map\+Boundary (\begin{DoxyParamCaption}\item[{Rectangle}]{map\+Boundary }\end{DoxyParamCaption})}
+
+Draw boundary when player is close to map border.
+
+Draw boundary when player is close to map border.
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+Boundary} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a7261e36c06fcdc218fc023724cba2e74}\label{class_player_a7261e36c06fcdc218fc023724cba2e74}} 
+\index{Player@{Player}!getBoundaryHitbox@{getBoundaryHitbox}}
+\index{getBoundaryHitbox@{getBoundaryHitbox}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getBoundaryHitbox()}{getBoundaryHitbox()}}
+{\footnotesize\ttfamily Rectangle Player\+::get\+Boundary\+Hitbox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get boundary hitbox.
+
+Get boundary hitbox.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_ab36b767b32ea10923f6330984dd71be4}\label{class_player_ab36b767b32ea10923f6330984dd71be4}} 
+\index{Player@{Player}!getinstance@{getinstance}}
+\index{getinstance@{getinstance}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getinstance()}{getinstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_player}{Player}} $\ast$ Player\+::getinstance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Singleton instantiating. \mbox{\Hypertarget{class_player_a42ce923a08775ad8b4be45e5c4e9c63f}\label{class_player_a42ce923a08775ad8b4be45e5c4e9c63f}} 
+\index{Player@{Player}!getPlayerTexture@{getPlayerTexture}}
+\index{getPlayerTexture@{getPlayerTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getPlayerTexture()}{getPlayerTexture()}}
+{\footnotesize\ttfamily Texture2D Player\+::get\+Player\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get player texture.
+
+/ Get player texture.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_ac4d11b36116592dfa1ed8c782ebd3d7b}\label{class_player_ac4d11b36116592dfa1ed8c782ebd3d7b}} 
+\index{Player@{Player}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily Vector2 Player\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get player position.
+
+Get player position.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_aa2890f51b31e33f439f6bd67092168f7}\label{class_player_aa2890f51b31e33f439f6bd67092168f7}} 
+\index{Player@{Player}!getRotation@{getRotation}}
+\index{getRotation@{getRotation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getRotation()}{getRotation()}}
+{\footnotesize\ttfamily float Player\+::get\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get player rotation.
+
+Get player rotation.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_ab86c557c1237df31a55c4401cd42b95f}\label{class_player_ab86c557c1237df31a55c4401cd42b95f}} 
+\index{Player@{Player}!getUnderglowTexture@{getUnderglowTexture}}
+\index{getUnderglowTexture@{getUnderglowTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getUnderglowTexture()}{getUnderglowTexture()}}
+{\footnotesize\ttfamily Texture2D Player\+::get\+Underglow\+Texture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get underglow texture.
+
+Get underglow texture.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_aa9bf4875036d7faa83b6ec7305fc615c}\label{class_player_aa9bf4875036d7faa83b6ec7305fc615c}} 
+\index{Player@{Player}!move@{move}}
+\index{move@{move}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Player\+::move (\begin{DoxyParamCaption}\item[{Vector2}]{position }\end{DoxyParamCaption})}
+
+Plater movement.
+
+Move the player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a77272705898cc659bb796dc7e910911f}\label{class_player_a77272705898cc659bb796dc7e910911f}} 
+\index{Player@{Player}!rotatePlayer@{rotatePlayer}}
+\index{rotatePlayer@{rotatePlayer}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{rotatePlayer()}{rotatePlayer()}}
+{\footnotesize\ttfamily void Player\+::rotate\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Rotate player.
+
+Rotate the player. \mbox{\Hypertarget{class_player_adc57786049aafb4ce1f1cfa7ad6700a0}\label{class_player_adc57786049aafb4ce1f1cfa7ad6700a0}} 
+\index{Player@{Player}!setPlayerTexture@{setPlayerTexture}}
+\index{setPlayerTexture@{setPlayerTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setPlayerTexture()}{setPlayerTexture()}}
+{\footnotesize\ttfamily void Player\+::set\+Player\+Texture (\begin{DoxyParamCaption}\item[{Texture2D}]{texture }\end{DoxyParamCaption})}
+
+Set the texture. \mbox{\Hypertarget{class_player_a80c3c9fb36fad58f536106bd032c1ee5}\label{class_player_a80c3c9fb36fad58f536106bd032c1ee5}} 
+\index{Player@{Player}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Player\+::set\+Position (\begin{DoxyParamCaption}\item[{Vector2}]{position }\end{DoxyParamCaption})}
+
+Set the position.
+
+/ Set player position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a7728447f81898b4afd53eb39746d00e4}\label{class_player_a7728447f81898b4afd53eb39746d00e4}} 
+\index{Player@{Player}!updatePlayerBoundaryHitbox@{updatePlayerBoundaryHitbox}}
+\index{updatePlayerBoundaryHitbox@{updatePlayerBoundaryHitbox}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{updatePlayerBoundaryHitbox()}{updatePlayerBoundaryHitbox()}}
+{\footnotesize\ttfamily void Player\+::update\+Player\+Boundary\+Hitbox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Move boundary hitbox rectangle with player. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\+\_\+build/player.\+h\item 
+\+\_\+build/player.\+cpp\end{DoxyCompactItemize}

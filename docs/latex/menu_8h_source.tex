@@ -1,0 +1,49 @@
+\hypertarget{menu_8h_source}{}\doxysection{menu.\+h}
+\label{menu_8h_source}\index{\_build/menu.h@{\_build/menu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ menuOrange\ CLITERAL(Color)\{\ 255,\ 138,\ 0,\ 255\}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ menuPurple\ CLITERAL(Color)\{\ 143,\ 0,\ 255,\ 255\}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ menuBlue\ CLITERAL(Color)\{\ 42,\ 191,\ 241,\ 255\}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu}{Menu}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \ \ Texture2D\ \_menuBackground\ =\ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/menu/menuBackground.png"{}});}
+\DoxyCodeLine{00015\ \ \ \ \ Texture2D\ \_menuButtons[3]\ =\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/menu/playButton.png"{}}),}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/menu/tutorialButton.png"{}}),}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/menu/quitButton.png"{}})}
+\DoxyCodeLine{00019\ \ \ \ \ \};}
+\DoxyCodeLine{00020\ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ Vector2\ \_menuButtonCoordinates[3]\ =\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{825,\ 461\},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \{825,\ 641\},}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{825,\ 819\}}
+\DoxyCodeLine{00025\ \ \ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ Rectangle\ \_buttonHitboxes[3]\ =\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \{825,\ 461,\ 484,\ 113\},}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \{825,\ 641,\ 484,\ 113\},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \{825,\ 819,\ 484,\ 113\}}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_selectedOption\ =\ -\/1;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{class_menu_ad466dd83355124a6ed958430450bfe94}{Menu}}()\{\};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a9df102abcebc51e69c4728dc3d3c3be0}{drawMenu}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ae9902af8b8aa2bd89d6dfd9c971b88a9}{setSelectedOption}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ selectedOption);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_menu_aeb4b1a1c71941fe65d5b645e4dbdbc9d}{getSelectedOption}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ad10af8c0cfbba9ce6f7066ea4638958b}{manageMenu}}();}
+\DoxyCodeLine{00067\ \};}
+
+\end{DoxyCode}

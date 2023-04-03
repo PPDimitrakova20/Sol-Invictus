@@ -1,0 +1,81 @@
+\hypertarget{animations_8h_source}{}\doxysection{animations.\+h}
+\label{animations_8h_source}\index{\_build/animations.h@{\_build/animations.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_slide_animation_frame}{SlideAnimationFrame}}}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_targetCoordinate;}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_startBoundary;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_endBoundary;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{char}\ \_direction;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_state;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_speed;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \_showComponent;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_slide_animation_frame}{SlideAnimationFrame}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ lBoundary,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ rBoundary,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ direction,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ state,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ speed,\ \textcolor{keywordtype}{bool}\ showComponent);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00036\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_slide_animation_frame_ae1880db36644f4fc655f45233e986edb}{getTargetCoordinate}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_slide_animation_frame_a640e3c4d395943385186e09284771d19}{getStartBoundary}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_slide_animation_frame_acb016da816d26d2cd7830f507b31b7fa}{getEndBoundary}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{class_slide_animation_frame_a95b2504c927d50f540a1b79949d0dba3}{getDirection}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_slide_animation_frame_ab5667765c29cf51c2eb9806b5c2bb053}{getState}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_slide_animation_frame_a9035978307b5cb47fc35ad831f890e0e}{getSpeed}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_slide_animation_frame_a3bf44ad3ea666c68a2cf6efaff15521b}{getShowComponent}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Setters}}
+\DoxyCodeLine{00086\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_slide_animation_frame_a15646adb13ea3ff2a76ff5eea99fdeb2}{setTargetCoordinate}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_slide_animation_frame_a6d430d5abf5385819ab245dd5c46a14b}{setDirection}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ bnoundary);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_slide_animation_frame_ab67012647ebe1cb7b772968708114e30}{setState}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ state);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_slide_animation_frame_a5d2a007e1440f6c42517b9ff0d96b865}{setShowComponent}}(\textcolor{keywordtype}{bool}\ showComponent);}
+\DoxyCodeLine{00108\ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \textcolor{keywordtype}{void}\ manageSlideAnimation(\mbox{\hyperlink{class_slide_animation_frame}{SlideAnimationFrame}}*\ animationFrame);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scroll_animation}{ScrollAnimation}}}
+\DoxyCodeLine{00116\ \{}
+\DoxyCodeLine{00117\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_targetCoordinate;}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_topBoundary;}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \_bottomBoundary;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{class_scroll_animation}{ScrollAnimation}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ topBoundary,\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ bottomBoundary);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00132\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_scroll_animation_a0d5d3fb375a9a34ee4ac09b639a47b84}{getTargetCoordinate}}();}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_scroll_animation_a596a44f2f4ea3a0076cdcd7cda56313f}{getTopBoundary}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_scroll_animation_ac85ce1314d21b9c7184be70364f0d8a2}{getBottomBoundary}}();}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//Setters}}
+\DoxyCodeLine{00154\ \textcolor{comment}{}\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scroll_animation_a3a938b71c271e2ea0e82126182f3e3fc}{setTargetCoordinate}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ n);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scroll_animation_a7f1af56cf881502fd8bd0029e9f3e065}{setTopBoundary}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ startBoundary);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scroll_animation_ae0bff25164a554364e0d27acaef6306e}{setBottomBoundary}}(\textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ endBoundary);}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00174\ \textcolor{keywordtype}{void}\ manageScrollAnimation(\mbox{\hyperlink{class_scroll_animation}{ScrollAnimation}}*\ animationFrame);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ }
+
+\end{DoxyCode}

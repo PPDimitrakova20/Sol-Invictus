@@ -1,0 +1,36 @@
+\hypertarget{tutorial_8h_source}{}\doxysection{tutorial.\+h}
+\label{tutorial_8h_source}\index{\_build/tutorial.h@{\_build/tutorial.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tutorial}{Tutorial}}}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{//\ Load\ tutorial\ textures}}
+\DoxyCodeLine{00009\ \ \ \ \ Texture2D\ \_tutorialPages[3]\ =\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/tutorial/tutorial1.png"{}}),}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/tutorial/tutorial2.png"{}}),}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ LoadTexture(\textcolor{stringliteral}{"{}./../assets/UI/tutorial/tutorial3.png"{}})}
+\DoxyCodeLine{00013\ \ \ \ \ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ Rectangle\ \_arrows[2]\ =\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \{832,\ 978,\ 50,\ 40\},}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \{1042,\ 978,\ 50,\ 40\}}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \_tutorialProgess\ =\ 0;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tutorial_afc2c1cd2b6b5ec757875aa943d30ff9d}{getTutorialProgress}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tutorial_aeeb049b6a87ac17a0a0a3fbc491f27e8}{setTutorialProgress}}(\textcolor{keywordtype}{int}\ tutorialProgess);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tutorial_a1ef1e8b56284cde86ed58977b01d5eda}{drawTutorial}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tutorial_aff7f3d551f4890873d4e32b57bbc8318}{updateTutorialProgress}}();}
+\DoxyCodeLine{00049\ \};}
+
+\end{DoxyCode}
