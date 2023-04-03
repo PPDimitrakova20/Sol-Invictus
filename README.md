@@ -1,6 +1,6 @@
 <p align="center">
-  <img height="170" width="190" src="https://github.com/PPDimitrakova20/Sol-Invictus/blob/main/assets/logos/logoDark.png#gh-dark-mode-only" alt="Logo"/>
-  <img height="500" width="500" src="https://github.com/PPDimitrakova20/Sol-Invictus/blob/main/assets/logos/logoLight.png#gh-light-mode-only" alt="Logo"/>
+  <img height="150" width="800" src="https://github.com/PPDimitrakova20/Sol-Invictus/blob/main/assets/logos/teamLogo.svg#gh-dark-mode-only" alt="Logo"/>
+  <img height="150" width="800" src="https://github.com/PPDimitrakova20/Sol-Invictus/blob/main/assets/logos/teamLogoDark.svg#gh-light-mode-only" alt="Logo"/>
 </p>
 
 ## 📋 Table of Contents
