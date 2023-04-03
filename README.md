@@ -51,7 +51,7 @@ https://github.com/PPDimitrakova20/Sol-Invictus
 
 ### Documentation <a name="doc"></a>
 - [Wiki](https://github.com/PPDimitrakova20/Sol-Invictus/wiki) - Everything you need to know about our project
-- [PowerPoint](https://codingburgas-my.sharepoint.com/:p:/g/personal/ppdimitrakova20_codingburgas_bg/EdmUSoySmRpPg1d0p8yNl8EBNIS2Ftqx8kCeZq8_sASfAw?e=jPDVSI)- Presentation
+- [PowerPoint](https://codingburgas-my.sharepoint.com/:p:/g/personal/ppdimitrakova20_codingburgas_bg/ERyzdtMAYN9LkWdlwc4rjh4BtceeuLt23nR7ODAuCZP03g?e=qIrpf0)- Presentation
 - [Doxygen](https://doxygen.nl)- Documentation
 - [Excel](https://codingburgas-my.sharepoint.com/:x:/g/personal/ppdimitrakova20_codingburgas_bg/Ee4Zl7CLtTFFnheA2eEkooAB4DyX04SCjbKZSgSsmA8k1Q?e=IxUoF7) - QA Documentation
 
