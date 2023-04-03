@@ -31,13 +31,14 @@ void Tutorial::drawTutorial(Texture background)
 	DrawTexture(_tutorialPages[_tutorialProgess], 360, 90,RAYWHITE);
 }
 
-
 /**
  * Change the tutorial pages depending on which arrow is clicked.
  * 
  */
 void Tutorial::updateTutorialProgress()
 {
+	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
 	for (int i = 0; i < 2; i++)
 	{
 		// Check if the mouse is over one of the arrows

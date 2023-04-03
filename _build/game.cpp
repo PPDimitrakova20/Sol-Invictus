@@ -10,7 +10,7 @@ void game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -166,12 +166,10 @@ void game()
     // Main game loop
     while (!WindowShouldClose())
     {
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 
         switch (currentLayer)
         {
         case MENU:
-
             BeginDrawing();
 
             // Clear framebuffer
@@ -225,6 +223,7 @@ void game()
         case GAMELOGIC:
 
             /*---------- Player logic ---------- */
+
             // Move the player
             player->move(player->getPosition());
 
@@ -315,7 +314,7 @@ void game()
             }
 
             // Sort the recipe list
-            recipeList = accessPoint.sortCraftingRecipes(recipeList, scrollAnimationFrames[22]->getTargetCoordinate());
+            recipeList = accessPoint.sortCraftingRecipes(recipeList, scrollAnimationFrames[22]->getTargetCoordinate());   
 
             // Check if the task required recipe is complete
             for (int i = 0; i < recipeList[0].getChemicalMakeup().size(); i++)
@@ -328,6 +327,26 @@ void game()
                 else
                 {
                     taskRecipeComplete = true;
+                }
+            }
+
+            // Reset mouse cursor state
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
+            // Update mouse cursor state if a recipe from the list is craftable
+            for (CraftingRecipe& i : recipeList)
+            {
+                if (CheckCollisionPointRec(GetMousePosition(), i.getHitbox()))
+                {
+                    if (i.getStatus() == 1)
+                    {
+                        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                    }
+
+                    if (taskRecipeComplete)
+                    {
+                        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                    }
                 }
             }
 
@@ -497,10 +516,10 @@ void game()
 
             // Draw the player
             DrawTexturePro(
-                player->getPlayerTexture(),
-                Rectangle{ 0, 0, 186, 186 },
-                Rectangle{ player->getPosition().x, player->getPosition().y, 186, 186 },
-                Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation() - rotationSpecifier, RAYWHITE);
+            player->getPlayerTexture(),
+            Rectangle{ 0, 0, 186, 186 },
+            Rectangle{ player->getPosition().x, player->getPosition().y, 186, 186 },
+            Vector2{ float(player->getPlayerTexture().width / 2), float(player->getPlayerTexture().height / 2) }, player->getRotation() - rotationSpecifier, RAYWHITE);
 
             // Draw boundary when player is close to map border
             for (int i = 0; i < 4; i++)

@@ -17,6 +17,8 @@ void Menu::drawMenu()
 
 	Color coloredMenuRectanglesColors[3] = {menuOrange, menuPurple, menuBlue};
 
+	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
 	for (int i = 0; i < 3; i++)
 	{
 		// Draw colored rectangles
@@ -32,7 +34,7 @@ void Menu::drawMenu()
 		else
 		{
 			// Draw normal texture
-			DrawTextureV(_menuButtons[i],_menuButtonCoordinates[i], RAYWHITE);
+			DrawTextureV(_menuButtons[i],_menuButtonCoordinates[i], RAYWHITE);	
 		}
 	}
 }

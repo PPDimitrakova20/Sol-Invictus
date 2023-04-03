@@ -10,7 +10,7 @@
  * \param caller
  * \return 
  */
-float GetInventoryTextX(int n, int caller)
+float getInventoryTextX(int n, int caller)
 {
 	switch (n)
 	{
@@ -64,7 +64,7 @@ void drawInventoryQuantityIndicators(Font font, short int itemQuantity[6], Color
 		}
 
 		// Draw quantity number
-		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ 1868 + GetInventoryTextX(itemQuantity[i], 1), float(114 + 150 * i) }, 30, 1, WHITE);
+		DrawTextEx(font, TextFormat("%i", itemQuantity[i]), Vector2{ 1868 + getInventoryTextX(itemQuantity[i], 1), float(114 + 150 * i) }, 30, 1, WHITE);
 	}
 }
 
@@ -116,7 +116,7 @@ void drawTaskbarQuantityIndicators(Font items, AminoAcid* activeAcid, short int 
 		}
 
 		// Draw quantity number
-		DrawTextEx(items, TextFormat("%i", activeItemQuantity[i]), Vector2{ (987 + 128 * i) + GetInventoryTextX(activeItemQuantity[i], 2), float(32 + base) }, 30, 1, WHITE);
+		DrawTextEx(items, TextFormat("%i", activeItemQuantity[i]), Vector2{ (987 + 128 * i) + getInventoryTextX(activeItemQuantity[i], 2), float(32 + base) }, 30, 1, WHITE);
 	}
 }
 
