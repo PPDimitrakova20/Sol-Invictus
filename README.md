@@ -16,7 +16,7 @@
 - [Acknowledgements](#acknowledgements)
 
 ## 🔎 Description <a name="description"></a>
-Our goal is to create a .io type of game where a roomba discovers amino-acids. This can be done by collecting different chemical elements and assembling them in the crafting bench. The player can later read information about the different acids in a side panel in the game.
+Our goal is to create a game where a roomba discovers amino-acids. This can be done by collecting different chemical elements and assembling them in the crafting bench. The player can later read information about the different acids in a side panel in the game.
 
 ## 🚀 Getting started<a name="gettingStarted"></a>
 *These instructions will get you a copy of the project up and running on your local machine.*
