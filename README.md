@@ -59,7 +59,7 @@ https://github.com/PPDimitrakova20/Sol-Invictus
 *Everyone who has participated in making this project:*
 
 - [Pamela Dimitrakova](https://github.com/PPDimitrakova20) - Scrum Trainer
-- [Mihail Petrov](https://github.com/MMPetrov20) - Full-stack Developer
+- [Mihail Petrov](https://github.com/MMPetrov20) - Backend Developer
 - [Hristiyan Petrov](https://github.com/HMPetrov20) - Backend Developer
 - [Maksim Vasilev](https://github.com/MDVasilev20) - Backend Developer
 - [Miroslav Shivachev](https://github.com/MRShivachev) - Designer
