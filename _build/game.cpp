@@ -9,7 +9,7 @@ void game()
     const int screenWidth = 1920;
     const int screenHeight = 1080;
 
-    InitWindow(screenWidth, screenHeight, "Dev window");
+    InitWindow(screenWidth, screenHeight, "Atomic Helper");
     ToggleFullscreen();
     SetTargetFPS(60);
 
