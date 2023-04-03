@@ -10,7 +10,7 @@ void game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -23,6 +23,8 @@ void game()
     };
 
     ProgramLayer currentLayer = MENU;
+
+    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 
     // Initialize menu
     Menu gameMenu;
@@ -164,6 +166,8 @@ void game()
     // Main game loop
     while (!WindowShouldClose())
     {
+        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
         switch (currentLayer)
         {
         case MENU:
@@ -283,6 +287,7 @@ void game()
             }   
 
             /*---------- Crafting bench logic ----------*/
+
             // Check if the active acid is already in the recipe list
             if (!recipeList.empty())
             {

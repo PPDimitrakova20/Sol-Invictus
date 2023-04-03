@@ -27,6 +27,7 @@ void Menu::drawMenu()
 		{
 			// Add hover effect
 			DrawTexture(_menuButtons[i], _menuButtonCoordinates[i].x, _menuButtonCoordinates[i]. y + 10, RAYWHITE);
+			SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
 		}
 		else
 		{
