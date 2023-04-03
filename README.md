@@ -47,7 +47,7 @@ https://github.com/PPDimitrakova20/Sol-Invictus
     - [Raylib](https://www.raylib.com/index.html) - external library for GUI
 
 ### Design <a name="design"></a>
-- [Figma](https://www.figma.com/downloads/) - Game, UI, Logo
+- [Figma](https://www.figma.com/file/earRKqc0GRLpfk7o05yVHt/Sol-Invictus-CUI-team-library?node-id=797-241&t=JvyLZk2HGCdnO12f-0) - Game, UI, Logo
 
 ### Documentation <a name="doc"></a>
 - [Wiki](https://github.com/PPDimitrakova20/Sol-Invictus/wiki) - Everything you need to know about our project
