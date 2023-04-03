@@ -10,7 +10,7 @@ void game()
     const int screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Dev window");
-    //ToggleFullscreen();
+    ToggleFullscreen();
     SetTargetFPS(60);
 
     // Load font variants from the file structure
@@ -211,7 +211,7 @@ void game()
                 gameMenu.setSelectedOption(-1);
                 break;
             default:
-                tutorialScreen.drawTutorial(background);
+                tutorialScreen.drawTutorial();
                 break;
             }
 

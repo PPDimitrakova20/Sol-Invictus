@@ -25,10 +25,10 @@ void Tutorial::setTutorialProgress(int tutorialProgess)
  * 
  * \param background
  */
-void Tutorial::drawTutorial(Texture background)
+void Tutorial::drawTutorial()
 {
-	DrawTexture(background, -900, -500, RAYWHITE);
-	DrawTexture(_tutorialPages[_tutorialProgess], 360, 90,RAYWHITE);
+	DrawRectangle(0, 0, 1920, 1080, { 27, 27, 27, 255 });
+	DrawTexture(_tutorialPages[_tutorialProgess], -1, 0,RAYWHITE);
 }
 
 /**

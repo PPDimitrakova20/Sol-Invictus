@@ -13,8 +13,8 @@ private:
     };
 
     Rectangle _arrows[2] = {
-        {835, 910, 50, 40},
-        {1044, 910, 50, 40}
+        {832, 978, 50, 40},
+        {1042, 978, 50, 40}
     };
 
 	int _tutorialProgess = 0;
@@ -39,7 +39,7 @@ public:
      * 
      * \param background
      */
-    void drawTutorial(Texture background);
+    void drawTutorial();
 
     /**
      * Changes the tutorial pages depending on which arrow is clicked.
