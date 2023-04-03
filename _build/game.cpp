@@ -13,6 +13,9 @@ void game()
     ToggleFullscreen();
     SetTargetFPS(60);
 
+    // Set the key for closing the game to Q
+    SetExitKey(KEY_Q);
+
     // Load font variants from the file structure
     Font taskbarTitleFont = LoadFontEx("../assets/fonts/Comfortaa-Bold.ttf", 40, 0, 250);
     Font quantityIndicatorsFont = LoadFontEx("../assets/fonts/Comfortaa-Regular.ttf", 30, 0, 250);
@@ -170,6 +173,9 @@ void game()
         switch (currentLayer)
         {
         case MENU:
+
+            gameMenu.setSelectedOption(-1);
+
             BeginDrawing();
 
             // Clear framebuffer
@@ -338,13 +344,13 @@ void game()
             {
                 if (CheckCollisionPointRec(GetMousePosition(), i.getHitbox()))
                 {
-                    if (taskRecipeComplete || i.getStatus() == 1)
-                    {
-                        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-                    }
                     if (i.getStatus() > 1)
                     {
                         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+                    }
+                    else if (taskRecipeComplete || i.getStatus() == 1)
+                    {
+                        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                     }
                 }
             }
@@ -467,7 +473,7 @@ void game()
                         manageScrollAnimation(scrollAnimationFrames[i]);
                     }
                 }
-            } 
+            }
 
             currentLayer = GAMEPRESENT;
             break;
@@ -600,12 +606,18 @@ void game()
             break;
         }
 
+        // Check if back-to-menu key is pressed
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            currentLayer = MENU;
+        }
+
         if (isQuitButtonPressed)
         {
             CloseWindow();
         }
     }
-    
+     
     // Free up alocated memory
     delete[] player;
     delete[] aminoAcids;
